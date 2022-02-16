@@ -177,6 +177,12 @@ export const headCellsSanpham = [
     label: "Giá",
   },
   {
+    id: "qrcode",
+    numeric: false,
+    disablePadding: false,
+    label: "QR Code",
+  },
+  {
     id: "ngaykhoitao",
     numeric: false,
     disablePadding: false,

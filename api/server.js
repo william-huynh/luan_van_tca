@@ -16,6 +16,7 @@ const nguyenlieuRouter = require("./routers/nguyenlieuRouter");
 const loaiSanphamRouter = require("./routers/loaiSanphamRouter");
 const donhangRouter = require("./routers/donhangRouter");
 const giaohangRouter = require("./routers/giaohangRouter");
+const qrcodeRouter = require("./routers/qrcodeRouter")
 const app = express();
 
 app.use(cors());
@@ -43,6 +44,7 @@ app.use("/api/nguyenlieu", nguyenlieuRouter);
 app.use("/api/loaisanpham", loaiSanphamRouter);
 app.use("/api/donhang", donhangRouter);
 app.use("/api/giaohang", giaohangRouter);
+app.use("/api/qrcode", qrcodeRouter);
 
 const port = process.env.PORT || 8000;
 
