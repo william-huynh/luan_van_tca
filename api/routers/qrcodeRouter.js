@@ -4,7 +4,8 @@ const Sanpham = require("../models/sanphamModel");
 const qr =  require('qrcode');
 
 
-qrcodeRouter.get("/scan", async (req,res) => {
+qrcodeRouter.post("/scan", async (req,res) => {
+    const role = req.body.role;
     let listId = []
     try {
         const sanpham = await Sanpham.find({},{ma:0,ten:0, mota:0,hinhanh:0,loaisanpham:0,thuoctinh:0,dscongcu:0,dsvattu:0,dsnguyenlieu:0,gia:0,ngaytao:0,createdAt:0,updatedAt:0,__v:0})
@@ -16,7 +17,7 @@ qrcodeRouter.get("/scan", async (req,res) => {
         if(listSanpham.length > 0){
             for (let i = 0; i < listSanpham.length; i++) {
                 if(listSanpham[i]._id.toString() === '' )  res.status(400).json({ success: false, message: "id empty"});
-                let url = `http://localhost:3000/admin/sanpham/chitiet/${listSanpham[i]._id.toString()}`
+                let url = `http://localhost:3000/${role}/sanpham/chitiet/${listSanpham[i]._id.toString()}`
                 try {
                         qr.toDataURL(url , (err, qrcode) => {
                         if(err) res.status(400).json({success: false, message: "scan qrcode error"})

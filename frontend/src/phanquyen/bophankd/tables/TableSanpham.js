@@ -15,6 +15,8 @@ import { formatMoney, getComparator } from "../../../utils";
 import TablePaginationActions from "@mui/material/TablePagination/TablePaginationActions";
 import { Link } from "react-router-dom";
 import { headCellsSanpham } from "./headCells";
+import axios from 'axios';
+import { useState, useEffect } from "react";
 
 const TableSanpham = ({ dsSanpham = [] }) => {
   const [order, setOrder] = React.useState("asc");
@@ -72,7 +74,26 @@ const TableSanpham = ({ dsSanpham = [] }) => {
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - dsSanpham.length) : 0;
-
+  //style Qrcode
+  const style = {
+    width: '50px',
+    height: '50px'
+  }
+  // Get and Render Qrcode
+  const [qrcode, setQrcode] = useState([])
+  useEffect(() => {
+    const getQrcode = async () => {
+      try {
+          const res = await axios.post('http://localhost:3000/api/qrcode/scan', 
+          { role: JSON.parse(localStorage.getItem('userInfo')).vaitro })
+          setQrcode(res.data.listId)
+        
+      }catch(error) {
+        console.log(error)
+      }
+    } 
+    getQrcode()
+  },[])
   return (
     <>
       <Box sx={{ width: "100%" }}>
@@ -158,6 +179,12 @@ const TableSanpham = ({ dsSanpham = [] }) => {
                           {row?.soluonghoanthanh}
                         </TableCell>
                         <TableCell align="right">{row?.danhan}</TableCell>
+                        {qrcode.map( qr => {
+                          if (qr.id === row?.sanpham._id)
+                            return <TableCell align="right">
+                                      <img style={style} src={qr.qrcode} />
+                                   </TableCell>
+                        })}
                         <TableCell align="right">
                           {formatMoney(row?.soluong * row?.gia)} vnđ
                         </TableCell>

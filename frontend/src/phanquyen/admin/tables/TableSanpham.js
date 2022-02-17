@@ -179,7 +179,8 @@ const TableSanpham = ({ dsSanpham = [], setRowsRemoved }) => {
   useEffect(() => {
     const getQrcode = async () => {
       try {
-          const res = await axios.get('http://localhost:3000/api/qrcode/scan')
+          const res = await axios.post('http://localhost:3000/api/qrcode/scan',
+          { role: JSON.parse(localStorage.getItem('userInfo')).vaitro })
           setQrcode(res.data.listId)
       }catch(error) {
          console.log(error)
