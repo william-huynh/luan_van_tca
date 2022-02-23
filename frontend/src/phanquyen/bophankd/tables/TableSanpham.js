@@ -76,8 +76,8 @@ const TableSanpham = ({ dsSanpham = [] }) => {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - dsSanpham.length) : 0;
   //style Qrcode
   const style = {
-    width: '50px',
-    height: '50px'
+    width: '60px',
+    height: '60px'
   }
   // Get and Render Qrcode
   const [qrcode, setQrcode] = useState([])

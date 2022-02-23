@@ -21,7 +21,9 @@ import Typography from "@mui/material/Typography";
 import { alpha } from "@mui/material/styles";
 import TableButton from "../../../components/TableButton";
 import { Link } from "react-router-dom";
-
+import { useState } from "react";
+import axios from "axios";
+import Popup from "../../../popup/Popup";
 const EnhancedTableToolbar = ({
   numSelected,
   rowsSelected,
@@ -155,6 +157,20 @@ const TableBophankd = ({ dsBophankd = [], setRowsRemoved }) => {
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - dsBophankd?.length) : 0;
+  const [qrcode, setQrcode] = useState({})
+  const handleGetQrcode = async id => {
+    let info = {
+      "id": id,
+      "role": JSON.parse(localStorage.getItem('userInfo')).vaitro
+    }
+     try {
+       const res = await axios.post('http://localhost:3000/api/qrcode/scanUser', info)
+       setQrcode(res.data.qrcode)
+       return <Popup />
+     } catch (error) {
+       console.log(error)
+     }
+  }
 
   return (
     <>
@@ -195,7 +211,7 @@ const TableBophankd = ({ dsBophankd = [], setRowsRemoved }) => {
                     return (
                       <TableRow
                         hover
-                        onClick={(event) => handleClick(event, row._id)}
+                        onClick={(event) => {handleClick(event, row._id); handleGetQrcode(row._id)} }
                         role="checkbox"
                         aria-checked={isItemSelected}
                         tabIndex={-1}

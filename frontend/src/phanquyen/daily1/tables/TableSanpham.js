@@ -76,8 +76,8 @@ const TableSanpham = ({ dsSanpham = [], readOnly }) => {
 
   //style Qrcode
   const style = {
-    width: '50px',
-    height: '50px'
+    width: '60px',
+    height: '60px'
   }
   // Get and Render Qrcode
   const [qrcode, setQrcode] = useState([])
