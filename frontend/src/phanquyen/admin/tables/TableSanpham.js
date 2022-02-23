@@ -171,8 +171,8 @@ const TableSanpham = ({ dsSanpham = [], setRowsRemoved }) => {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - dsSanpham.length) : 0;
  //style Qrcode
   const style = {
-    width: '50px',
-    height: '50px'
+    width: '60px',
+    height: '60px'
   }
   // Get and Render Qrcode
   const [qrcode, setQrcode] = useState([])
@@ -274,7 +274,7 @@ const TableSanpham = ({ dsSanpham = [], setRowsRemoved }) => {
                           {formatMoney(row.gia)}
                         </TableCell>
                         {qrcode.map( qr => {
-                          if (qr.id === row._id)
+                          if (qr.id === row._id) 
                             return <TableCell align="right">
                                       <img style={style} src={qr.qrcode} />
                                    </TableCell>

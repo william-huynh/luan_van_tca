@@ -21,6 +21,9 @@ import Typography from "@mui/material/Typography";
 import { alpha } from "@mui/material/styles";
 import TableButton from "../../../components/TableButton";
 import { Link } from "react-router-dom";
+import Popup from "../../../popup/Popup";
+import { StateContext } from "../../../Context/StateContext";
+import { useContext } from "react";
 
 const EnhancedTableToolbar = ({
   numSelected,
@@ -156,9 +159,10 @@ const TableGSV = ({ dsGsv = [], setRowsRemoved }) => {
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - dsGsv?.length) : 0;
-
+  const context = useContext(StateContext);
   return (
     <>
+      <Popup show={context.show} />
       <Box sx={{ width: "100%" }}>
         <Paper sx={{ width: "100%", mb: 2 }}>
           <EnhancedTableToolbar
@@ -196,7 +200,10 @@ const TableGSV = ({ dsGsv = [], setRowsRemoved }) => {
                     return (
                       <TableRow
                         hover
-                        onClick={(event) => handleClick(event, row._id)}
+                        onClick={(event) => {
+                          handleClick(event, row._id);
+                          context.handleGetQrcode(row._id);
+                        }}
                         role="checkbox"
                         aria-checked={isItemSelected}
                         tabIndex={-1}

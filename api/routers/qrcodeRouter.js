@@ -32,57 +32,61 @@ qrcodeRouter.post("/scan", async (req, res) => {
       return;
     }
     let listSanpham = Object.values(sanpham);
-    try {
-      listId = listSanpham
-        .map((item) => {
-          let currentProduct = { id: "", qrcode: null };
-          let productId = item._id.toString();
-          let url = `http://localhost:3000/${role}/sanpham/chitiet/${productId}`;
+
+    if (listSanpham.length > 0) {
+      for (let i = 0; i < listSanpham.length; i++) {
+        if (listSanpham[i]._id.toString() === "")
+          res.status(400).json({ success: false, message: "id empty" });
+        let url = `http://localhost:3000/${role}/sanpham/chitiet/${listSanpham[
+          i
+        ]._id.toString()}`;
+        try {
           qr.toDataURL(url, (err, qrcode) => {
-            currentProduct.id = productId;
-            currentProduct.qrcode = qrcode;
+            if (err)
+              res
+                .status(400)
+                .json({ success: false, message: "scan qrcode error" });
+            let data = {
+              id: listSanpham[i]._id.toString(),
+              qrcode,
+            };
+            listId.push(data);
+            end();
           });
-          return currentProduct;
-        })
-        .join("");
-      if (listId) {
-        return res.status(201).json({ success: true, listId });
+        } catch (error) {
+          res.status(400).json({ success: false, message: error });
+        }
+        const end = () => {
+          if (i === listSanpham.length - 1) {
+            return res
+              .status(200)
+              .json({ success: true, message: "success", listId });
+          }
+        };
       }
-    } catch (error) {
-      return res.status(500).json({ success: false });
     }
-    // if (listSanpham.ltoStringength > 0) {
-    //   for await  (item of listSanpham) {
-    //     if (item._id.() === "")
-    //       res.status(400).json({ success: false, message: "id empty" });
-    //     let url = `http://localhost:3000/${role}/sanpham/chitiet/${item._id.toString()}`;
-    //     try {
-    //       await qr.toDataURL(url, (err, qrcode) => {
-    //         if (err)
-    //           res
-    //             .status(400)
-    //             .json({ success: false, message: "scan qrcode error" });
-    //         let data = {
-    //           id: listSanpham[i]._id.toString(),
-    //           qrcode,
-    //         };
-    //         listId.push(data);
-    //         end();
-    //       });
-    //     } catch (error) {
-    //       res.status(400).json({ success: false, message: error });
-    //     }
-    //     const end = () => {
-    //       if (i === listSanpham.length - 1) {
-    //         return res
-    //           .status(200)
-    //           .json({ success: true, message: "success", listId });
-    //       }
-    //     };
-    //   }
-    // }
   } catch (error) {
     res.send({ message: error.message, success: false });
+  }
+});
+qrcodeRouter.post("/scanUser", async (req, res) => {
+  const id = req.body.id;
+  const role = req.body.role;
+  let URL = `http://localhost:3000/${role}/bophankd/chitiet/${id}`;
+
+  if (!id || !role)
+    res.status(400).json({ success: false, message: "id or role empty" });
+
+  try {
+    qr.toDataURL(URL, (error, qrcode) => {
+      if (error)
+        res.status(400).json({ success: false, message: "scan qrcode error" });
+      return res
+        .status(200)
+        .json({ success: true, message: "success", qrcode });
+    });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error });
   }
 });
 
