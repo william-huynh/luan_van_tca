@@ -204,7 +204,6 @@ const TableDaily1 = ({ dsDaily1 = [], setRowsRemoved, readOnly }) => {
                         hover
                         onClick={(event) => {
                           handleClick(event, row._id);
-                          context.handleGetQrcode(row._id, "daily1");
                         }}
                         role="checkbox"
                         aria-checked={isItemSelected}
@@ -230,9 +229,42 @@ const TableDaily1 = ({ dsDaily1 = [], setRowsRemoved, readOnly }) => {
                             </Link>
                           )}
                         </TableCell>
-                        <TableCell align="right">{row.sdt}</TableCell>
-                        <TableCell align="right">{row.email}</TableCell>
-                        <TableCell align="right">{row.taikhoan}</TableCell>
+                        <TableCell
+                          align="right"
+                          onClick={() => {
+                            context.handleGetQrcode(
+                              row._id,
+                              "daily1",
+                              row.active
+                            );
+                          }}
+                        >
+                          {row.sdt}
+                        </TableCell>
+                        <TableCell
+                          align="right"
+                          onClick={() => {
+                            context.handleGetQrcode(
+                              row._id,
+                              "daily1",
+                              row.active
+                            );
+                          }}
+                        >
+                          {row.email}
+                        </TableCell>
+                        <TableCell
+                          align="right"
+                          onClick={() => {
+                            context.handleGetQrcode(
+                              row._id,
+                              "daily1",
+                              row.active
+                            );
+                          }}
+                        >
+                          {row.taikhoan}
+                        </TableCell>
                         <TableCell align="right">
                           {row.active ? (
                             <Badge className="success">Đã kích hoạt</Badge>

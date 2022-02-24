@@ -190,7 +190,6 @@ const TableGiamsatvung = ({
                         hover
                         onClick={(event) => {
                           handleClick(event, row._id);
-                          context.handleGetQrcode(row._id, "giamsatvung");
                         }}
                         role="checkbox"
                         aria-checked={isItemSelected}
@@ -212,9 +211,40 @@ const TableGiamsatvung = ({
                             {row.ten}
                           </Link>
                         </TableCell>
-                        <TableCell align="right">{row.sdt}</TableCell>
-                        <TableCell align="right">{row.email}</TableCell>
-                        <TableCell align="right">
+                        <TableCell
+                          align="right"
+                          onClick={() => {
+                            context.handleGetQrcode(
+                              row._id,
+                              "giamsatvung",
+                              true
+                            );
+                          }}
+                        >
+                          {row.sdt}
+                        </TableCell>
+                        <TableCell
+                          align="right"
+                          onClick={() => {
+                            context.handleGetQrcode(
+                              row._id,
+                              "giamsatvung",
+                              true
+                            );
+                          }}
+                        >
+                          {row.email}
+                        </TableCell>
+                        <TableCell
+                          align="right"
+                          onClick={() => {
+                            context.handleGetQrcode(
+                              row._id,
+                              "giamsatvung",
+                              true
+                            );
+                          }}
+                        >
                           {row.user?.taikhoan}
                         </TableCell>
                       </TableRow>

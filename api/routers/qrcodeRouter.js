@@ -1,7 +1,7 @@
 const express = require("express");
 const qrcodeRouter = express.Router();
 const Sanpham = require("../models/sanphamModel");
-const User = require("../models/userModel")
+const User = require("../models/userModel");
 const qr = require("qrcode");
 
 qrcodeRouter.post("/scan", async (req, res) => {
@@ -71,23 +71,34 @@ qrcodeRouter.post("/scan", async (req, res) => {
   }
 });
 qrcodeRouter.post("/scanUser", async (req, res) => {
-  const { role, urlRole, id} = req.body;
-  
-  let URL = `http://localhost:3000/${role}/${urlRole}/chitiet/${id}`;
+  const { role, urlRole, id, isActive } = req.body;
+  if (role === "admin" && isActive) {
+    handleGetQr();
+  } else if (role !== "admin" && isActive) {
+    handleGetQr();
+  } else {
+    res.status(400).json({ success: false, message: "user not active" });
+    return;
+  }
+  function handleGetQr() {
+    let URL = `http://localhost:3000/${role}/${urlRole}/chitiet/${id}`;
 
-  if (!id || !role)
-    res.status(400).json({ success: false, message: "id or role empty" });
+    if (!id || !role)
+      res.status(400).json({ success: false, message: "id or role empty" });
 
-  try {
-    qr.toDataURL(URL, (error, qrcode) => {
-      if (error)
-        res.status(400).json({ success: false, message: "scan qrcode error" });
-      return res
-        .status(200)
-        .json({ success: true, message: "success", qrcode });
-    });
-  } catch (error) {
-    res.status(400).json({ success: false, message: error });
+    try {
+      qr.toDataURL(URL, (error, qrcode) => {
+        if (error)
+          res
+            .status(400)
+            .json({ success: false, message: "scan qrcode error" });
+        return res
+          .status(200)
+          .json({ success: true, message: "success", qrcode });
+      });
+    } catch (error) {
+      res.status(400).json({ success: false, message: error });
+    }
   }
 });
 

@@ -202,7 +202,6 @@ const TableBophankd = ({ dsBophankd = [], setRowsRemoved }) => {
                         hover
                         onClick={(event) => {
                           handleClick(event, row._id);
-                          context.handleGetQrcode(row._id,"bophankd");
                         }}
                         role="checkbox"
                         aria-checked={isItemSelected}
@@ -224,9 +223,28 @@ const TableBophankd = ({ dsBophankd = [], setRowsRemoved }) => {
                             {row.ten}
                           </Link>
                         </TableCell>
-                        <TableCell align="right">{row.sdt}</TableCell>
-                        <TableCell align="right">{row.email}</TableCell>
-                        <TableCell align="right">
+                        <TableCell
+                          align="right"
+                          onClick={() => {
+                            context.handleGetQrcode(row._id, "bophankd", true);
+                          }}
+                        >
+                          {row.sdt}
+                        </TableCell>
+                        <TableCell
+                          align="right"
+                          onClick={() => {
+                            context.handleGetQrcode(row._id, "bophankd", true);
+                          }}
+                        >
+                          {row.email}
+                        </TableCell>
+                        <TableCell
+                          align="right"
+                          onClick={() => {
+                            context.handleGetQrcode(row._id, "bophankd", true);
+                          }}
+                        >
                           {row?.user?.taikhoan}
                         </TableCell>
                       </TableRow>

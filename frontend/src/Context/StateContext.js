@@ -9,11 +9,12 @@ const StateProvider = ({ children }) => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const handleGetQrcode = async (id,role) => {
+  const handleGetQrcode = async (id, role, isActive) => {
     let info = {
       role: JSON.parse(localStorage.getItem("userInfo")).vaitro,
       urlRole: role,
-      id: id, 
+      id,
+      isActive,
     };
     try {
       const res = await axios.post(

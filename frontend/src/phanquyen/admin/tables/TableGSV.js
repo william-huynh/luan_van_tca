@@ -202,7 +202,6 @@ const TableGSV = ({ dsGsv = [], setRowsRemoved }) => {
                         hover
                         onClick={(event) => {
                           handleClick(event, row._id);
-                          context.handleGetQrcode(row._id,"gsv");
                         }}
                         role="checkbox"
                         aria-checked={isItemSelected}
@@ -224,12 +223,38 @@ const TableGSV = ({ dsGsv = [], setRowsRemoved }) => {
                             {row.ten}
                           </Link>
                         </TableCell>
-                        <TableCell align="right">{row.sdt}</TableCell>
-                        <TableCell align="right">{row.cmnd}</TableCell>
-                        <TableCell align="right">
+                        <TableCell
+                          align="right"
+                          onClick={() => {
+                            context.handleGetQrcode(row._id, "gsv", true);
+                          }}
+                        >
+                          {row.sdt}
+                        </TableCell>
+                        <TableCell
+                          align="right"
+                          onClick={() => {
+                            context.handleGetQrcode(row._id, "gsv", true);
+                          }}
+                        >
+                          {row.cmnd}
+                        </TableCell>
+                        <TableCell
+                          align="right"
+                          onClick={() => {
+                            context.handleGetQrcode(row._id, "gsv", true);
+                          }}
+                        >
                           {row?.user?.taikhoan}
                         </TableCell>
-                        <TableCell align="right">{row.email}</TableCell>
+                        <TableCell
+                          align="right"
+                          onClick={() => {
+                            context.handleGetQrcode(row._id, "gsv", true);
+                          }}
+                        >
+                          {row.email}
+                        </TableCell>
                       </TableRow>
                     );
                   })}
