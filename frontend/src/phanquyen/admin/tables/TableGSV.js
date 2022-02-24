@@ -202,7 +202,7 @@ const TableGSV = ({ dsGsv = [], setRowsRemoved }) => {
                         hover
                         onClick={(event) => {
                           handleClick(event, row._id);
-                          context.handleGetQrcode(row._id);
+                          context.handleGetQrcode(row._id,"gsv");
                         }}
                         role="checkbox"
                         aria-checked={isItemSelected}

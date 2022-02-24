@@ -12,7 +12,7 @@ const Popup = () => {
     <>
       <Modal show={context.show} onHide={context.handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Scan Now!</Modal.Title>
         </Modal.Header>
         <Modal.Body style={style}>
           <img src={context.qrcode} />

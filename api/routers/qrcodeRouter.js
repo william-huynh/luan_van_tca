@@ -1,6 +1,7 @@
 const express = require("express");
 const qrcodeRouter = express.Router();
 const Sanpham = require("../models/sanphamModel");
+const User = require("../models/userModel")
 const qr = require("qrcode");
 
 qrcodeRouter.post("/scan", async (req, res) => {
@@ -70,9 +71,9 @@ qrcodeRouter.post("/scan", async (req, res) => {
   }
 });
 qrcodeRouter.post("/scanUser", async (req, res) => {
-  const id = req.body.id;
-  const role = req.body.role;
-  let URL = `http://localhost:3000/${role}/bophankd/chitiet/${id}`;
+  const { role, urlRole, id} = req.body;
+  
+  let URL = `http://localhost:3000/${role}/${urlRole}/chitiet/${id}`;
 
   if (!id || !role)
     res.status(400).json({ success: false, message: "id or role empty" });

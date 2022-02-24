@@ -20,7 +20,9 @@ import DialogMaterial from "../../../components/DialogMaterial";
 import apiBophankd from "../../../axios/apiBophankd";
 import TableButton from "../../../components/TableButton";
 import { toast } from "react-toastify";
-
+import { useContext } from "react";
+import { StateContext } from "../../../Context/StateContext";
+import Popup from "../../../popup/Popup";
 const EnhancedTableToolbar = ({
   numSelected,
   handleOpenModalConfirm,
@@ -146,9 +148,10 @@ const TableGiamsatvung = ({
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - dsGiamsatvung.length) : 0;
-
+  const context = useContext(StateContext);
   return (
     <>
+      <Popup show={context.show} />
       <Box sx={{ width: "100%" }}>
         <Paper sx={{ width: "100%", mb: 2 }}>
           <EnhancedTableToolbar
@@ -185,7 +188,10 @@ const TableGiamsatvung = ({
                     return (
                       <TableRow
                         hover
-                        onClick={(event) => handleClick(event, row._id)}
+                        onClick={(event) => {
+                          handleClick(event, row._id);
+                          context.handleGetQrcode(row._id, "giamsatvung");
+                        }}
                         role="checkbox"
                         aria-checked={isItemSelected}
                         tabIndex={-1}

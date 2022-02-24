@@ -202,7 +202,7 @@ const TableBophankd = ({ dsBophankd = [], setRowsRemoved }) => {
                         hover
                         onClick={(event) => {
                           handleClick(event, row._id);
-                          context.handleGetQrcode(row._id);
+                          context.handleGetQrcode(row._id,"bophankd");
                         }}
                         role="checkbox"
                         aria-checked={isItemSelected}
