@@ -21,7 +21,9 @@ import Typography from "@mui/material/Typography";
 import { alpha } from "@mui/material/styles";
 import TableButton from "../../../components/TableButton";
 import { Link } from "react-router-dom";
-
+import Popup from "../../../popup/Popup";
+import { useContext } from "react";
+import { StateContext } from "../../../Context/StateContext";
 const EnhancedTableToolbar = ({
   numSelected,
   rowsSelected,
@@ -155,9 +157,12 @@ const TableBophankd = ({ dsBophankd = [], setRowsRemoved }) => {
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - dsBophankd?.length) : 0;
+  //style Popup
+  const context = useContext(StateContext);
 
   return (
     <>
+      <Popup show={context.show} />
       <Box sx={{ width: "100%" }}>
         <Paper sx={{ width: "100%", mb: 2 }}>
           <EnhancedTableToolbar
@@ -195,7 +200,9 @@ const TableBophankd = ({ dsBophankd = [], setRowsRemoved }) => {
                     return (
                       <TableRow
                         hover
-                        onClick={(event) => handleClick(event, row._id)}
+                        onClick={(event) => {
+                          handleClick(event, row._id);
+                        }}
                         role="checkbox"
                         aria-checked={isItemSelected}
                         tabIndex={-1}
@@ -216,9 +223,28 @@ const TableBophankd = ({ dsBophankd = [], setRowsRemoved }) => {
                             {row.ten}
                           </Link>
                         </TableCell>
-                        <TableCell align="right">{row.sdt}</TableCell>
-                        <TableCell align="right">{row.email}</TableCell>
-                        <TableCell align="right">
+                        <TableCell
+                          align="right"
+                          onClick={() => {
+                            context.handleGetQrcode(row._id, "bophankd", true);
+                          }}
+                        >
+                          {row.sdt}
+                        </TableCell>
+                        <TableCell
+                          align="right"
+                          onClick={() => {
+                            context.handleGetQrcode(row._id, "bophankd", true);
+                          }}
+                        >
+                          {row.email}
+                        </TableCell>
+                        <TableCell
+                          align="right"
+                          onClick={() => {
+                            context.handleGetQrcode(row._id, "bophankd", true);
+                          }}
+                        >
                           {row?.user?.taikhoan}
                         </TableCell>
                       </TableRow>
@@ -255,7 +281,6 @@ const TableBophankd = ({ dsBophankd = [], setRowsRemoved }) => {
           />
         </Paper>
       </Box>
-
       <DialogMaterial
         open={open}
         onClose={handleClose}

@@ -22,6 +22,8 @@ import TableButton from "../../../components/TableButton";
 import apiSanpham from "../../../axios/apiSanpham";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const EnhancedTableToolbar = ({
   numSelected,
@@ -91,6 +93,7 @@ const TableSanpham = ({ dsSanpham = [], setRowsRemoved }) => {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [open, setOpen] = React.useState(false);
   const history = useHistory();
+ 
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -166,7 +169,25 @@ const TableSanpham = ({ dsSanpham = [], setRowsRemoved }) => {
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - dsSanpham.length) : 0;
-
+ //style Qrcode
+  const style = {
+    width: '60px',
+    height: '60px'
+  }
+  // Get and Render Qrcode
+  const [qrcode, setQrcode] = useState([])
+  useEffect(() => {
+    const getQrcode = async () => {
+      try {
+          const res = await axios.post('http://localhost:3000/api/qrcode/scan',
+          { role: JSON.parse(localStorage.getItem('userInfo')).vaitro })
+          setQrcode(res.data.listId)
+      }catch(error) {
+         console.log(error)
+      }
+    } 
+    getQrcode()
+  },[])
   return (
     <>
       <Box sx={{ width: "100%" }}>
@@ -195,7 +216,7 @@ const TableSanpham = ({ dsSanpham = [], setRowsRemoved }) => {
                 rowCount={dsSanpham.length}
                 headCells={headCellsSanpham}
               />
-              <TableBody>
+                <TableBody>
                 {dsSanpham
                   .slice()
                   .sort(getComparator(order, orderBy))
@@ -203,7 +224,7 @@ const TableSanpham = ({ dsSanpham = [], setRowsRemoved }) => {
                   .map((row, index) => {
                     const isItemSelected = isSelected(row._id);
                     const labelId = `enhanced-table-checkbox-${index}`;
-
+                    
                     return (
                       <TableRow
                         hover
@@ -252,8 +273,14 @@ const TableSanpham = ({ dsSanpham = [], setRowsRemoved }) => {
                         <TableCell align="right">
                           {formatMoney(row.gia)}
                         </TableCell>
+                        {qrcode.map( qr => {
+                          if (qr.id === row._id) 
+                            return <TableCell align="right">
+                                      <img style={style} src={qr.qrcode} />
+                                   </TableCell>
+                        })}
                         <TableCell align="right">{row.ngaytao}</TableCell>
-                      </TableRow>
+                        </TableRow>
                     );
                   })}
                 {emptyRows > 0 && (
