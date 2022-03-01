@@ -16,8 +16,18 @@ const {
 
 // them dai ly
 daily2Router.post("/them", async (req, res) => {
-  const { ten, sdt, email, xa, huyen, tinh, taikhoan, daily1Id, dl2, gsvId } =
-    req.body;
+  const {
+    ten,
+    sdt,
+    email,
+    xa,
+    huyen,
+    tinh,
+    taikhoan,
+    daily1Id,
+    bophankdId,
+    gsvId,
+  } = req.body;
   try {
     // create daily 1
     const daily2 = new Daily2({
@@ -31,14 +41,13 @@ daily2Router.post("/them", async (req, res) => {
       daily1: daily1Id,
     });
     const savedDaily2 = await daily2.save();
-
     if (savedDaily2) {
       // Thêm vào danh sách đại lý 2 của đại lý 1
       const daily1 = await Daily1.findById(daily1Id);
       daily1.daily2 = [savedDaily2._id, ...daily1.daily2];
       await daily1.save();
       // Thêm vào danh sách duyệt đại lý 2 của bộ phận kinh doanh
-      const bophankd = await Bophankd.findById(dl2);
+      const bophankd = await Bophankd.findById(bophankdId);
       bophankd.daily2 = [savedDaily2._id, ...bophankd.daily2];
       await bophankd.save();
       // Thêm vào danh sách duyệt đại lý 2 của giám sát vùng
