@@ -59,7 +59,17 @@ function LoginForm(props) {
       // console.log(getData2);
       values.taikhoan = "";
       values.matkhau = "";
-      navigation.navigate("TabNav");
+      switch (resultAction.payload.vaitro)
+      {      
+        case "hodan":
+          navigation.navigate("TabNav");
+          break;
+        case "daily1":
+          navigation.navigate("HomeDaily1");
+          break;
+        default:
+          console.log("404");
+      }
     } catch (error) {
       handleOpen();
     }

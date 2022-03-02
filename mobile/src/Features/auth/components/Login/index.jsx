@@ -1,6 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
+import HomeDaily1 from "../../../HomeDaily1";
 import ListCongCu from "../../../Home/ScreenKho/ListCongCu";
 import ListVatTu from "../../../Home/ScreenKho/ListVatTu";
 import ListNguyenLieu from "../../../Home/ScreenKho/ListNguyenLieu";
@@ -26,6 +27,7 @@ function Login(props) {
           component={LoginForm}
           options={{ header: () => null}}
         />
+        <Stack.Screen name="HomeDaily1" component={HomeDaily1} />
         <Stack.Screen name="TabNav" component={TabNav} />
         <Stack.Screen name="BCTienDo" component={BCTienDo} />
         <Stack.Screen name="ScreenCongCu" component={ListCongCu} />
