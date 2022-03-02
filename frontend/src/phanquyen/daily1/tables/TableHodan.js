@@ -17,6 +17,9 @@ import DialogMaterial from "../../../components/DialogMaterial";
 import styled from "styled-components";
 import apiDaily1 from "../../../axios/apiDaily1";
 import { toast } from "react-toastify";
+import Popup from "../../../popup/Popup";
+import { useContext } from "react";
+import { StateContext } from "../../../Context/StateContext";
 
 const TableHodan = ({
   dsHodan = [],
@@ -97,9 +100,10 @@ const TableHodan = ({
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - dsHodan.length) : 0;
-
+  const context = useContext(StateContext);
   return (
     <>
+      <Popup show={context.show} />
       <Box sx={{ width: "100%" }}>
         <Paper sx={{ width: "100%", mb: 2 }}>
           <TableContainer>
@@ -155,13 +159,66 @@ const TableHodan = ({
                             </Link>
                           )}
                         </TableCell>
-                        <TableCell align="right">{row.sdt}</TableCell>
-                        <TableCell align="right">{row.cmnd}</TableCell>
-                        <TableCell align="right">{row.namsinh}</TableCell>
-                        <TableCell align="right">
+                        <TableCell
+                          align="right"
+                          onClick={() => {
+                            context.handleGetQrcode(
+                              row._id,
+                              "hodan",
+                              row.active
+                            );
+                          }}
+                        >
+                          {row.sdt}
+                        </TableCell>
+                        <TableCell
+                          align="right"
+                          onClick={() => {
+                            context.handleGetQrcode(
+                              row._id,
+                              "hodan",
+                              row.active
+                            );
+                          }}
+                        >
+                          {row.cmnd}
+                        </TableCell>
+                        <TableCell
+                          align="right"
+                          onClick={() => {
+                            context.handleGetQrcode(
+                              row._id,
+                              "hodan",
+                              row.active
+                            );
+                          }}
+                        >
+                          {row.namsinh}
+                        </TableCell>
+                        <TableCell
+                          align="right"
+                          onClick={() => {
+                            context.handleGetQrcode(
+                              row._id,
+                              "hodan",
+                              row.active
+                            );
+                          }}
+                        >
                           {row?.loaisanpham?.ten}
                         </TableCell>
-                        <TableCell align="right">{row.langnghe.ten}</TableCell>
+                        <TableCell
+                          align="right"
+                          onClick={() => {
+                            context.handleGetQrcode(
+                              row._id,
+                              "hodan",
+                              row.active
+                            );
+                          }}
+                        >
+                          {row.langnghe.ten}
+                        </TableCell>
                         <TableCell align="right">
                           {row.active ? (
                             <Badge className="success">Đã kích hoạt</Badge>

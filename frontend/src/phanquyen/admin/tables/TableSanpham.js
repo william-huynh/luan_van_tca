@@ -171,15 +171,16 @@ const TableSanpham = ({ dsSanpham = [], setRowsRemoved }) => {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - dsSanpham.length) : 0;
  //style Qrcode
   const style = {
-    width: '50px',
-    height: '50px'
+    width: '60px',
+    height: '60px'
   }
   // Get and Render Qrcode
   const [qrcode, setQrcode] = useState([])
   useEffect(() => {
     const getQrcode = async () => {
       try {
-          const res = await axios.get('http://localhost:3000/api/qrcode/scan')
+          const res = await axios.post('http://localhost:3000/api/qrcode/scan',
+          { role: JSON.parse(localStorage.getItem('userInfo')).vaitro })
           setQrcode(res.data.listId)
       }catch(error) {
          console.log(error)
@@ -273,7 +274,7 @@ const TableSanpham = ({ dsSanpham = [], setRowsRemoved }) => {
                           {formatMoney(row.gia)}
                         </TableCell>
                         {qrcode.map( qr => {
-                          if (qr.id === row._id)
+                          if (qr.id === row._id) 
                             return <TableCell align="right">
                                       <img style={style} src={qr.qrcode} />
                                    </TableCell>

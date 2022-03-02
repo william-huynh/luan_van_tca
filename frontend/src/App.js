@@ -2,6 +2,7 @@ import React from "react";
 import "react-toastify/dist/ReactToastify.css";
 import RouteProvider from "./navigation/RouteProvider";
 import { ToastContainer } from "react-toastify";
+import StateProvider from "./Context/StateContext";
 
 function App() {
   return (
