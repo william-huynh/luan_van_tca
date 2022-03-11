@@ -1,14 +1,7 @@
 import React from "react";
-import {
-    Alert,
-    Button,
-    StyleSheet,
-    Text,
-    View,
-    Pressable,
-    ScrollView,
-    LogBox,
-} from "react-native";
+import styles from "./style";
+import { Alert, Button, StyleSheet, Text, View, Pressable, ScrollView, LogBox } from "react-native";
+
 function HomeDaily1(props)
 {
     return (

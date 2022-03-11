@@ -1,7 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
-import HomeDaily1 from "../../../HomeDaily1";
+import HomeDaily1 from "../../../Daily1/Home";
 import ListCongCu from "../../../Home/ScreenKho/ListCongCu";
 import ListVatTu from "../../../Home/ScreenKho/ListVatTu";
 import ListNguyenLieu from "../../../Home/ScreenKho/ListNguyenLieu";
