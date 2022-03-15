@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./style";
-import { Alert, Button, StyleSheet, Text, View, Pressable, ScrollView, LogBox } from "react-native";
+import { Alert, Button, StyleSheet, Text, View, Pressable, ScrollView, LogBox, SafeAreaView } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 
@@ -8,7 +8,7 @@ function HomeDaily1(props)
 {
     return (
         // Main container
-        <View style = {styles.container}>
+        <SafeAreaView style = {styles.container}>
 
             {/* Top Bar: Title & Menu */}
             <View style = {styles.topBarContainer}>
@@ -158,7 +158,7 @@ function HomeDaily1(props)
                     style = {styles.naviBarIcon}
                 />
             </View>
-        </View>
+        </SafeAreaView>
     );
 }
 export default HomeDaily1;
