@@ -5,14 +5,14 @@ import { Provider } from "react-redux";
 import store from "./src/app/store";
 import Login from "./src/Features/auth/components/Login";
 import HomeDaily1 from "./src/Features/Daily1/Home";
-import ScreenProductDaily1 from "./src/Features/Daily1/Products"
+import ScreenOrderDaily1 from "./src/Features/Daily1/Orders"
 import Home from "./src/Features/Home";
 
 export default function App() {
   LogBox.ignoreLogs(['Remote debugger']);
   return (
     // <HomeDaily1/>
-    <ScreenProductDaily1/>
+    <ScreenOrderDaily1/>
     // <Provider store={store}>
     //   <Login />
     // </Provider>

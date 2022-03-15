@@ -2,27 +2,27 @@ import React, { useEffect, useState } from "react";
 import { FlatList, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-function ProductListDaily1 (props) {
+function OrderListDaily1 (props) {
     const {dataList: { item: data }} = props;
     return (
         // Main container
         <SafeAreaView style = {styles.container}>
             
             {/* Picture */}
-            <View style = {styles.productPicture}></View>
+            <View style = {styles.orderPicture}></View>
 
-            {/* Detail: Name & Product ID & Order ID */}
-            <View style = {styles.productDetailContainer}>
-                <Text style = {styles.productDetailName}>{data.title}</Text>
-                <Text style = {styles.productDetailDescription}>Mã sản phẩm : {data.product_id}</Text>
-                <Text style = {styles.productDetailDescription}>Mã đơn hàng : {data.order_id}</Text>
+            {/* Detail: Name & Price & Deadline */}
+            <View style = {styles.orderDetailContainer}>
+                <Text style = {styles.orderDetailName}>{data.title}</Text>
+                <Text style = {styles.orderDetailDescription}>Tổng đơn giá : {data.price} VND</Text>
+                <Text style = {styles.orderDetailDescription}>Phân phát đến : {data.deadline}</Text>
             </View>
 
             {/* Info Icon */}
             <Ionicons
                 name = "information-circle-outline"
                 size = {25}
-                style = {styles.productInfo}
+                style = {styles.orderInfo}
             />
         </SafeAreaView>
     )
@@ -39,33 +39,33 @@ const styles = StyleSheet.create({
         padding: 10,
     },
 
-    // Product Picture
-    productPicture: {
+    // Order Picture
+    orderPicture: {
         width: 80,
         height: 80,
         backgroundColor: "gray",
         borderRadius: 10,
     },
 
-    // Product Detail
-    productDetailContainer: {
+    // Order Detail
+    orderDetailContainer: {
         flex: 1,
         justifyContent: "space-around",
         marginLeft: 20,
     },
-    productDetailName: {
+    orderDetailName: {
         fontSize: 15,
         fontWeight: "bold",
-        color: "#57DE8D",
+        color: "#00E0B8",
     },
-    productDetailDescription: {
+    orderDetailDescription: {
         fontSize: 13,
     },
 
-    // Product Info
-    productInfo: {
-        color: "#57DE8D",
+    // Order Info
+    orderInfo: {
+        color: "#00E0B8",
     },
   });
 
-export default ProductListDaily1;
+export default OrderListDaily1;
