@@ -13,9 +13,9 @@ function OrderListDaily1 (props) {
 
             {/* Detail: Name & Price & Deadline */}
             <View style = {styles.orderDetailContainer}>
-                <Text style = {styles.orderDetailName}>{data.title}</Text>
-                <Text style = {styles.orderDetailDescription}>Tổng đơn giá : {data.price} VND</Text>
-                <Text style = {styles.orderDetailDescription}>Phân phát đến : {data.deadline}</Text>
+                <Text style = {styles.orderDetailName}>{data.ma}</Text>
+                <Text style = {styles.orderDetailDescription}>Tổng đơn giá : {data.tongdongia} VND</Text>
+                <Text style = {styles.orderDetailDescription}>Phân phát đến : {data.ngaydathang}</Text>
             </View>
 
             {/* Info Icon */}

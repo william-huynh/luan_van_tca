@@ -1,7 +1,13 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
+
+// Import Dai ly 1 screens
 import HomeDaily1 from "../../../Daily1/Home";
+import OrderDaily1 from "../../../Daily1/Orders";
+import ProductDaily1 from "../../../Daily1/Products";
+
+// Import Ho dan screens
 import ListCongCu from "../../../Home/ScreenKho/ListCongCu";
 import ListVatTu from "../../../Home/ScreenKho/ListVatTu";
 import ListNguyenLieu from "../../../Home/ScreenKho/ListNguyenLieu";
@@ -16,9 +22,11 @@ import FormVTLoi from "../../../Home/ScreenKho/VatTu/FormVTLoi";
 import ListKhoLoi from "../../../Home/ScreenKho/ListKhoLoi";
 import ListSanPham from "../../../Home/ScreenKho/ListSanPham";
 import FormGiaoHang from "../../../Home/ScreenDonHang/FormGiaoHang";
+
 function Login(props) {
   const Stack = createNativeStackNavigator();
   return (
+
     // <LoginForm onSubmit={handleLoginSubmit} />
     <NavigationContainer>
       <Stack.Navigator screenOptions={{header : ()=> null}}>
@@ -27,7 +35,13 @@ function Login(props) {
           component={LoginForm}
           options={{ header: () => null}}
         />
+
+        {/* Dai ly 1 screens */}
         <Stack.Screen name="HomeDaily1" component={HomeDaily1} />
+        <Stack.Screen name="ProductDaily1" component={ProductDaily1} />
+        <Stack.Screen name="OrderDaily1" component={OrderDaily1} />
+
+        {/* Ho dan screens */}
         <Stack.Screen name="TabNav" component={TabNav} />
         <Stack.Screen name="BCTienDo" component={BCTienDo} />
         <Stack.Screen name="ScreenCongCu" component={ListCongCu} />
