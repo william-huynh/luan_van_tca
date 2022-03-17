@@ -110,11 +110,15 @@ const Daily2Them = (props) => {
         bophankdId: daily1Info.bophankd,
         gsvId: daily1Info.giamsatvung,
       };
+      console.log(daily1Info._id, daily1Info.bophankd, daily1Info.giamsatvung);
       const { success } = await apiDaily2.themDaily2(dl);
+      console.log("run");
       if (success) {
         toast.success("Thêm thành công!", { theme: "colored" });
         resetFields();
         setSuccess(true);
+      } else {
+        console.log(success);
       }
     }
   };
