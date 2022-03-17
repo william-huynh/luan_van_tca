@@ -4,6 +4,23 @@ const User = require("../models/userModel");
 const bcrypt = require("bcryptjs");
 const { generateToken } = require("../utils");
 
+// get all user
+userRouter.get("/getAll", async (req, res) => {
+  const user = await User.find(
+    {},
+    {
+      taikhoan: 0,
+      matkhau: 0,
+      __v: 0,
+    }
+  );
+  if (!user) {
+    res.status(403).send({ message: "Không tồn tại user", success: true });
+  } else {
+    return res.status(200).json({ message: "success", success: true, user });
+  }
+});
+
 // user signin
 userRouter.post("/login", async (req, res) => {
   const { taikhoan, matkhau } = req.body;
