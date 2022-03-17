@@ -457,6 +457,20 @@ const ThongtinCanhan = ({ type }) => {
                 </Select>
               </InputBox>
             </FlexRow>
+            <ButtonsWrapper>
+              <Button onClick={handleSubmit}>Lưu</Button>
+              <ButtonBox>
+                <Btn
+                  className={activeTab === "canhan" ? "canhan" : "taikhoan"}
+                />
+                <ToggleBtn onClick={() => setActiveTab("canhan")}>
+                  Cá nhân
+                </ToggleBtn>
+                <ToggleBtn onClick={() => setActiveTab("taikhoan")}>
+                  Tài khoản
+                </ToggleBtn>
+              </ButtonBox>
+            </ButtonsWrapper>
           </Section>
 
           <Section
@@ -509,10 +523,24 @@ const ThongtinCanhan = ({ type }) => {
                 {pwdErr.type === "xnMatkhau" && <ErrMsg>{pwdErr.msg}</ErrMsg>}
               </InputBox>
             </FlexCollumn>
+            <ButtonsWrapper>
+              <Button onClick={handleSubmit}>Lưu</Button>
+              <ButtonBox>
+                <Btn
+                  className={activeTab === "canhan" ? "canhan" : "taikhoan"}
+                />
+                <ToggleBtn onClick={() => setActiveTab("canhan")}>
+                  Cá nhân
+                </ToggleBtn>
+                <ToggleBtn onClick={() => setActiveTab("taikhoan")}>
+                  Tài khoản
+                </ToggleBtn>
+              </ButtonBox>
+            </ButtonsWrapper>
           </Section>
         </>
 
-        <ButtonsWrapper>
+        {/* <ButtonsWrapper>
           <Button onClick={handleSubmit}>Lưu</Button>
           <ButtonBox>
             <Btn className={activeTab === "canhan" ? "canhan" : "taikhoan"} />
@@ -523,7 +551,7 @@ const ThongtinCanhan = ({ type }) => {
               Tài khoản
             </ToggleBtn>
           </ButtonBox>
-        </ButtonsWrapper>
+        </ButtonsWrapper> */}
       </Wrapper>
     </Container>
   );
