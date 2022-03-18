@@ -91,13 +91,11 @@ const Detailsuser = (props) => {
         <h1 className={styles.title}>Chi tiết {name}</h1>
         <div className={styles.form}>
           <div className={styles.name}>
-            <div className={styles.name}>
-              <img src={ten} className={styles.img} />
-              <span>Tên {name}</span>
-              <h4 className={styles.info}>
-                {info.ten === undefined ? info.daidien : info.ten}
-              </h4>
-            </div>
+            <img src={ten} className={styles.img} />
+            <span>Tên {name}</span>
+            <h4 className={styles.info}>
+              {info.ten === undefined ? info.daidien : info.ten}
+            </h4>
           </div>
           {/* <div className={styles.name}>
             <img src={taikhoan} className={styles.img} />
