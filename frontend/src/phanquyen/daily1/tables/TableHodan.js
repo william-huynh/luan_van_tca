@@ -163,7 +163,7 @@ const TableHodan = ({
                           align="right"
                           onClick={() => {
                             context.handleGetQrcode(
-                              row._id,
+                              row.user,
                               "hodan",
                               row.active
                             );
@@ -175,7 +175,7 @@ const TableHodan = ({
                           align="right"
                           onClick={() => {
                             context.handleGetQrcode(
-                              row._id,
+                              row.user,
                               "hodan",
                               row.active
                             );
@@ -187,7 +187,7 @@ const TableHodan = ({
                           align="right"
                           onClick={() => {
                             context.handleGetQrcode(
-                              row._id,
+                              row.user,
                               "hodan",
                               row.active
                             );
@@ -199,7 +199,7 @@ const TableHodan = ({
                           align="right"
                           onClick={() => {
                             context.handleGetQrcode(
-                              row._id,
+                              row.user,
                               "hodan",
                               row.active
                             );
@@ -211,7 +211,7 @@ const TableHodan = ({
                           align="right"
                           onClick={() => {
                             context.handleGetQrcode(
-                              row._id,
+                              row.user,
                               "hodan",
                               row.active
                             );

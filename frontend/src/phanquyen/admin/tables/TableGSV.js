@@ -226,7 +226,7 @@ const TableGSV = ({ dsGsv = [], setRowsRemoved }) => {
                         <TableCell
                           align="right"
                           onClick={() => {
-                            context.handleGetQrcode(row._id, "gsv", true);
+                            context.handleGetQrcode(row.user._id, "gsv", true);
                           }}
                         >
                           {row.sdt}
@@ -234,7 +234,7 @@ const TableGSV = ({ dsGsv = [], setRowsRemoved }) => {
                         <TableCell
                           align="right"
                           onClick={() => {
-                            context.handleGetQrcode(row._id, "gsv", true);
+                            context.handleGetQrcode(row.user._id, "gsv", true);
                           }}
                         >
                           {row.cmnd}
@@ -242,7 +242,7 @@ const TableGSV = ({ dsGsv = [], setRowsRemoved }) => {
                         <TableCell
                           align="right"
                           onClick={() => {
-                            context.handleGetQrcode(row._id, "gsv", true);
+                            context.handleGetQrcode(row.user._id, "gsv", true);
                           }}
                         >
                           {row?.user?.taikhoan}
@@ -250,7 +250,7 @@ const TableGSV = ({ dsGsv = [], setRowsRemoved }) => {
                         <TableCell
                           align="right"
                           onClick={() => {
-                            context.handleGetQrcode(row._id, "gsv", true);
+                            context.handleGetQrcode(row.user._id, "gsv", true);
                           }}
                         >
                           {row.email}

@@ -215,7 +215,7 @@ const TableGiamsatvung = ({
                           align="right"
                           onClick={() => {
                             context.handleGetQrcode(
-                              row._id,
+                              row.user._id,
                               "giamsatvung",
                               true
                             );
@@ -227,7 +227,7 @@ const TableGiamsatvung = ({
                           align="right"
                           onClick={() => {
                             context.handleGetQrcode(
-                              row._id,
+                              row.user._id,
                               "giamsatvung",
                               true
                             );
@@ -239,7 +239,7 @@ const TableGiamsatvung = ({
                           align="right"
                           onClick={() => {
                             context.handleGetQrcode(
-                              row._id,
+                              row.user._id,
                               "giamsatvung",
                               true
                             );

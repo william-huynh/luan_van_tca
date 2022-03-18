@@ -233,7 +233,7 @@ const TableDaily1 = ({ dsDaily1 = [], setRowsRemoved, readOnly }) => {
                           align="right"
                           onClick={() => {
                             context.handleGetQrcode(
-                              row._id,
+                              row.user,
                               "daily1",
                               row.active
                             );
@@ -245,7 +245,7 @@ const TableDaily1 = ({ dsDaily1 = [], setRowsRemoved, readOnly }) => {
                           align="right"
                           onClick={() => {
                             context.handleGetQrcode(
-                              row._id,
+                              row.user,
                               "daily1",
                               row.active
                             );
@@ -257,7 +257,7 @@ const TableDaily1 = ({ dsDaily1 = [], setRowsRemoved, readOnly }) => {
                           align="right"
                           onClick={() => {
                             context.handleGetQrcode(
-                              row._id,
+                              row.user,
                               "daily1",
                               row.active
                             );

@@ -155,7 +155,7 @@ const TableDaily1 = ({ dsDaily1 = [], setSuccess, bophankdId, setRefresh }) => {
                           align="right"
                           onClick={() => {
                             context.handleGetQrcode(
-                              row._id,
+                              row.user._id,
                               "daily1",
                               row.active
                             );
@@ -167,7 +167,7 @@ const TableDaily1 = ({ dsDaily1 = [], setSuccess, bophankdId, setRefresh }) => {
                           align="right"
                           onClick={() => {
                             context.handleGetQrcode(
-                              row._id,
+                              row.user._id,
                               "daily1",
                               row.active
                             );
@@ -179,7 +179,7 @@ const TableDaily1 = ({ dsDaily1 = [], setSuccess, bophankdId, setRefresh }) => {
                           align="right"
                           onClick={() => {
                             context.handleGetQrcode(
-                              row._id,
+                              row.user._id,
                               "daily1",
                               row.active
                             );

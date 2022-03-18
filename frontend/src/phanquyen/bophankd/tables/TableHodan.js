@@ -151,7 +151,7 @@ const TableHodan = ({ dsHodan = [], setRowsRemoved, readOnly }) => {
                           align="right"
                           onClick={() => {
                             context.handleGetQrcode(
-                              row._id,
+                              row.user,
                               "hodan",
                               row.active
                             );
@@ -163,7 +163,7 @@ const TableHodan = ({ dsHodan = [], setRowsRemoved, readOnly }) => {
                           align="right"
                           onClick={() => {
                             context.handleGetQrcode(
-                              row._id,
+                              row.user,
                               "hodan",
                               row.active
                             );
@@ -175,7 +175,7 @@ const TableHodan = ({ dsHodan = [], setRowsRemoved, readOnly }) => {
                           align="right"
                           onClick={() => {
                             context.handleGetQrcode(
-                              row._id,
+                              row.user,
                               "hodan",
                               row.active
                             );
@@ -187,7 +187,7 @@ const TableHodan = ({ dsHodan = [], setRowsRemoved, readOnly }) => {
                           align="right"
                           onClick={() => {
                             context.handleGetQrcode(
-                              row._id,
+                              row.user,
                               "hodan",
                               row.active
                             );
@@ -199,7 +199,7 @@ const TableHodan = ({ dsHodan = [], setRowsRemoved, readOnly }) => {
                           align="right"
                           onClick={() => {
                             context.handleGetQrcode(
-                              row._id,
+                              row.user,
                               "hodan",
                               row.active
                             );

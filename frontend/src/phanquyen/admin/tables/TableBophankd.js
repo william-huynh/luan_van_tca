@@ -226,7 +226,11 @@ const TableBophankd = ({ dsBophankd = [], setRowsRemoved }) => {
                         <TableCell
                           align="right"
                           onClick={() => {
-                            context.handleGetQrcode(row._id, "bophankd", true);
+                            context.handleGetQrcode(
+                              row.user._id,
+                              "bophankd",
+                              true
+                            );
                           }}
                         >
                           {row.sdt}
@@ -234,7 +238,11 @@ const TableBophankd = ({ dsBophankd = [], setRowsRemoved }) => {
                         <TableCell
                           align="right"
                           onClick={() => {
-                            context.handleGetQrcode(row._id, "bophankd", true);
+                            context.handleGetQrcode(
+                              row.user._id,
+                              "bophankd",
+                              true
+                            );
                           }}
                         >
                           {row.email}
@@ -242,7 +250,11 @@ const TableBophankd = ({ dsBophankd = [], setRowsRemoved }) => {
                         <TableCell
                           align="right"
                           onClick={() => {
-                            context.handleGetQrcode(row._id, "bophankd", true);
+                            context.handleGetQrcode(
+                              row.user._id,
+                              "bophankd",
+                              true
+                            );
                           }}
                         >
                           {row?.user?.taikhoan}
