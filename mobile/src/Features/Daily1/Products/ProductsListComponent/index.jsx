@@ -1,29 +1,36 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { FlatList, SafeAreaView, StyleSheet, Text, View, Image } from "react-native";
+import axiosClient from "../../../../api/axiosClient";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 function ProductListDaily1 (props) {
-    const {dataList: { item: data }} = props;
+    const { navigation } = props;
+    const data = props.sanpham.item;
+    const getImg = (imgName)=>{ return `${axiosClient.defaults.baseURL}uploads/${imgName}` } // Get image function
+    const handleRedirectProductDetail = () => { navigation.navigate("ProductDetailDaily1", { data }) }
+    
     return (
         // Main container
         <SafeAreaView style = {styles.container}>
             
             {/* Picture */}
-            <View style = {styles.productPicture}></View>
+            <Image source = {{ uri: `${getImg(data.sanpham.hinhanh)}` }} style = {styles.productPicture} />
 
             {/* Detail: Name & Product ID & Order ID */}
             <View style = {styles.productDetailContainer}>
-                <Text style = {styles.productDetailName}>{data.title}</Text>
-                <Text style = {styles.productDetailDescription}>Mã sản phẩm : {data.product_id}</Text>
-                <Text style = {styles.productDetailDescription}>Mã đơn hàng : {data.order_id}</Text>
+                <Text style = {styles.productDetailName}>{data.sanpham.ten}</Text>
+                <Text style = {styles.productDetailDescription}>Mã sản phẩm : {data.sanpham.ma}</Text>
+                <Text style = {styles.productDetailDescription}>Giá sản phẩm : {data.sanpham.gia} VND</Text>
             </View>
 
             {/* Info Icon */}
-            <Ionicons
-                name = "information-circle-outline"
-                size = {25}
-                style = {styles.productInfo}
-            />
+            <Text onPress={handleRedirectProductDetail}>
+                <Ionicons
+                    name = "information-circle-outline"
+                    size = {25}
+                    style = {styles.productInfo}
+                />
+            </Text>
         </SafeAreaView>
     )
 }
@@ -43,7 +50,6 @@ const styles = StyleSheet.create({
     productPicture: {
         width: 80,
         height: 80,
-        backgroundColor: "gray",
         borderRadius: 10,
     },
 

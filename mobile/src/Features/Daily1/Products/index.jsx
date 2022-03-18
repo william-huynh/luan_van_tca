@@ -1,58 +1,59 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { FlatList, SafeAreaView, Text, View, TouchableOpacity } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import ProductListDaily1 from "./ProductsListComponent";
-import styles from "./style";
 
-const DATA = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    title: 'First Product',
-    product_id: '61c53adc7aed6f14ea8da078',
-    order_id: '61c53adc7aed6f14ea8da078',
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    title: 'Second Product',
-    product_id: 'SP002',
-    order_id: 'DH002',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    title: 'Third Product',
-    product_id: 'SP003',
-    order_id: 'DH003',
-  },
-];
+import styles from "./style";
+import ProductListDaily1 from "./ProductsListComponent";
+import daily1Api from "../../../api/daily1Api";
 
 function ProductDaily1(props) {
+  const { navigation } = props;
+  // Get daily1 id
+  const daily1Id = props.route.params.idDaily1;
+  const [productList, setProductList] = useState();
+
+  // Get list
+  useEffect(() => {
+    const fetchData = async () => {
+      const getListOrder = await daily1Api.dsSanpham(daily1Id);
+      setProductList(getListOrder.dssanpham);
+    };
+    fetchData();
+  }, []);
+
+  const handleRedirectHome = () => { navigation.navigate("HomeDaily1", { navigation: navigation }) }
+
   return (
       // Main container
       <SafeAreaView style = {styles.container}>
           
           {/* Top Bar: Return & Search */}
           <View style = {styles.topBarContainer}>
-              <Ionicons 
-                  name = "arrow-back"
-                  size = {25}
-                  style = {styles.topBarIconArrow}
-              />
-              <Text style = {styles.topBarText}>Sản phẩm</Text>
-              <Ionicons 
-                  name = "search"
-                  size = {25}
-                  style = {styles.topBarIconSearch}
-              />
+              <TouchableOpacity onPress = {handleRedirectHome} style = {styles.topBarReturn}>
+                  <Ionicons 
+                      name = "arrow-back"
+                      size = {25}
+                      style = {{ color: "white" }}
+                  />
+                  <Text style = {styles.topBarText}>Sản phẩm</Text>
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <Ionicons 
+                    name = "search"
+                    size = {25}
+                    style = {{ color: "white" }}
+                />
+              </TouchableOpacity>
           </View>
 
           {/* Product List */}
           <View style = {styles.productListContainer}>
             <FlatList
-              data={orderList}
-              renderItem={(item, index) => (
+              data={productList}
+              renderItem={(item) => (
                 <ProductListDaily1
-                  dataList={item}
-                  // navigation={navigation}
+                  sanpham={item}
+                  navigation={navigation}
                   daily1Id={daily1Id}
                 />
               )}

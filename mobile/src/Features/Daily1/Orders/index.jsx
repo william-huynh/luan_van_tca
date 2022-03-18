@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import OrderListDaily1 from "./OrderListComponent";
+
 import styles from "./style";
+import OrderListDaily1 from "./OrderListComponent";
 import daily1Api from "../../../api/daily1Api";
 
 function OrderDaily1(props) {
+  const { navigation } = props;
+  // Get daily1 id
   const daily1Id = props.route.params.idDaily1;
-  // console.log(daily1Id);
   const [orderList, setOrderList] = useState();
+
+  // Get list
   useEffect(() => {
-    (async () => {
+    const fetchData = async () => {
       const getListOrder = await daily1Api.dsDonhang(daily1Id);
-      setOrderList(
-        // getListOrder.dsdonhang
-        getListOrder.donhang.filter((item) => item.xacnhan === true)
-      );
-    })();
+      setOrderList(getListOrder.donhang);
+    };
+    fetchData();
   }, []);
 
   return (
@@ -44,7 +46,7 @@ function OrderDaily1(props) {
               data={orderList}
               renderItem={(item, index) => (
                 <OrderListDaily1
-                  dataList={item}
+                  order={item}
                   // navigation={navigation}
                   daily1Id={daily1Id}
                 />

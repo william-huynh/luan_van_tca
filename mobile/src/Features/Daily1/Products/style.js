@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 
-
 const styles = StyleSheet.create({
     // Container
     container: {
@@ -19,27 +18,24 @@ const styles = StyleSheet.create({
         paddingRight: 25,
         paddingLeft: 25,
     },
-    topBarIconArrow: {
-        color: "white",
-        flex: 1,
+    topBarReturn: {
+        flex: 1, 
+        display: "flex", 
+        flexDirection: "row"
     },
     topBarText: {
-        flex: 8,
         color: "white",
         fontSize: 20,
         fontWeight: "bold",
-    },
-    topBarIconSearch: {
-        color: "white",
-        flex: 1,
-        textAlign: "right",
+        paddingLeft: 8,
     },
 
     // Product List
     productListContainer: {
         backgroundColor: "#F3F0FF",
         flex: 1,
-        borderRadius: 15,
+        borderTopLeftRadius: 15,
+        borderTopRightRadius: 15,
         paddingTop: 37,
         paddingRight: 25,
         paddingLeft: 25,

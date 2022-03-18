@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./style";
-import { Alert, Button, StyleSheet, Text, View, Pressable, ScrollView, LogBox, SafeAreaView } from "react-native";
+import { Text, View, ScrollView, SafeAreaView, TouchableOpacity } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import daily1Api from "../../../api/daily1Api";
@@ -9,7 +9,7 @@ function HomeDaily1(props) {
     const { navigation } = props;
     const [callback, setCallBack] = useState(false);
     const [user, setUser] = useState();
-    const handleCallBackSL = (data)=>{
+    const handleCallBackSL = (data) => {
         if(data)
         {
           // console.log(data);
@@ -34,9 +34,10 @@ function HomeDaily1(props) {
         })();
     }, [callback]);
 
-    const handleRedirectOrder = () => {
-        navigation.navigate("OrderDaily1", { idDaily1: `${user._id}` });
-    };
+    // Redirect functions
+    const handleRedirectOrder = () => { navigation.navigate("OrderDaily1", { idDaily1: `${user._id}`, navigation: navigation }) };
+    const handleRedirectProduct = () => { navigation.navigate("ProductDaily1", { idDaily1: `${user._id}`, navigation: navigation }) }
+    
     return (
         // Main container
         <SafeAreaView style = {styles.container}>
@@ -57,7 +58,7 @@ function HomeDaily1(props) {
                         <ScrollView>
                             <View style = {styles.dashboardRow}>
                                 <View style = {styles.dashboardBoxContainer}>
-                                    <View style = {styles.dashboardBox}>
+                                    <TouchableOpacity onPress = {handleRedirectProduct} style = {styles.dashboardBox}>
                                         <View style = {styles.dashboardBoxIconBox}>
                                             <Ionicons
                                                 name = "cube"
@@ -67,11 +68,11 @@ function HomeDaily1(props) {
                                         </View>
                                         <Text style = {styles.dashboardBoxTitle}>Sản Phẩm</Text>
                                         <Text style = {styles.dashboardBoxDescription}>21 sản phẩm</Text>
-                                    </View>
+                                    </TouchableOpacity>
                                 </View>
                                 <View style = {styles.dashboardBoxContainer}>
-                                    <View style = {styles.dashboardBox}>
-                                    <View style = {styles.dashboardBoxIconBox}>
+                                    <TouchableOpacity style = {styles.dashboardBox}>
+                                        <View style = {styles.dashboardBoxIconBox}>
                                             <Ionicons
                                                 name = "construct"
                                                 size = {35}
@@ -80,12 +81,12 @@ function HomeDaily1(props) {
                                         </View>
                                         <Text style = {styles.dashboardBoxTitle}>Công Cụ</Text>
                                         <Text style = {styles.dashboardBoxDescription}>16 công cụ</Text>
-                                    </View>
+                                    </TouchableOpacity>
                                 </View>
                             </View>
                             <View style = {styles.dashboardRow}>
                                 <View style = {styles.dashboardBoxContainer}>
-                                    <View style = {styles.dashboardBox}>
+                                    <TouchableOpacity style = {styles.dashboardBox}>
                                         <View style = {styles.dashboardBoxIconBox}>
                                             <Ionicons
                                                 name = "analytics"
@@ -95,11 +96,11 @@ function HomeDaily1(props) {
                                         </View>
                                         <Text style = {styles.dashboardBoxTitle}>Vật Tư</Text>
                                         <Text style = {styles.dashboardBoxDescription}>15 vật tư</Text>
-                                    </View>
+                                    </TouchableOpacity>
                                 </View>
                                 <View style = {styles.dashboardBoxContainer}>
-                                    <View style = {styles.dashboardBox}>
-                                    <View style = {styles.dashboardBoxIconBox}>
+                                    <TouchableOpacity style = {styles.dashboardBox}>
+                                        <View style = {styles.dashboardBoxIconBox}>
                                             <Ionicons
                                                 name = "leaf"
                                                 size = {35}
@@ -108,12 +109,12 @@ function HomeDaily1(props) {
                                         </View>
                                         <Text style = {styles.dashboardBoxTitle}>Nguyên Liệu</Text>
                                         <Text style = {styles.dashboardBoxDescription}>15 nghiên liệu</Text>
-                                    </View>
+                                    </TouchableOpacity>
                                 </View>
                             </View>
                             <View style = {styles.dashboardRow}>
                                 <View style = {styles.dashboardBoxContainer}>
-                                    <View style = {styles.dashboardBox}>
+                                    <TouchableOpacity onPress = {handleRedirectOrder} style = {styles.dashboardBox}>
                                         <View style = {styles.dashboardBoxIconBox}>
                                             <Ionicons
                                                 name = "copy"
@@ -121,13 +122,13 @@ function HomeDaily1(props) {
                                                 style = {{ color: "#00E0B8" }}
                                             />
                                         </View>
-                                        <Text style = {styles.dashboardBoxTitle} onPress={handleRedirectOrder}>Đơn Hàng</Text>
+                                        <Text style = {styles.dashboardBoxTitle}>Đơn Hàng</Text>
                                         <Text style = {styles.dashboardBoxDescription}>19 đơn hàng</Text>
-                                    </View>
+                                    </TouchableOpacity>
                                 </View>
                                 <View style = {styles.dashboardBoxContainer}>
-                                    <View style = {styles.dashboardBox}>
-                                    <View style = {styles.dashboardBoxIconBox}>
+                                    <TouchableOpacity style = {styles.dashboardBox}>
+                                        <View style = {styles.dashboardBoxIconBox}>
                                             <Ionicons
                                                 name = "man"
                                                 size = {35}
@@ -136,12 +137,12 @@ function HomeDaily1(props) {
                                         </View>
                                         <Text style = {styles.dashboardBoxTitle}>Hộ Dân</Text>
                                         <Text style = {styles.dashboardBoxDescription}>3 hộ dân</Text>
-                                    </View>
+                                    </TouchableOpacity>
                                 </View>
                             </View>
                             <View style = {styles.dashboardRow}>
                                 <View style = {styles.dashboardBoxContainer}>
-                                    <View style = {styles.dashboardBox}>
+                                    <TouchableOpacity style = {styles.dashboardBox}>
                                         <View style = {styles.dashboardBoxIconBox}>
                                             <Ionicons
                                                 name = "log-in"
@@ -151,11 +152,11 @@ function HomeDaily1(props) {
                                         </View>
                                         <Text style = {styles.dashboardBoxTitle}>Hàng Giao Đến</Text>
                                         <Text style = {styles.dashboardBoxDescription}>10 hàng giao đến</Text>
-                                    </View>
+                                    </TouchableOpacity>
                                 </View>
                                 <View style = {styles.dashboardBoxContainer}>
-                                    <View style = {styles.dashboardBox}>
-                                    <View style = {styles.dashboardBoxIconBox}>
+                                    <TouchableOpacity style = {styles.dashboardBox}>
+                                        <View style = {styles.dashboardBoxIconBox}>
                                             <Ionicons
                                                 name = "log-out"
                                                 size = {35}
@@ -164,7 +165,7 @@ function HomeDaily1(props) {
                                         </View>
                                         <Text style = {styles.dashboardBoxTitle}>Hàng Giao Đi</Text>
                                         <Text style = {styles.dashboardBoxDescription}>20 hàng giao đi</Text>
-                                    </View>
+                                    </TouchableOpacity>
                                 </View>
                             </View>
                         </ScrollView>
@@ -172,23 +173,27 @@ function HomeDaily1(props) {
 
                     {/* Navigation bar: Home & Add & Account */}
                     <View style = {styles.naviBarContainer}>
-                        <Ionicons
-                            name = "home"
-                            size = {35}
-                            style = {styles.naviBarIcon}
-                        />
-                        <View style = {styles.naviBarIconBox}>
+                        <Text style = {styles.naviBarIcon}>
+                            <Ionicons
+                                name = "home"
+                                size = {35}
+                                style = {{ color: "white" }}
+                            />
+                        </Text>
+                        <Text style = {styles.naviBarIconBox}>
                             <Ionicons
                                 name = "add"
                                 size = {40}
-                                style = {{ color: "#FFFFFF", paddingLeft: 4 }}
+                                style = {{ color: "#FFFFFF"}}
                             />
-                        </View>
-                        <Ionicons
-                            name = "person"
-                            size = {35}
-                            style = {styles.naviBarIcon}
-                        />
+                        </Text>
+                        <Text style = {styles.naviBarIcon}>
+                            <Ionicons
+                                name = "person"
+                                size = {35}
+                                style = {{ color: "white" }}
+                            />
+                        </Text>
                     </View>
                 {/* </>
             )} */}

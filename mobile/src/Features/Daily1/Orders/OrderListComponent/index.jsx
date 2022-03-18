@@ -3,19 +3,16 @@ import { FlatList, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 function OrderListDaily1 (props) {
-    const {dataList: { item: data }} = props;
+    const data = props.order.item;
     return (
         // Main container
         <SafeAreaView style = {styles.container}>
-            
-            {/* Picture */}
-            <View style = {styles.orderPicture}></View>
 
             {/* Detail: Name & Price & Deadline */}
             <View style = {styles.orderDetailContainer}>
                 <Text style = {styles.orderDetailName}>{data.ma}</Text>
                 <Text style = {styles.orderDetailDescription}>Tổng đơn giá : {data.tongdongia} VND</Text>
-                <Text style = {styles.orderDetailDescription}>Phân phát đến : {data.ngaydathang}</Text>
+                <Text style = {styles.orderDetailDescription}>Tình trạng đơn hàng : {data.xacnhan == true ? "Đã xác nhận" : "Chưa xác nhận"}</Text>
             </View>
 
             {/* Info Icon */}
@@ -36,7 +33,8 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         borderRadius: 10,
         marginBottom: 25,
-        padding: 10,
+        padding: 15,
+        paddingBottom: 7,
     },
 
     // Order Picture
@@ -56,10 +54,12 @@ const styles = StyleSheet.create({
     orderDetailName: {
         fontSize: 15,
         fontWeight: "bold",
+        paddingBottom: 10,
         color: "#00E0B8",
     },
     orderDetailDescription: {
         fontSize: 13,
+        paddingBottom: 10,
     },
 
     // Order Info

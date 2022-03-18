@@ -4,13 +4,12 @@ import { StyleSheet, Text, View ,LogBox } from "react-native";
 import { Provider } from "react-redux";
 import store from "./src/app/store";
 import Login from "./src/Features/auth/components/Login";
-import ProductDaily1 from "./src/Features/Daily1/Products";
+import ProductDetailDaily1 from "./src/Features/Daily1/Products/ProductDetail";
 
 export default function App() {
   LogBox.ignoreLogs(['Remote debugger']);
   return (
-    // <HomeDaily1/>
-    // <ProductDaily1/>
+    // <ProductDetailDaily1/>
     <Provider store={store}>
       <Login />
     </Provider>

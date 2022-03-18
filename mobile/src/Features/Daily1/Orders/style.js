@@ -39,7 +39,8 @@ const styles = StyleSheet.create({
     orderListContainer: {
         backgroundColor: "#F3F0FF",
         flex: 1,
-        borderRadius: 15,
+        borderTopLeftRadius: 15,
+        borderTopRightRadius: 15,
         paddingTop: 37,
         paddingRight: 25,
         paddingLeft: 25,
