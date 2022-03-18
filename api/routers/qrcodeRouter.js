@@ -81,7 +81,7 @@ qrcodeRouter.post("/scanUser", async (req, res) => {
     return;
   }
   function handleGetQr() {
-    let URL = `http://localhost:3000/${role}/${urlRole}/chitiet/${id}`;
+    let URL = `http://localhost:3000/public/details/user/${id}`;
 
     if (!id || !role)
       res.status(400).json({ success: false, message: "id or role empty" });
