@@ -9,7 +9,6 @@ userRouter.get("/getAll", async (req, res) => {
   const user = await User.find(
     {},
     {
-      taikhoan: 0,
       matkhau: 0,
       __v: 0,
     }

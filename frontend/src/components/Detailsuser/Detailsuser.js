@@ -1,14 +1,25 @@
 import React, { useState } from "react";
-import styles from "./Detailsuser.module.css";
 import ten from "../../assets/icons/ten.png";
 import sdt from "../../assets/icons/sdt.png";
 import email from "../../assets/icons/email.png";
 import diachi from "../../assets/icons/diachi.png";
 import taikhoan from "../../assets/icons/taikhoan.png";
 import axios from "axios";
+import {
+  Container,
+  Content,
+  Form,
+  FormContent,
+  FormGroup,
+  FormTitle,
+  Input,
+  Label,
+  TextArea,
+} from "../../phanquyen/admin/styledComponents";
 
 const Detailsuser = (props) => {
   const id = props.id;
+  const user = props.user;
   const role = props.role;
   let name = "";
   const [info, setInfo] = useState([]);
@@ -87,46 +98,82 @@ const Detailsuser = (props) => {
 
   return (
     <>
-      <div className={styles.container}>
-        <h1 className={styles.title}>Chi tiết {name}</h1>
-        <div className={styles.form}>
-          <div className={styles.name}>
-            <img src={ten} className={styles.img} />
-            <span>Tên {name}</span>
-            <h4 className={styles.info}>
-              {info.ten === undefined ? info.daidien : info.ten}
-            </h4>
-          </div>
-          {/* <div className={styles.name}>
-            <img src={taikhoan} className={styles.img} />
-            <span>Tên tài khoản</span>
-            <h4 className={styles.info}>{info.user.taikhoan}</h4>
-          </div> */}
-          <div className={styles.name}>
-            <img src={sdt} className={styles.img} />
-            <span>Số điện thoại</span>
-            <h4 className={styles.info}>
-              {info.sdt === undefined ? "Chưa cập nhật" : info.sdt}
-            </h4>
-          </div>
-          <div className={styles.name}>
-            <img src={email} className={styles.img} />
-            <span>Email</span>
-            <h4 className={styles.info}>
-              {info.email === undefined ? "Chưa cập nhật" : info.email}
-            </h4>
-          </div>
-          <div className={styles.name}>
-            <img src={diachi} className={styles.img} />
-            <span>Địa chỉ</span>
-            <h4 className={styles.info}>
-              {info.diachi === undefined
-                ? info.xa + "," + info.huyen + "," + info.tinh
-                : info.diachi}
-            </h4>
-          </div>
-        </div>
-      </div>
+      <Container>
+        <Content>
+          <Form>
+            <FormContent>
+              <FormTitle>
+                <span>Chi tiết {name}</span>
+              </FormTitle>
+
+              <FormGroup>
+                <Label>
+                  <img src={ten} alt="ten" />
+                  <span>Tên bộ phận kinh doanh:</span>
+                </Label>
+                <Input
+                  type="text"
+                  name="ten"
+                  value={info.ten === undefined ? info.daidien : info.ten}
+                  disabled
+                />
+              </FormGroup>
+
+              <FormGroup>
+                <Label>
+                  <img src={taikhoan} alt="taikhoan" />
+                  <span>Tên tài khoản:</span>
+                </Label>
+                <Input type="text" name="taikhoan" value={user} disabled />
+              </FormGroup>
+
+              <FormGroup>
+                <Label>
+                  <img src={sdt} alt="sdt" />
+                  <span>Số điện thoại:</span>
+                </Label>
+                <Input
+                  type="text"
+                  name="sdt"
+                  value={info.sdt === undefined ? "Chưa cập nhật" : info.sdt}
+                  disabled
+                />
+              </FormGroup>
+
+              <FormGroup>
+                <Label>
+                  <img src={email} alt="email" />
+                  <span>E-mail:</span>
+                </Label>
+                <Input
+                  type="text"
+                  name="email"
+                  value={
+                    info.email === undefined ? "Chưa cập nhật" : info.email
+                  }
+                  disabled
+                />
+              </FormGroup>
+
+              <FormGroup>
+                <Label>
+                  <img src={diachi} alt="diachi" />
+                  <span>Địa chỉ:</span>
+                </Label>
+                <TextArea
+                  value={
+                    info.diachi === undefined
+                      ? info.xa + "," + info.huyen + "," + info.tinh
+                      : info.diachi
+                  }
+                  rows="3"
+                  disabled
+                />
+              </FormGroup>
+            </FormContent>
+          </Form>
+        </Content>
+      </Container>
     </>
   );
 };

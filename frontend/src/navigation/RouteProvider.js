@@ -34,7 +34,6 @@ const RouteProvider = () => {
         <Route path="/hodan" component={HodanRoutes} />
         {user.map((user) => {
           let path = `/public/details/user/${user._id.toString()}`;
-          console.log(path + "" + user.vaitro);
           return (
             <Route
               path={path}
@@ -42,6 +41,7 @@ const RouteProvider = () => {
                 <Detailsuser
                   {...props}
                   id={user._id.toString()}
+                  user={user.taikhoan}
                   role={user.vaitro}
                 />
               )}
