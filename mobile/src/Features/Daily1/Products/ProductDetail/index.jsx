@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, SafeAreaView, Text, View, TouchableOpacity, ScrollView } from "react-native";
+import { LogBox, FlatList, SafeAreaView, Text, View, TouchableOpacity, ScrollView } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import ProductDetailToolsList from "./ToolsList";
 
 // import daily1Api from "../../../../api/daily1Api";
+import congcuApi from "../../../../api/congcuApi";
 import styles from "./style";
 import ProductDetailSuppliesList from "./SuppliesList";
 import ProductDetailIngredientsList from "./IngredientsList";
@@ -11,8 +12,25 @@ import ProductDetailIngredientsList from "./IngredientsList";
 function ProductDetailDaily1(props) {
     const { navigation } = props;
     const data = props.route.params.data.sanpham;
+    const getImg = (imgName)=>{ return `${axiosClient.defaults.baseURL}uploads/${imgName}` } // Get image function
+    const [toolInfo, setToolInfo] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
     const handleRedirectProductList = () => { navigation.navigate("ProductDaily1", { navigation: navigation }) }
-    const thuoctinhStr = data.thuoctinh.join(", ").toString();
+    const thuoctinhStr = data.thuoctinh.join(", ").toString(); // Change thuoc tinh array to string
+    // console.log(data.dscongcu[0]);
+
+    // Ignore "VirtualizedLists should never be nested" log
+    useEffect(() => {
+        // const fetchData = async () => {
+        //     console.log(data.dscongcu[0]);
+        //     const getToolInfo = await congcuApi.getCongCu(data.dscongcu[0].congcu);
+        //     setToolInfo(getToolInfo);
+        //     setIsLoading(false);
+        // };
+        // fetchData();
+        LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
+    }, [])
+
     return (
         <SafeAreaView style = {styles.container}>
 
@@ -63,6 +81,13 @@ function ProductDetailDaily1(props) {
                                 )}
                                 keyExtractor={item => item._id}
                             />
+                            {/* {dscongcu.map((toolInfo, index) => (
+                                <View style = {styles.container}>
+                                    <Image source = {{ uri: `${getImg(toolInfo.congcu.hinhanh)}` }} style = {styles.productDetailListPicture} />
+                                    <Text style = {styles.productDetailListName}>{toolInfo.congcu.ten}</Text>
+                                    <Text style = {styles.productDetailListQuantity}>x {data.soluong}</Text>
+                                </View>
+                            ))} */}
                         </View>
 
                         {/* Product Supplies */}

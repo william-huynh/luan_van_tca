@@ -8,23 +8,30 @@ function ProductDetailIngredientsList(props) {
     const data = props.nguyenlieu.item;
     const getImg = (imgName)=>{ return `${axiosClient.defaults.baseURL}uploads/${imgName}` } // Get image function
     const [ingredientInfo, setIngredientInfo] = useState();
+    const [isLoading, setIsLoading] = useState(true);
 
     // Get tool info
     useEffect(() => {
         const fetchData = async () => {
             const getIngredientInfo = await nguyenlieuApi.getNguyenLieu(data.nguyenlieu);
             setIngredientInfo(getIngredientInfo);
+            setIsLoading(false);
         };
         fetchData();
     }, []);
-    console.log(data)
+    
     return (
-        <SafeAreaView style = {styles.container}>
-            <Image source = {{ uri: `${getImg(ingredientInfo.nguyenlieu.hinhanh)}` }} style = {styles.productDetailListPicture} />
-            {/* <View style = {styles.productDetailListPicture}/> */}
-            <Text style = {styles.productDetailListName}>{ingredientInfo.nguyenlieu.ten}</Text>
-            <Text style = {styles.productDetailListQuantity}>x {data.khoiluong} kg</Text>
-        </SafeAreaView>
+        <>
+            {!isLoading ? (
+                <SafeAreaView style = {styles.container}>
+                    <Image source = {{ uri: `${getImg(ingredientInfo.nguyenlieu.hinhanh)}` }} style = {styles.productDetailListPicture} />
+                    <Text style = {styles.productDetailListName}>{ingredientInfo.nguyenlieu.ten}</Text>
+                    <Text style = {styles.productDetailListQuantity}>x {data.khoiluong} kg</Text>
+                </SafeAreaView>
+            ) : (
+                console.log("Is loading!")
+            )}
+        </>
     );
 }
 

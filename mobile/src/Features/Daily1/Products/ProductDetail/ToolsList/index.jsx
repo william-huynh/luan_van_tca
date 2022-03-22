@@ -7,24 +7,31 @@ import congcuApi from "../../../../../api/congcuApi";
 function ProductDetailToolsList(props) {
     const data = props.congcu.item;
     const getImg = (imgName)=>{ return `${axiosClient.defaults.baseURL}uploads/${imgName}` } // Get image function
-    const [toolInfo, setToolInfo] = useState();
+    const [toolInfo, setToolInfo] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     // Get tool info
     useEffect(() => {
         const fetchData = async () => {
             const getToolInfo = await congcuApi.getCongCu(data.congcu);
             setToolInfo(getToolInfo);
+            setIsLoading(false);
         };
         fetchData();
     }, []);
     
     return (
-        <SafeAreaView style = {styles.container}>
-            <Image source = {{ uri: `${getImg(toolInfo.congcu.hinhanh)}` }} style = {styles.productDetailListPicture} />
-            {/* <View style = {styles.productDetailListPicture}/> */}
-            <Text style = {styles.productDetailListName}>{toolInfo.congcu.ten}</Text>
-            <Text style = {styles.productDetailListQuantity}>x {data.soluong}</Text>
-        </SafeAreaView>
+        <>
+            {!isLoading ? (
+                <SafeAreaView style = {styles.container}>
+                    <Image source = {{ uri: `${getImg(toolInfo.congcu.hinhanh)}` }} style = {styles.productDetailListPicture} />
+                    <Text style = {styles.productDetailListName}>{toolInfo.congcu.ten}</Text>
+                    <Text style = {styles.productDetailListQuantity}>x {data.soluong}</Text>
+                </SafeAreaView>
+            ) : (
+                console.log("Is loading!")
+            )}
+        </>
     );
 }
 

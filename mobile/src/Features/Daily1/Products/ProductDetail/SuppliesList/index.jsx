@@ -8,23 +8,30 @@ function ProductDetailSuppliesList(props) {
     const data = props.vattu.item;
     const getImg = (imgName)=>{ return `${axiosClient.defaults.baseURL}uploads/${imgName}` } // Get image function
     const [supplyInfo, setSupplyInfo] = useState();
+    const [isLoading, setIsLoading] = useState(true);
 
     // Get tool info
     useEffect(() => {
         const fetchData = async () => {
             const getsupplyInfo = await vattuApi.getVatTu(data.vattu);
             setSupplyInfo(getsupplyInfo);
+            setIsLoading(false);
         };
         fetchData();
     }, []);
     
     return (
-        <SafeAreaView style = {styles.container}>
-            <Image source = {{ uri: `${getImg(supplyInfo.vattu.hinhanh)}` }} style = {styles.productDetailListPicture} />
-            {/* <View style = {styles.productDetailListPicture}/> */}
-            <Text style = {styles.productDetailListName}>{supplyInfo.vattu.ten}</Text>
-            <Text style = {styles.productDetailListQuantity}>x {data.soluong}</Text>
-        </SafeAreaView>
+        <>
+            {!isLoading ? (
+                <SafeAreaView style = {styles.container}>
+                    <Image source = {{ uri: `${getImg(supplyInfo.vattu.hinhanh)}` }} style = {styles.productDetailListPicture} />
+                    <Text style = {styles.productDetailListName}>{supplyInfo.vattu.ten}</Text>
+                    <Text style = {styles.productDetailListQuantity}>x {data.soluong}</Text>
+                </SafeAreaView>
+            ) : (
+                console.log("Is loading!")
+            )}
+        </>
     );
 }
 
