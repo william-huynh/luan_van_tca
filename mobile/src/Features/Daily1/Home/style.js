@@ -93,8 +93,9 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         borderColor: "#FFFFFF",
         backgroundColor: "#EA5388",
-        alignItems: "center",
-        justifyContent: "center",
+        textAlign: "center",
+        paddingLeft: 3,
+        paddingTop: 3,
     }
 });
 
