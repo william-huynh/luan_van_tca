@@ -44,7 +44,25 @@ Khởi động ứng dụng trên di động
 
 `npm start`
 
+# Cú pháp export toàn bộ database ra một thư mục (Gồm một số file)
+
+mongodump -d database_name -o output_directory
+
+Ví dụ:
+Export toàn bộ cơ sở dữ liệu myfirstdb ra thư mục C:/test
+mongodump -d myfirstdb -o C:/test
+
+# Cú pháp import toàn bộ một database ở dạng đơn giản nhất.
+
+mongorestore -d database_name path_to_database
+
+Ví dụ:
+Import cơ sở dữ liệu từ thư mục export trước đó vào cơ sở dữ liệu: mydb2
+mongorestore -d mydb2 C:\test\myfirstdb
+
 #### Chú ý :
+
+Các dữ liệu import và export sẽ được lưu vào folder database-backup
 
 Nhớ tắt tất cả dịch vụ chạy trên cổng đã sử dụng
 

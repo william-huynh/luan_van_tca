@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"luan_van.loaisanphams"}],"uuid":"18ab4577d1c7421eb18cb4a5875e2863"}

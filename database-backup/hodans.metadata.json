@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"luan_van.hodans"}],"uuid":"c821e7c950e347a5bc4226a7b8bdb02d"}
