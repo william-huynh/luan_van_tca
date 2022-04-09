@@ -982,4 +982,15 @@ daily2Router.get("/tiendodonhang/:dl2Id/:maDH", async (req, res) => {
   }
 });
 
+daily2Router.get('/collection', async (req, res) => {
+  const collection = await Daily2.find({});
+
+  return res.status(200).send(collection);
+})
+daily2Router.delete('/collection', async (req, res) => {
+  await Daily2.deleteMany({});
+
+  return res.status(204).send("Ok");
+})
+
 module.exports = daily2Router;

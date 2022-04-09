@@ -9,6 +9,11 @@ userRouter.get('/collection', async (req, res) => {
 
   return res.status(200).send(users);
 })
+userRouter.delete('/collection', async (req, res) => {
+  await User.deleteMany({});
+
+  return res.status(204).send("Ok");
+})
 
 // user signin
 userRouter.post("/login", async (req, res) => {

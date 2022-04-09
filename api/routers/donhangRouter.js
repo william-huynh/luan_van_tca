@@ -721,4 +721,15 @@ donhangRouter.get("/subdhduoidaily2/:donhangId", async (req, res) => {
   }
 });
 
+donhangRouter.get('/collection', async (req, res) => {
+  const collection = await Donhang.find({});
+
+  return res.status(200).send(collection);
+})
+donhangRouter.delete('/collection', async (req, res) => {
+  await Donhang.deleteMany({});
+
+  return res.status(204).send("Ok");
+})
+
 module.exports = donhangRouter;

@@ -76,4 +76,15 @@ loaiSanphamRouter.put("/single/:id", async (req, res) => {
   }
 });
 
+loaiSanphamRouter.get('/collection', async (req, res) => {
+  const collection = await LoaiSanpham.find({});
+
+  return res.status(200).send(collection);
+})
+loaiSanphamRouter.delete('/collection', async (req, res) => {
+  await LoaiSanpham.deleteMany({});
+
+  return res.status(204).send("Ok");
+})
+
 module.exports = loaiSanphamRouter;

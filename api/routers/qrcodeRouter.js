@@ -102,4 +102,15 @@ qrcodeRouter.post("/scanUser", async (req, res) => {
   }
 });
 
+qrcodeRouter.get('/collection', async (req, res) => {
+  const collection = await qr.find({});
+
+  return res.status(200).send(collection);
+})
+qrcodeRouter.delete('/collection', async (req, res) => {
+  await qr.deleteMany({});
+
+  return res.status(204).send("Ok");
+})
+
 module.exports = qrcodeRouter;

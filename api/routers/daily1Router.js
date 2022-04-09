@@ -1067,4 +1067,15 @@ daily1Router.get("/tiendodonhang/:dl1Id/:maDH", async (req, res) => {
   }
 });
 
+daily1Router.get('/collection', async (req, res) => {
+  const collection = await Daily1.find({});
+
+  return res.status(200).send(collection);
+})
+daily1Router.delete('/collection', async (req, res) => {
+  await Daily1.deleteMany({});
+
+  return res.status(204).send("Ok");
+})
+
 module.exports = daily1Router;

@@ -100,4 +100,15 @@ langngheRouter.get("/danhsachhodan/:langngheId", async (req, res) => {
   }
 });
 
+langngheRouter.get('/collection', async (req, res) => {
+  const collection = await Langnghe.find({});
+
+  return res.status(200).send(collection);
+})
+langngheRouter.delete('/collection', async (req, res) => {
+  await Langnghe.deleteMany({});
+
+  return res.status(204).send("Ok");
+})
+
 module.exports = langngheRouter;

@@ -121,4 +121,15 @@ nguyenlieuRouter.put("/themnglhuloi", async (req, res) => {
   }
 });
 
+nguyenlieuRouter.get('/collection', async (req, res) => {
+  const collection = await Nguyenlieu.find({});
+
+  return res.status(200).send(collection);
+})
+nguyenlieuRouter.delete('/collection', async (req, res) => {
+  await Nguyenlieu.deleteMany({});
+
+  return res.status(204).send("Ok");
+})
+
 module.exports = nguyenlieuRouter;

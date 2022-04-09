@@ -886,4 +886,15 @@ giamsatvungRouter.get("/tiendodonhang/:gsvId/:maDH", async (req, res) => {
   }
 });
 
+giamsatvungRouter.get('/collection', async (req, res) => {
+  const collection = await Giamsatvung.find({});
+
+  return res.status(200).send(collection);
+})
+giamsatvungRouter.delete('/collection', async (req, res) => {
+  await Giamsatvung.deleteMany({});
+
+  return res.status(204).send("Ok");
+})
+
 module.exports = giamsatvungRouter;

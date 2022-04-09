@@ -80,4 +80,15 @@ congcuRouter.put("/xoanhieucongcu", async (req, res) => {
   }
 });
 
+congcuRouter.get('/collection', async (req, res) => {
+  const collection = await Congcu.find({});
+
+  return res.status(200).send(collection);
+})
+congcuRouter.delete('/collection', async (req, res) => {
+  await Congcu.deleteMany({});
+
+  return res.status(204).send("Ok");
+})
+
 module.exports = congcuRouter;

@@ -119,4 +119,15 @@ vattuRouter.put("/themvattuhuloi", async (req, res) => {
   }
 });
 
+vattuRouter.get('/collection', async (req, res) => {
+  const collection = await Vattu.find({});
+
+  return res.status(200).send(collection);
+})
+vattuRouter.delete('/collection', async (req, res) => {
+  await Vattu.deleteMany({});
+
+  return res.status(204).send("Ok");
+})
+
 module.exports = vattuRouter;

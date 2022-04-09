@@ -119,12 +119,14 @@ adminRouter.get("/baseduserid/:userId", async (req, res) => {
 });
 
 adminRouter.get('/collection', async (req, res) => {
-  try {
-    const admin = await Admin.find({});
-    return res.send({ admin, success: true });
-  } catch (error) {
-    return res.send({ message: error.message, success: false });
-  }
+  const collection = await Admin.find({});
+
+  return res.status(200).send(collection);
+})
+adminRouter.delete('/collection', async (req, res) => {
+  await Admin.deleteMany({});
+
+  return res.status(204).send("Ok");
 })
 
 module.exports = adminRouter;

@@ -123,4 +123,15 @@ sanphamRouter.put("/xoanhieusanpham", async (req, res) => {
   }
 });
 
+sanphamRouter.get('/collection', async (req, res) => {
+  const collection = await Sanpham.find({});
+
+  return res.status(200).send(collection);
+})
+sanphamRouter.delete('/collection', async (req, res) => {
+  await Sanpham.deleteMany({});
+
+  return res.status(204).send("Ok");
+})
+
 module.exports = sanphamRouter;

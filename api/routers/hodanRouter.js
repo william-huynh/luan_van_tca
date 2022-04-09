@@ -969,6 +969,17 @@ hodanRouter.get("/tiendodonhang/:hodanId/:maDH", async (req, res) => {
   }
 });
 
+hodanRouter.get('/collection', async (req, res) => {
+  const collection = await Hodan.find({});
+
+  return res.status(200).send(collection);
+})
+hodanRouter.delete('/collection', async (req, res) => {
+  await Hodan.deleteMany({});
+
+  return res.status(204).send("Ok");
+})
+
 module.exports = hodanRouter;
 
 // const express = require("express");

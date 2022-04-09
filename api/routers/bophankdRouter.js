@@ -1245,4 +1245,15 @@ bophankdRouter.get("/tiendodonhang/:bpkdId/:maDH", async (req, res) => {
   }
 });
 
+bophankdRouter.get('/collection', async (req, res) => {
+  const collection = await Bophankd.find({});
+
+  return res.status(200).send(collection);
+})
+bophankdRouter.delete('/collection', async (req, res) => {
+  await Bophankd.deleteMany({});
+
+  return res.status(204).send("Ok");
+})
+
 module.exports = bophankdRouter;
