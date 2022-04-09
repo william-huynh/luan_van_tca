@@ -1,11 +1,14 @@
 const express = require("express");
+const path = require("path");
+const cors = require("cors");
+const helmet = require('helmet');
+const morgan = require('morgan');
+
 const userRouter = require("./routers/userRouter");
 const sanphamRouter = require("./routers/sanphamRouter");
 const congcuRouter = require("./routers/congcuRouter");
-const path = require("path");
 const daily1Router = require("./routers/daily1Router");
 const daily2Router = require("./routers/daily2Router");
-const cors = require("cors");
 const bophankdRouter = require("./routers/bophankdRouter");
 const adminRouter = require("./routers/adminRouter");
 const hodanRouter = require("./routers/hodanRouter");
@@ -21,7 +24,11 @@ const qrcodeRouter = require("./routers/qrcodeRouter")
 const app = express();
 
 app.use(cors());
-require("dotenv").config();
+app.use(helmet());
+app.use(morgan('dev'));
+
+const vars = require('./config/vars');
+
 require("./database/config")();
 
 // middleware
@@ -47,8 +54,6 @@ app.use("/api/donhang", donhangRouter);
 app.use("/api/giaohang", giaohangRouter);
 app.use("/api/qrcode", qrcodeRouter);
 
-const port = process.env.PORT || 8000;
-
-app.listen(port, () => {
-  console.log(`server is running on port ${port}`);
+app.listen(vars.port, () => {
+  console.log(`[INFO] Server is running on  ${vars.protocol}://${vars.host}:${vars.port} (${vars.env})`);
 });

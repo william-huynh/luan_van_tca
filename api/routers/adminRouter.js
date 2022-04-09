@@ -1,7 +1,9 @@
 const express = require("express");
-const adminRouter = express.Router();
-const Admin = require("../models/adminModel");
 const bcrypt = require("bcryptjs");
+
+const adminRouter = express.Router();
+
+const Admin = require("../models/adminModel");
 const User = require("../models/userModel");
 const Bophankd = require("../models/bophankdModel");
 const Giamsatvung = require("../models/giamsatvungModel");
@@ -54,6 +56,7 @@ adminRouter.put(
         _user.matkhau = bcrypt.hashSync(matkhau, 8);
         await _user.save();
       }
+
       // update info
       const admin = await Admin.findOne({ user });
       admin.ten = ten;
