@@ -6,6 +6,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 function ProductListDaily1 (props) {
     const { navigation } = props;
     const data = props.sanpham.item;
+    console.log(data[0])
     const getImg = (imgName)=>{ return `${axiosClient.defaults.baseURL}uploads/${imgName}` } // Get image function
     const handleRedirectProductDetail = () => { navigation.navigate("ProductDetailDaily1", { data }) }
     

@@ -47,7 +47,7 @@ function OrderDaily1(props) {
               renderItem={(item, index) => (
                 <OrderListDaily1
                   order={item}
-                  // navigation={navigation}
+                  navigation={navigation}
                   daily1Id={daily1Id}
                 />
               )}

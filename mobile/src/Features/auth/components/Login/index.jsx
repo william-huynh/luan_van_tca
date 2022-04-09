@@ -5,6 +5,7 @@ import React from "react";
 // Import Dai ly 1 screens
 import HomeDaily1 from "../../../Daily1/Home";
 import OrderDaily1 from "../../../Daily1/Orders";
+import OrderDetailDaily1 from "../../../Daily1/Orders/OrderDetail";
 import ProductDaily1 from "../../../Daily1/Products";
 import ProductDetailDaily1 from "../../../Daily1/Products/ProductDetail";
 
@@ -41,6 +42,7 @@ function Login(props) {
         <Stack.Screen name="HomeDaily1" component={HomeDaily1} />
         <Stack.Screen name="ProductDaily1" component={ProductDaily1} />
         <Stack.Screen name="OrderDaily1" component={OrderDaily1} />
+        <Stack.Screen name="OrderDetailDaily1" component={OrderDetailDaily1} />
         <Stack.Screen name="ProductDetailDaily1" component={ProductDetailDaily1} />
 
         {/* Ho dan screens */}
