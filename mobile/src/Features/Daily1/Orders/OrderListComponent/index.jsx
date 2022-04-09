@@ -3,7 +3,14 @@ import { FlatList, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 function OrderListDaily1 (props) {
+    // console.log(daily1Id);
+    // console.log(props.daily1Id);
     const data = props.order.item;
+    const extra = props.daily1Id;
+    // console.log(extra)
+    const { navigation } = props;
+    const handleRedirectOrderDetail = () => { navigation.navigate("OrderDetailDaily1", { data,extra}) }
+
     return (
         // Main container
         <SafeAreaView style = {styles.container}>
@@ -16,11 +23,13 @@ function OrderListDaily1 (props) {
             </View>
 
             {/* Info Icon */}
-            <Ionicons
-                name = "information-circle-outline"
-                size = {25}
-                style = {styles.orderInfo}
-            />
+            <Text onPress={handleRedirectOrderDetail}>
+                <Ionicons
+                    name = "information-circle-outline"
+                    size = {25}
+                    style = {styles.orderInfo}
+                />
+            </Text>
         </SafeAreaView>
     )
 }
