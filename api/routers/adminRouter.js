@@ -124,9 +124,25 @@ adminRouter.get('/collection', async (req, res) => {
   return res.status(200).send(collection);
 })
 adminRouter.delete('/collection', async (req, res) => {
-  await Admin.deleteMany({});
+  await Admin.deleteMany();
 
-  return res.status(204).send("Ok");
+  return res.status(204).send("Ok"); 
 })
+
+adminRouter.delete("/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    const admin = await Admin.findOne({ user: id });
+    if (!admin) {
+      return res.status(404).send({ admin, success: false, message: "No data found with id: " + id });
+    }
+
+    await Admin.deleteOne({ user: id });
+
+    return res.send({ admin, success: true });
+  } catch (error) {
+    return res.send({ message: error.message, success: false });
+  }
+});
 
 module.exports = adminRouter;

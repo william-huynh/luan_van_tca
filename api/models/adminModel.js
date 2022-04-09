@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+const User = require("./userModel");
+
 const adminSchema = new mongoose.Schema(
   {
     ten: {
@@ -29,10 +31,12 @@ adminSchema.pre('save', function(next) {
   // TODO: Add relations
   next();
 });
-adminSchema.post('remove', function(next) {
-  console.log("[DEBUG] Trigger 'remove' post hook on Admin");
-  // TODO: Drop relations
-  next();
+adminSchema.pre('deleteOne', { document: false, query: true }, async function() {
+  const document = this.getQuery();
+  console.log("[DEBUG] (AdminDeleteOnePostHook) Triggered, deleting User " + document.user);
+
+  const execution = await User.deleteOne(mongoose.Types.ObjectId(document.user));
+  console.log("[DEBUG] (AdminDeleteOnePostHook) Execution completed, deleted " + execution.deletedCount + " document(s)");
 });
 
 const Admin = mongoose.model("Admin", adminSchema);
