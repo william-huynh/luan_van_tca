@@ -27,13 +27,13 @@ const adminSchema = new mongoose.Schema(
 );
 
 adminSchema.pre('save', function(next) {
-  console.log("[DEBUG] Trigger 'save' pre hook on Admin");
+  console.log("[DEBUG] (AdminSavePreHook) Triggered");
   // TODO: Add relations
   next();
 });
 adminSchema.pre('deleteOne', { document: false, query: true }, async function() {
   const document = this.getQuery();
-  console.log("[DEBUG] (AdminDeleteOnePostHook) Triggered, deleting User " + document.user);
+  console.log("[DEBUG] (AdminDeleteOnePostHook) Triggered");
 
   const execution = await User.deleteOne(mongoose.Types.ObjectId(document.user));
   console.log("[DEBUG] (AdminDeleteOnePostHook) Execution completed, deleted " + execution.deletedCount + " document(s)");
