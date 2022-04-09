@@ -105,6 +105,17 @@ const donhangSchema = new mongoose.Schema(
   }
 );
 
+donhangSchema.pre('save', function(next) {
+  console.log("[DEBUG] Trigger 'save' pre hook on Donhang");
+  // TODO: Add relations
+  next();
+});
+donhangSchema.post('remove', function(next) {
+  console.log("[DEBUG] Trigger 'remove' post hook on Donhang");
+  // TODO: Drop relations
+  next();
+});
+
 const Donhang = mongoose.model("Donhang", donhangSchema);
 
 module.exports = Donhang;

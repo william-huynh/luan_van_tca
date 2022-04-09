@@ -15,6 +15,8 @@ const Bophankd = require("../models/bophankdModel");
 const Daily1 = require("../models/daily1Model");
 const Hodan = require("../models/hodanModel");
 
+const { roles } = require('../config/constants');
+
 // them gsv
 giamsatvungRouter.post("/them", async (req, res) => {
   const { ten, sdt, email, cmnd, xa, huyen, tinh, taikhoan } = req.body;
@@ -22,7 +24,7 @@ giamsatvungRouter.post("/them", async (req, res) => {
     const newUser = new User({
       taikhoan,
       matkhau: bcrypt.hashSync("123456", 8),
-      vaitro: "giamsatvung",
+      vaitro: roles.giamsatvung,
     });
     const savedUser = await newUser.save();
     const newGsv = new Giamsatvung({

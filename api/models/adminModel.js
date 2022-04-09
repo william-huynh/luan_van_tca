@@ -24,6 +24,17 @@ const adminSchema = new mongoose.Schema(
   }
 );
 
+adminSchema.pre('save', function(next) {
+  console.log("[DEBUG] Trigger 'save' pre hook on Admin");
+  // TODO: Add relations
+  next();
+});
+adminSchema.post('remove', function(next) {
+  console.log("[DEBUG] Trigger 'remove' post hook on Admin");
+  // TODO: Drop relations
+  next();
+});
+
 const Admin = mongoose.model("Admin", adminSchema);
 
 module.exports = Admin;

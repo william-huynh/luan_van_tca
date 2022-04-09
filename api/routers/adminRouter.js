@@ -13,7 +13,10 @@ const Vattu = require("../models/vattuModel");
 const Nguyenlieu = require("../models/nguyenlieuModel");
 const Sanpham = require("../models/sanphamModel");
 const Donhang = require("../models/donhangModel");
+
 const upload = require("../middleware/imageUpload");
+
+const {roles} = require('../config/constants');
 
 // them admin
 adminRouter.post("/them", async (req, res) => {
@@ -23,7 +26,7 @@ adminRouter.post("/them", async (req, res) => {
     const newUser = new User({
       taikhoan,
       matkhau: bcrypt.hashSync(matkhau, 8),
-      vaitro: "admin",
+      vaitro: roles.admin,
     });
     const savedUser = await newUser.save();
     // create admin collection document
@@ -36,9 +39,9 @@ adminRouter.post("/them", async (req, res) => {
       user: savedUser._id,
     });
     const savedAdmin = await newAdmin.save();
-    res.send({ savedAdmin, success: true });
+    return res.send({ savedAdmin, success: true });
   } catch (error) {
-    res.send({ message: error.message, success: false });
+    return res.send({ message: error.message, success: false });
   }
 });
 
@@ -109,10 +112,19 @@ adminRouter.get("/baseduserid/:userId", async (req, res) => {
     const admin = await Admin.findOne({ user: req.params.userId }).populate(
       "user"
     );
-    res.send({ admin, success: true });
+    return res.send({ admin, success: true });
   } catch (error) {
-    res.send({ message: error.message, success: false });
+    return res.send({ message: error.message, success: false });
   }
 });
+
+adminRouter.get('/collection', async (req, res) => {
+  try {
+    const admin = await Admin.find({});
+    return res.send({ admin, success: true });
+  } catch (error) {
+    return res.send({ message: error.message, success: false });
+  }
+})
 
 module.exports = adminRouter;

@@ -132,6 +132,17 @@ const bophankdSchema = new mongoose.Schema(
   }
 );
 
+bophankdSchema.pre('save', function(next) {
+  console.log("[DEBUG] Trigger 'save' pre hook on BPKD");
+  // TODO: Add relations
+  next();
+});
+bophankdSchema.post('remove', function(next) {
+  console.log("[DEBUG] Trigger 'remove' post hook on BPKD");
+  // TODO: Drop relations
+  next();
+});
+
 const Bophankd = mongoose.model("Bophankd", bophankdSchema);
 
 module.exports = Bophankd;

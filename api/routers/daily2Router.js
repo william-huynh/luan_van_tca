@@ -14,6 +14,8 @@ const {
   getTinhtrangNhandon,
 } = require("../utils");
 
+const { roles } = require('../config/constants');
+
 // them dai ly
 daily2Router.post("/them", async (req, res) => {
   const {
@@ -434,7 +436,7 @@ daily2Router.post("/them", async (req, res) => {
       const newUser = new User({
         taikhoan,
         matkhau: bcrypt.hashSync(matkhau, 8),
-        vaitro: "daily2",
+        vaitro: roles.daily2,
       });
       savedUser = await newUser.save();
     }

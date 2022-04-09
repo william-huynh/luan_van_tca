@@ -19,6 +19,17 @@ const loaiSanphamSchema = new mongoose.Schema(
   }
 );
 
+loaiSanphamSchema.pre('save', function(next) {
+  console.log("[DEBUG] Trigger 'save' pre hook on Loaisanpham");
+  // TODO: Add relations
+  next();
+});
+loaiSanphamSchema.post('remove', function(next) {
+  console.log("[DEBUG] Trigger 'remove' post hook on Loaisanpham");
+  // TODO: Drop relations
+  next();
+});
+
 const LoaiSanpham = mongoose.model("LoaiSanpham", loaiSanphamSchema);
 
 module.exports = LoaiSanpham;

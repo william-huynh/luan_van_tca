@@ -30,6 +30,17 @@ const vattuSchema = new mongoose.Schema(
   }
 );
 
+vattuSchema.pre('save', function(next) {
+  console.log("[DEBUG] Trigger 'save' pre hook on Vattu");
+  // TODO: Add relations
+  next();
+});
+vattuSchema.post('remove', function(next) {
+  console.log("[DEBUG] Trigger 'remove' post hook on Vattu");
+  // TODO: Drop relations
+  next();
+});
+
 const Vattu = mongoose.model("Vattu", vattuSchema);
 
 module.exports = Vattu;

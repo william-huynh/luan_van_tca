@@ -4,6 +4,12 @@ const User = require("../models/userModel");
 const bcrypt = require("bcryptjs");
 const { generateToken } = require("../utils");
 
+userRouter.get('/collection', async (req, res) => {
+  const users = await User.find({});
+
+  return res.status(200).send(users);
+})
+
 // user signin
 userRouter.post("/login", async (req, res) => {
   const { taikhoan, matkhau } = req.body;

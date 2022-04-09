@@ -46,6 +46,17 @@ const giaohangSchema = new mongoose.Schema(
   }
 );
 
+giaohangSchema.pre('save', function(next) {
+  console.log("[DEBUG] Trigger 'save' pre hook on Giaohang");
+  // TODO: Add relations
+  next();
+});
+giaohangSchema.post('remove', function(next) {
+  console.log("[DEBUG] Trigger 'remove' post hook on Giaohang");
+  // TODO: Drop relations
+  next();
+});
+
 const Giaohang = mongoose.model("Giaohang", giaohangSchema);
 
 module.exports = Giaohang;

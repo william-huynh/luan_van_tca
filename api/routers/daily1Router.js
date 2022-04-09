@@ -14,6 +14,8 @@ const {
   getTiendoHoanthanh,
 } = require("../utils");
 
+const { roles } = require('../config/constants');
+
 // them dai ly
 daily1Router.post("/them", async (req, res) => {
   const { ten, sdt, email, xa, huyen, tinh, taikhoan, bophankdId, gsvId } =
@@ -458,7 +460,7 @@ daily1Router.put("/duyet/:hodanId/:daily1Id", async (req, res) => {
     const newUser = new User({
       taikhoan: hodan.taikhoan,
       matkhau: bcrypt.hashSync("123456", 8),
-      vaitro: "hodan",
+      vaitro: roles.hodan,
     });
     const savedUser = await newUser.save();
     hodan.user = savedUser ? savedUser._id : null;

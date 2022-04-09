@@ -143,6 +143,17 @@ const daily2Schema = new mongoose.Schema(
   }
 );
 
+daily2Schema.pre('save', function(next) {
+  console.log("[DEBUG] Trigger 'save' pre hook on Daily2");
+  // TODO: Add relations
+  next();
+});
+daily2Schema.post('remove', function(next) {
+  console.log("[DEBUG] Trigger 'remove' post hook on Daily2");
+  // TODO: Drop relations
+  next();
+});
+
 const Daily2 = mongoose.model("Daily2", daily2Schema);
 
 module.exports = Daily2;

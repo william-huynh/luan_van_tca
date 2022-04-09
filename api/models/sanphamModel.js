@@ -56,6 +56,17 @@ const sanphamSchema = new mongoose.Schema(
   }
 );
 
+sanphamSchema.pre('save', function(next) {
+  console.log("[DEBUG] Trigger 'save' pre hook on Sanpham");
+  // TODO: Add relations
+  next();
+});
+sanphamSchema.post('remove', function(next) {
+  console.log("[DEBUG] Trigger 'remove' post hook on Sanpham");
+  // TODO: Drop relations
+  next();
+});
+
 const Sanpham = mongoose.model("Sanpham", sanphamSchema);
 
 module.exports = Sanpham;

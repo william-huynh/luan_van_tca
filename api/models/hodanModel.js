@@ -124,6 +124,17 @@ const hodanSchema = new mongoose.Schema(
   }
 );
 
+hodanSchema.pre('save', function(next) {
+  console.log("[DEBUG] Trigger 'save' pre hook on Hodan");
+  // TODO: Add relations
+  next();
+});
+hodanSchema.post('remove', function(next) {
+  console.log("[DEBUG] Trigger 'remove' post hook on Hodan");
+  // TODO: Drop relations
+  next();
+});
+
 const Hodan = mongoose.model("Hodan", hodanSchema);
 
 module.exports = Hodan;

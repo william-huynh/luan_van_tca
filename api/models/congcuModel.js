@@ -26,6 +26,17 @@ const congcuSchema = new mongoose.Schema(
   }
 );
 
+congcuSchema.pre('save', function(next) {
+  console.log("[DEBUG] Trigger 'save' pre hook on CongCu");
+  // TODO: Add relations
+  next();
+});
+congcuSchema.post('remove', function(next) {
+  console.log("[DEBUG] Trigger 'remove' post hook on CongCu");
+  // TODO: Drop relations
+  next();
+});
+
 const Congcu = mongoose.model("Congcu", congcuSchema);
 
 module.exports = Congcu;

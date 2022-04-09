@@ -20,6 +20,17 @@ const userSchema = new mongoose.Schema(
   }
 );
 
+userSchema.pre('save', function(next) {
+  console.log("[DEBUG] Trigger 'save' pre hook on User");
+  // TODO: Add relations
+  next();
+});
+userSchema.post('remove', function(next) {
+  console.log("[DEBUG] Trigger 'remove' post hook on User");
+  // TODO: Drop relations
+  next();
+});
+
 const User = mongoose.model("User", userSchema);
 
 module.exports = User;

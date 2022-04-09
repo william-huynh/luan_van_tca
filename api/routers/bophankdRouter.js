@@ -15,6 +15,8 @@ const {
 const Donhang = require("../models/donhangModel");
 const Hodan = require("../models/hodanModel");
 
+const { roles } = require('../config/constants');
+
 // them bo phan kd
 bophankdRouter.post("/them", upload.single("hinhanh"), async (req, res) => {
   const { ten, sdt, email, xa, huyen, tinh, taikhoan } = req.body;
@@ -22,7 +24,7 @@ bophankdRouter.post("/them", upload.single("hinhanh"), async (req, res) => {
     const newUser = new User({
       taikhoan,
       matkhau: bcrypt.hashSync("123456", 8),
-      vaitro: "bophankd",
+      vaitro: roles.bophankd,
     });
     const savedUser = await newUser.save();
     const bpkd = new Bophankd({

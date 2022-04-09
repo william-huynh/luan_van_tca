@@ -30,6 +30,17 @@ const nguyenlieuSchema = new mongoose.Schema(
   }
 );
 
+nguyenlieuSchema.pre('save', function(next) {
+  console.log("[DEBUG] Trigger 'save' pre hook on Nguyenlieu");
+  // TODO: Add relations
+  next();
+});
+nguyenlieuSchema.post('remove', function(next) {
+  console.log("[DEBUG] Trigger 'remove' post hook on Admin");
+  // TODO: Drop relations
+  next();
+});
+
 const Nguyenlieu = mongoose.model("Nguyenlieu", nguyenlieuSchema);
 
 module.exports = Nguyenlieu;

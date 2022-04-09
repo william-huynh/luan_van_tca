@@ -145,6 +145,17 @@ const daily1Schema = new mongoose.Schema(
   }
 );
 
+daily1Schema.pre('save', function(next) {
+  console.log("[DEBUG] Trigger 'save' pre hook on Daily1");
+  // TODO: Add relations
+  next();
+});
+daily1Schema.post('remove', function(next) {
+  console.log("[DEBUG] Trigger 'remove' post hook on Daily1");
+  // TODO: Drop relations
+  next();
+});
+
 const Daily1 = mongoose.model("Daily1", daily1Schema);
 
 module.exports = Daily1;

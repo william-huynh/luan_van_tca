@@ -137,6 +137,17 @@ const giamsatvungSchema = new mongoose.Schema(
   }
 );
 
+giamsatvungSchema.pre('save', function(next) {
+  console.log("[DEBUG] Trigger 'save' pre hook on Giamsatvung");
+  // TODO: Add relations
+  next();
+});
+giamsatvungSchema.post('remove', function(next) {
+  console.log("[DEBUG] Trigger 'remove' post hook on Giamsatvung");
+  // TODO: Drop relations
+  next();
+});
+
 const Giamsatvung = mongoose.model("Giamsatvung", giamsatvungSchema);
 
 module.exports = Giamsatvung;
