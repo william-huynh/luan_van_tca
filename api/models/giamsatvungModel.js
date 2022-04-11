@@ -142,10 +142,12 @@ giamsatvungSchema.pre('save', function(next) {
   // TODO: Add relations
   next();
 });
-giamsatvungSchema.post('remove', function(next) {
-  console.log("[DEBUG] Trigger 'remove' post hook on Giamsatvung");
-  // TODO: Drop relations
-  next();
+giamsatvungSchema.pre('deleteOne', { document: false, query: true }, async function() {
+  const document = this.getQuery();
+  console.log("[DEBUG] (GSVDeleteOnePostHook) Triggered");
+
+  const execution = await User.deleteOne(mongoose.Types.ObjectId(document.user));
+  console.log("[DEBUG] (GSVDeleteOnePostHook) Execution completed, deleted " + execution.deletedCount + " document(s)");
 });
 
 const Giamsatvung = mongoose.model("Giamsatvung", giamsatvungSchema);

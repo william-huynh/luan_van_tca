@@ -13,11 +13,14 @@ const {
   getTiendoHoanthanh,
   getTinhtrangNhandon,
 } = require("../utils");
+const {
+  postValidation
+} = require('../validation/daily2.validation');
 
 const { roles } = require('../config/constants');
 
 // them dai ly
-daily2Router.post("/them", async (req, res) => {
+daily2Router.post("/them", [postValidation], async (req, res) => {
   const {
     ten,
     sdt,
@@ -48,19 +51,21 @@ daily2Router.post("/them", async (req, res) => {
       const daily1 = await Daily1.findById(daily1Id);
       daily1.daily2 = [savedDaily2._id, ...daily1.daily2];
       await daily1.save();
+
       // Thêm vào danh sách duyệt đại lý 2 của bộ phận kinh doanh
       const bophankd = await Bophankd.findById(bophankdId);
       bophankd.daily2 = [savedDaily2._id, ...bophankd.daily2];
       await bophankd.save();
+
       // Thêm vào danh sách duyệt đại lý 2 của giám sát vùng
       const gsv = await Giamsatvung.findById(gsvId);
       gsv.daily2 = [savedDaily2._id, ...gsv.daily2];
       await gsv.save();
     }
 
-    res.send({ savedDaily2, success: true });
+    res.status(500).send({ savedDaily2, success: true });
   } catch (error) {
-    res.send({ message: error.message, success: false });
+    res.status(500).send({ message: error.message, success: false });
   }
 });
 

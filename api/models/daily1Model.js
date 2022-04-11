@@ -150,10 +150,9 @@ daily1Schema.pre('save', function(next) {
   // TODO: Add relations
   next();
 });
-daily1Schema.post('remove', function(next) {
-  console.log("[DEBUG] Trigger 'remove' post hook on Daily1");
-  // TODO: Drop relations
-  next();
+daily1Schema.pre('deleteOne', { document: false, query: true }, async function() {
+  const document = this.getQuery();
+  console.log("[DEBUG] (AdminDeleteOnePostHook) Triggered");
 });
 
 const Daily1 = mongoose.model("Daily1", daily1Schema);

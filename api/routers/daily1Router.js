@@ -3,6 +3,7 @@ const Daily1 = require("../models/daily1Model");
 const User = require("../models/userModel");
 const daily1Router = express.Router();
 var bcrypt = require("bcryptjs");
+const mongoose = require("mongoose");
 const Daily2 = require("../models/daily2Model");
 const Bophankd = require("../models/bophankdModel");
 const Giamsatvung = require("../models/giamsatvungModel");
@@ -14,10 +15,14 @@ const {
   getTiendoHoanthanh,
 } = require("../utils");
 
+const {
+  postValidation
+} = require('../validation/daily1.validation');
+
 const { roles } = require('../config/constants');
 
 // them dai ly
-daily1Router.post("/them", async (req, res) => {
+daily1Router.post("/them", [postValidation], async (req, res) => {
   const { ten, sdt, email, xa, huyen, tinh, taikhoan, bophankdId, gsvId } =
     req.body;
   try {
@@ -36,18 +41,19 @@ daily1Router.post("/them", async (req, res) => {
 
     if (savedDaily1) {
       // Thêm vào danh sách đại lý 1 của GSV
-      const gsv = await Giamsatvung.findById(gsvId);
+      const gsv = await Giamsatvung.findById(mongoose.Types.ObjectId(gsvId));
       gsv.daily1 = [savedDaily1._id, ...gsv.daily1];
       await gsv.save();
+
       // Thêm vào danh sách duyệt đại lý 1 của bộ phận kinh doanh
       const bophankd = await Bophankd.findById(bophankdId);
       bophankd.daily1 = [savedDaily1._id, ...bophankd.daily1];
       await bophankd.save();
     }
 
-    res.send({ savedDaily1, success: true });
+    return res.send({ savedDaily1, success: true });
   } catch (error) {
-    res.send({ message: error.message, success: false });
+    return res.status(500).send({ message: error.message, success: false });
   }
 });
 
