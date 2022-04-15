@@ -8,6 +8,11 @@ import OrderDaily1 from "../../../Daily1/Orders";
 import OrderDetailDaily1 from "../../../Daily1/Orders/OrderDetail";
 import ProductDaily1 from "../../../Daily1/Products";
 import ProductDetailDaily1 from "../../../Daily1/Products/ProductDetail";
+import ToolDaily1 from "../../../Daily1/Tools";
+import SupplyDaily1 from "../../../Daily1/Supplies";
+import MaterialDaily1 from "../../../Daily1/Materials";
+import OrderInDaily1 from "../../../Daily1/OrderIn";
+import OrderOutDaily1 from "../../../Daily1/OrderOut";
 
 // Import Ho dan screens
 import ListCongCu from "../../../Home/ScreenKho/ListCongCu";
@@ -44,6 +49,11 @@ function Login(props) {
         <Stack.Screen name="OrderDaily1" component={OrderDaily1} />
         <Stack.Screen name="OrderDetailDaily1" component={OrderDetailDaily1} />
         <Stack.Screen name="ProductDetailDaily1" component={ProductDetailDaily1} />
+        <Stack.Screen name="ToolDaily1" component={ToolDaily1} />
+        <Stack.Screen name="SupplyDaily1" component={SupplyDaily1} />
+        <Stack.Screen name="MaterialDaily1" component={MaterialDaily1} />
+        <Stack.Screen name="OrderInDaily1" component={OrderInDaily1} />
+        <Stack.Screen name="OrderOutDaily1" component={OrderOutDaily1} />
 
         {/* Ho dan screens */}
         <Stack.Screen name="TabNav" component={TabNav} />

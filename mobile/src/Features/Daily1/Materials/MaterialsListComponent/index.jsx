@@ -3,10 +3,10 @@ import { FlatList, SafeAreaView, StyleSheet, Text, View, Image } from "react-nat
 import axiosClient from "../../../../api/axiosClient";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-function ProductListDaily1 (props) {
+function MaterialListDaily1 (props) {
     const { navigation } = props;
-    const data = props.sanpham.item;
-    // console.log(data[0])
+    const data = props.congcu.item;
+    // console.log(data)
     const getImg = (imgName)=>{ return `${axiosClient.defaults.baseURL}uploads/${imgName}` } // Get image function
     const handleRedirectProductDetail = () => { navigation.navigate("ProductDetailDaily1", { data }) }
     
@@ -15,17 +15,18 @@ function ProductListDaily1 (props) {
         <SafeAreaView style = {styles.container}>
             
             {/* Picture */}
-            <Image source = {{ uri: `${getImg(data.sanpham.hinhanh)}` }} style = {styles.productPicture} />
+            <Image source = {{ uri: `${getImg(data.nguyenlieu.hinhanh)}` }} style = {styles.productPicture} />
 
             {/* Detail: Name & Product ID & Order ID */}
             <View style = {styles.productDetailContainer}>
-                <Text style = {styles.productDetailName}>{data.sanpham.ten}</Text>
-                <Text style = {styles.productDetailDescription}>Mã sản phẩm : {data.sanpham.ma}</Text>
-                <Text style = {styles.productDetailDescription}>Giá sản phẩm : {data.sanpham.gia} VND</Text>
+                <Text style = {styles.productDetailName}>{data.nguyenlieu.ten}</Text>
+                <Text style = {styles.productDetailDescription}>Công dụng sản phẩm : {data.nguyenlieu.congdung}</Text>
+                <Text style = {styles.productDetailDescription}>Mô tả sản phẩm : {data.nguyenlieu.mota}</Text>
             </View>
 
             {/* Info Icon */}
-            <Text onPress={handleRedirectProductDetail}>
+            {/* <Text onPress={handleRedirectProductDetail}> */}
+            <Text >
                 <Ionicons
                     name = "information-circle-outline"
                     size = {25}
@@ -63,7 +64,7 @@ const styles = StyleSheet.create({
     productDetailName: {
         fontSize: 15,
         fontWeight: "bold",
-        color: "#57DE8D",
+        color: "#FFB74B",
     },
     productDetailDescription: {
         fontSize: 13,
@@ -71,8 +72,8 @@ const styles = StyleSheet.create({
 
     // Product Info
     productInfo: {
-        color: "#57DE8D",
+        color: "#FFB74B",
     },
   });
 
-export default ProductListDaily1;
+export default MaterialListDaily1;
