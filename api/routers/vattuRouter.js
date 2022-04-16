@@ -1,133 +1,34 @@
 const express = require("express");
 const vattuRouter = express.Router();
 const upload = require("../middleware/imageUpload");
-const Bophankd = require("../models/bophankdModel");
-const Vattu = require("../models/vattuModel");
 const { getCurrentDatetime } = require("../utils");
-
+const vattuController = require("../controller/VattuController");
 // them vat tu
-vattuRouter.post("/them", upload.single("hinhanh"), async (req, res) => {
-  const { ten, mota, thuoctinh, congdung } = req.body;
-  try {
-    const newVattu = new Vattu({
-      ten,
-      mota,
-      thuoctinh: JSON.parse(thuoctinh),
-      hinhanh: req.file ? req.file.filename : "",
-      congdung,
-      ngaytao: getCurrentDatetime(),
-    });
-    const savedVattu = await newVattu.save();
-
-    res.send({ savedVattu, success: true });
-  } catch (error) {
-    res.send({ message: error.message, success: false });
-  }
-});
+vattuRouter.post("/them", upload.single("hinhanh"), vattuController.themvattu);
 
 // sua vat tu
-vattuRouter.put("/single/:id", upload.single("hinhanh"), async (req, res) => {
-  const { ten, mota, thuoctinh, congdung, soluong } = req.body;
-  try {
-    const vattu = await Vattu.findById(req.params.id);
-    vattu.ten = ten;
-    vattu.mota = mota;
-    vattu.thuoctinh = JSON.parse(thuoctinh);
-    vattu.hinhanh = req.file ? req.file.filename : vattu.hinhanh;
-    vattu.congdung = congdung;
-    vattu.soluong = soluong;
-
-    const updatedVattu = await vattu.save();
-    res.send({ updatedVattu, success: true });
-  } catch (error) {
-    res.send({ message: error.message, success: false });
-  }
-});
+vattuRouter.put(
+  "/single/:id",
+  upload.single("hinhanh"),
+  vattuController.suavattu
+);
 
 // lay danh sach vat tu
-vattuRouter.get("/danhsach", async (req, res) => {
-  const vattu = await Vattu.find({}).sort({ createdAt: "desc" });
-  if (!vattu.length) {
-    return res.send({ message: "Không tìm thấy vật tư", success: false });
-  }
-  res.send({ vattu, success: true });
-});
+vattuRouter.get("/danhsach", vattuController.laydsvattu);
 
 // lay thong tin 1 vat tu
-vattuRouter.get("/single/:id", async (req, res) => {
-  try {
-    const vattu = await Vattu.findById(req.params.id);
-    if (vattu) {
-      res.send({ vattu, success: true });
-    } else {
-      res.send({ message: "Không tìm thấy vật tư", success: false });
-    }
-  } catch (error) {
-    res.send({ message: error.message, success: false });
-  }
-});
+vattuRouter.get("/single/:id", vattuController.laytt1vattu);
 
 // Xoa 1 vattu
-vattuRouter.delete("/single/:id", async (req, res) => {
-  try {
-    const removedVattu = await Vattu.findByIdAndDelete(req.params.id);
-
-    res.send({ removedVattu, success: true });
-  } catch (error) {
-    res.send({ message: error.message, success: false });
-  }
-});
+vattuRouter.delete("/single/:id", vattuController.xoavattu);
 
 // Xoa nhieu vattu
-vattuRouter.put("/xoanhieuvattu", async (req, res) => {
-  const { arrOfIds } = req.body;
-  try {
-    for (const item of arrOfIds) {
-      await Vattu.findByIdAndDelete(item);
-    }
-
-    res.send({ success: true });
-  } catch (error) {
-    res.send({ message: error.message, success: false });
-  }
-});
+vattuRouter.put("/xoanhieuvattu", vattuController.xoanhieuvattu);
 
 // them vattu hu loi
-vattuRouter.put("/themvattuhuloi", async (req, res) => {
-  const { dsvattuLoi } = req.body;
-  try {
-    for (const item of dsvattuLoi) {
-      const vattu = await Vattu.findById(item.vattu);
-      if (vattu.loi) {
-        vattu.loi = {
-          soluongloi: vattu.soluongloi + item.soluongloi,
-          ngaybaoloi: getCurrentDatetime(),
-        };
-        await vattu.save();
-      } else {
-        vattu.loi = {
-          soluongloi: item.soluongloi,
-          ngaybaoloi: getCurrentDatetime(),
-        };
-        await vattu.save();
-      }
-    }
+vattuRouter.put("/themvattuhuloi", vattuController.themvattuhuloi);
 
-    res.send({ success: true });
-  } catch (error) {
-    res.send({ message: error.message, success: false });
-  }
-});
-
-vattuRouter.get('/collection', async (req, res) => {
-  const collection = await Vattu.find({});
-
-  return res.status(200).send(collection);
-})
-vattuRouter.delete('/collection', async (req, res) => {
-  await Vattu.deleteMany({});
-
-  return res.status(204).send("Ok");
-})
+vattuRouter.get("/collection", vattuController.getCollection);
+vattuRouter.delete("/collection", vattuController.dropCollection);
 
 module.exports = vattuRouter;
