@@ -55,7 +55,7 @@ const NguyenlieuThem = (props) => {
     }
   };
 
-  const submitForm = async () => {
+  const handleSubmit = async () => {
     if (!emptyField()) {
       const formData = new FormData();
       formData.append("ten", ten);
@@ -110,7 +110,7 @@ const NguyenlieuThem = (props) => {
           titleBack
           onClick={() => props.history.push("/admin/nguyenlieu")}
           headerRight={
-            <button className="btn btn-primary px-3" onClick={submitForm}>
+            <button className="btn btn-primary px-3" onClick={handleSubmit}>
               Lưu
               <i class="fas fa-save"></i>
             </button>
@@ -233,6 +233,11 @@ const NguyenlieuThem = (props) => {
                   );
                 })}
               </FormGroup>
+              <button className="btn btn-primary px-3" onClick={handleSubmit}>
+                Lưu
+                <i class="ml-2 fas fa-save"></i>
+              </button>
+
             </FormContent>
           </Form>
         </Content>

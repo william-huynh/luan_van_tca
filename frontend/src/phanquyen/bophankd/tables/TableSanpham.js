@@ -144,14 +144,14 @@ const TableSanpham = ({ dsSanpham = [] }) => {
                         </TableCell>
                         <TableCell align="right">
                           <Link
-                            to={`/bophankd/donhang/chitiet/${row?.donhang._id}`}
+                            to={`/bophankd/donhang/chitiet/${row?.donhang?._id}`}
                           >
                             {row?.donhang.ma}
                           </Link>
                         </TableCell>
                         <TableCell align="right">
                           <Link
-                            to={`/bophankd/sanpham/chitiet/${row?.sanpham._id}`}
+                            to={`/bophankd/sanpham/chitiet/${row?.sanpham?._id}`}
                           >
                             {row?.ma}
                           </Link>

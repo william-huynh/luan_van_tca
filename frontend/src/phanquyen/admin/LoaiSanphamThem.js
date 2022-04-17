@@ -37,7 +37,7 @@ const LoaiSanphamThem = (props) => {
     // check white space
     if (val.indexOf(" ") >= 0) {
       setMaLSPErr("Mã không có khoảng trắng");
-    } else if (dsMaLSP.includes(val.toLowerCase())) {
+    } else if (dsMaLSP && dsMaLSP.includes(val.toLowerCase())) {
       // check maSP exist
       setMaLSPErr("Mã đã tồn tại");
     } else if (format.test(val)) {
@@ -96,7 +96,7 @@ const LoaiSanphamThem = (props) => {
   const fetchDsLoaiSP = async () => {
     setLoading(true);
     const { loaiSanpham } = await apiLoaiSanpham.dsLoaiSanpham();
-    setDsMaLSP(loaiSanpham.map((lsp) => lsp.ma.toLowerCase()));
+    setDsMaLSP(loaiSanpham && loaiSanpham.map((lsp) => lsp.ma.toLowerCase()));
     setLoading(false);
   };
 
@@ -173,6 +173,12 @@ const LoaiSanphamThem = (props) => {
                   onChange={handleChange}
                 />
               </FormGroup>
+
+              <button className="btn btn-primary px-3" onClick={handleSubmit}>
+                Lưu
+                <i class="ml-2 fas fa-save"></i>
+              </button>
+
             </FormContent>
           </Form>
         </Content>

@@ -289,6 +289,12 @@ const BophankdThem = (props) => {
                 />
                 {<ErrMsg>{taikhoanErr}</ErrMsg>}
               </FormGroup>
+
+              <button className="btn btn-primary px-3" onClick={handleSubmit}>
+                Lưu
+                <i class="ml-2 fas fa-save"></i>
+              </button>
+
             </FormContent>
           </Form>
         </Content>
