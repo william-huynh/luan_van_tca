@@ -45,7 +45,6 @@ module.exports.themgsv = async (req, res) => {
 // cap nhat thong tin ca nhan
 module.exports.capnhatthongtincanhan = async (req, res) => {
   const { ten, sdt, email, tinh, huyen, xa, matkhau, user } = req.body;
-  // return res.send(req.body);
   try {
     // update password
     if (matkhau) {

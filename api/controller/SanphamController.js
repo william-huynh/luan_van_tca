@@ -47,7 +47,11 @@ module.exports.laydssanpham = async (req, res) => {
       .populate(
         "loaisanpham dscongcu.congcu dsvattu.vattu dsnguyenlieu.nguyenlieu"
       )
-      .sort({ createdAt: "desc" });
+      .sort({ createdAt: "desc" })
+      .exec();
+
+    console.log(sanpham);
+
     if (!sanpham) {
       return res.send({ message: "Không tìm thấy sản phẩm", success: false });
     }

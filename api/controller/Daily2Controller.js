@@ -59,7 +59,7 @@ module.exports.themdaily2 = async (req, res) => {
       await gsv.save();
     }
 
-    res.status(500).send({ savedDaily2, success: true });
+    res.status(200).send({ savedDaily2, success: true });
   } catch (error) {
     res.status(500).send({ message: error.message, success: false });
   }

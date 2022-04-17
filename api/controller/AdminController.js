@@ -8,6 +8,7 @@ const Vattu = require("../models/vattuModel");
 const Nguyenlieu = require("../models/nguyenlieuModel");
 const Sanpham = require("../models/sanphamModel");
 const Donhang = require("../models/donhangModel");
+const bcrypt = require("bcryptjs");
 
 const upload = require("../middleware/imageUpload");
 
