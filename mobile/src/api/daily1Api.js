@@ -13,6 +13,14 @@ const daily1Api = {
     const url = `/api/daily1/dssanpham/${daily1Id}`;
     return axiosClient.get(url);
   },
+  dssubdonhangOfSingleDH(daily1Id, maDH) {
+    const url = `/api/daily1/dssubdhofsingledh/${daily1Id}/${maDH}`;
+    return axiosClient.get(url);
+  },
+  tiendoDonhang(daily1Id, maDH) {
+    const url = `/api/daily1/tiendodonhang/${daily1Id}/${maDH}`;
+    return axiosClient.get(url);
+  },
 }
 
 export default daily1Api;

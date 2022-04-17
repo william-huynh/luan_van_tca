@@ -103,7 +103,6 @@ function OrderDetailProductsList(props) {
                     </View>
                     ):(
                         <View>
-                            <Text>Something went wrong</Text>
                         </View>
                     )
                     }
