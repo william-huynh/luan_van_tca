@@ -94,6 +94,7 @@ const donhangSchema = new mongoose.Schema(
     dasudung: Boolean,
     ngaytao: String, // dùng cho đon hàng được tạo đầu tiên, dù là đơn hàng subdonhang
     ngaydathang: String, // Ngày bên này đặt hàng bên kia, dùng ngày này để lưu ngày nhận cc, vt, ngl
+    trangthai: { type: Boolean, default: true },
     hinhanhbaocao: String,
     xacnhan: {
       type: Boolean,
@@ -105,12 +106,12 @@ const donhangSchema = new mongoose.Schema(
   }
 );
 
-donhangSchema.pre('save', function(next) {
+donhangSchema.pre("save", function (next) {
   console.log("[DEBUG] Trigger 'save' pre hook on Donhang");
   // TODO: Add relations
   next();
 });
-donhangSchema.post('remove', function(next) {
+donhangSchema.post("remove", function (next) {
   console.log("[DEBUG] Trigger 'remove' post hook on Donhang");
   // TODO: Drop relations
   next();

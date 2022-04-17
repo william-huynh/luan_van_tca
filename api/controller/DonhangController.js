@@ -44,7 +44,20 @@ module.exports.themdonhang = async (req, res) => {
     res.send({ message: error.message, success: false });
   }
 };
-
+// Huy don hang
+module.exports.huydonhang = async (req, res) => {
+  const { code, trangthai } = req.body;
+  try {
+    const donhang = await Donhang.updateMany(
+      { ma: code },
+      { trangthai: trangthai }
+    );
+    // const updatedStatus = await donhang.save();
+    res.send({ donhang, success: true });
+  } catch (error) {
+    res.send({ message: error.message, success: false });
+  }
+};
 // Lấy ALL ds đơn hàng là đơn hàng gốc
 module.exports.layALLdsdonhanggoc = async (req, res) => {
   try {
