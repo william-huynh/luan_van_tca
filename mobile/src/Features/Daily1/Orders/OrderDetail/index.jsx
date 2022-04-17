@@ -97,19 +97,6 @@ function OrderDetailDaily1 (props) {
                     </View>
                     <View>
                         <View style={styles.orderDetailProgressTextContainer}>
-                            <Text style={styles.orderDetailProgressTextLeft}>Nhận đơn</Text>
-                            <Text style={styles.orderDetailProgressTextRight}>75%</Text>
-                        </View>
-                        <Progress.Bar
-                            progress={0.75} 
-                            height={20} 
-                            width={null} 
-                            color={"#57DE8D"}
-                            borderRadius={10} 
-                            borderWidth={0} 
-                            style={styles.orderDetailProgressBar} 
-                        />
-                        <View style={styles.orderDetailProgressTextContainer}>
                             <Text style={styles.orderDetailProgressTextLeft}>Hoàn thành</Text>
                             <Text style={styles.orderDetailProgressTextRight}>50%</Text>
                         </View>
@@ -131,19 +118,6 @@ function OrderDetailDaily1 (props) {
                     </View>
                     <View>
                         <View style={styles.orderDetailProgressTextContainer}>
-                            <Text style={styles.orderDetailProgressTextLeft}>Nhận đơn</Text>
-                            <Text style={styles.orderDetailProgressTextRight}>100%</Text>
-                        </View>
-                        <Progress.Bar
-                            progress={1} 
-                            height={20} 
-                            width={null} 
-                            color={"#57DE8D"}
-                            borderRadius={10} 
-                            borderWidth={0} 
-                            style={styles.orderDetailProgressBar} 
-                        />
-                        <View style={styles.orderDetailProgressTextContainer}>
                             <Text style={styles.orderDetailProgressTextLeft}>Hoàn thành</Text>
                             <Text style={styles.orderDetailProgressTextRight}>0%</Text>
                         </View>
@@ -164,19 +138,6 @@ function OrderDetailDaily1 (props) {
                         <Text style = {styles.orderDetailTitle}>Hộ dân</Text>
                     </View>
                     <View>
-                        <View style={styles.orderDetailProgressTextContainer}>
-                            <Text style={styles.orderDetailProgressTextLeft}>Nhận đơn</Text>
-                            <Text style={styles.orderDetailProgressTextRight}>75%</Text>
-                        </View>
-                        <Progress.Bar
-                            progress={0.75} 
-                            height={20} 
-                            width={null} 
-                            color={"#57DE8D"}
-                            borderRadius={10} 
-                            borderWidth={0} 
-                            style={styles.orderDetailProgressBar} 
-                        />
                         <View style={styles.orderDetailProgressTextContainer}>
                             <Text style={styles.orderDetailProgressTextLeft}>Hoàn thành</Text>
                             <Text style={styles.orderDetailProgressTextRight}>25%</Text>
