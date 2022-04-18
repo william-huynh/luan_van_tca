@@ -1,6 +1,7 @@
-import { useState, createContext } from "react";
+import { useState, createContext, useEffect } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
+import apiDonhang from "../axios/apiDonhang";
 
 const StateContext = createContext();
 
@@ -11,6 +12,7 @@ const StateProvider = ({ children }) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [code, setCode] = useState("null");
+  const [dsDonhang, setDsDonhang] = useState([]);
   const handleGetQrcode = async (id, role, isActive) => {
     let info = {
       role: JSON.parse(localStorage.getItem("userInfo")).vaitro,
@@ -29,6 +31,10 @@ const StateProvider = ({ children }) => {
       console.log(error);
     }
   };
+  const reRender = async () => {
+    const { donhang } = await apiDonhang.allDsDonhang();
+    setDsDonhang(donhang);
+  };
   const handleCancleOrder = async (code, trangthai) => {
     let info = {
       code,
@@ -42,6 +48,7 @@ const StateProvider = ({ children }) => {
       );
       if (res.data.success === true) {
         toast.success("Hủy thành công!", { theme: "colored" });
+        reRender();
       } else {
         toast.success("Hủy thất bại!", { theme: "colored" });
       }
@@ -53,6 +60,8 @@ const StateProvider = ({ children }) => {
     show,
     code,
     setCode,
+    dsDonhang,
+    setDsDonhang,
     handleClose,
     handleShow,
     qrcode,
