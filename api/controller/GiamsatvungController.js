@@ -4,6 +4,7 @@ const Giamsatvung = require("../models/giamsatvungModel");
 const Daily2 = require("../models/daily2Model");
 const Langnghe = require("../models/langngheModel");
 const upload = require("../middleware/imageUpload");
+const Donhang = require("../models/donhangModel");
 const {
   getCurrentDatetime,
   getTinhtrangNhandon,
@@ -397,15 +398,15 @@ module.exports.laydscongcuthuocgsv = async (req, res) => {
 module.exports.laysolieutongquan = async (req, res) => {
   try {
     const gsv = await Giamsatvung.findById(req.params.gsvId).populate(
-      "daily1 daily2 donhang dssanpham dscongcu dsvattu dsnguyenlieu"
+      "daily1 daily2 dssanpham dscongcu dsvattu dsnguyenlieu"
     );
     const langnghe = await Langnghe.find({});
-
+    const slDonhang = await Donhang.find({ donhanggoc: true, trangthai: true });
     res.send({
       dslangnghe: langnghe.length,
       dsdaily1: gsv.daily1.length,
       dsdaily2: gsv.daily2.length,
-      dsdonhang: gsv.donhang.length,
+      dsdonhang: slDonhang.length,
       dssanpham: gsv.dssanpham.length,
       dscongcu: gsv.dscongcu.length,
       dsvattu: gsv.dsvattu.length,

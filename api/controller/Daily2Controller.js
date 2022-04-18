@@ -4,6 +4,7 @@ var bcrypt = require("bcryptjs");
 const Daily1 = require("../models/daily1Model");
 const Hodan = require("../models/hodanModel");
 const Giamsatvung = require("../models/giamsatvungModel");
+const Donhang = require("../models/donhangModel");
 const Bophankd = require("../models/bophankdModel");
 const upload = require("../middleware/imageUpload");
 const {
@@ -634,16 +635,16 @@ module.exports.laydscongcuthuocdaily2 = async (req, res) => {
 module.exports.laysolieutongquan = async (req, res) => {
   try {
     let daily2 = await Daily2.findById(req.params.daily2Id).populate(
-      "dssanpham dscongcu dsvattu dsnguyenlieu hodan donhang"
+      "dssanpham dscongcu dsvattu dsnguyenlieu hodan"
     );
-
+    const slDonhang = await Donhang.find({ donhanggoc: true, trangthai: true });
     res.send({
       dssanpham: daily2.dssanpham.length,
       dscongcu: daily2.dscongcu.length,
       dsvattu: daily2.dsvattu.length,
       dsnguyenlieu: daily2.dsnguyenlieu.length,
       dshodan: daily2.hodan.length,
-      dsdonhang: daily2.donhang.length,
+      dsdonhang: slDonhang.length,
       success: true,
     });
   } catch (error) {
