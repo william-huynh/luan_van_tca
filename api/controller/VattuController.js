@@ -37,6 +37,7 @@ module.exports.suavattu = async (req, res) => {
     const updatedVattu = await vattu.save();
     res.send({ updatedVattu, success: true });
   } catch (error) {
+    console.log(error);
     res.send({ message: error.message, success: false });
   }
 };

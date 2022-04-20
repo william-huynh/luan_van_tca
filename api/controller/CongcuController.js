@@ -1,4 +1,3 @@
-const upload = require("../middleware/imageUpload");
 const Congcu = require("../models/congcuModel");
 const { getCurrentDatetime } = require("../utils");
 
