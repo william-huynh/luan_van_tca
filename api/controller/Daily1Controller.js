@@ -663,7 +663,11 @@ module.exports.laysolieutongquan = async (req, res) => {
     let daily1 = await Daily1.findById(req.params.daily1Id).populate(
       "dssanpham dscongcu dsvattu dsnguyenlieu daily2 hodan"
     );
-    const slDonhang = await Donhang.find({ donhanggoc: true, trangthai: true });
+    const slDonhang = await Donhang.find({
+      daily1: req.params.daily1Id,
+      donhanggoc: true,
+      trangthai: true,
+    });
 
     res.send({
       dssanpham: daily1.dssanpham.length,

@@ -12,19 +12,25 @@ import { links } from "./arrayOfLinks";
 const TongQuan = (props) => {
   const [loading, setLoading] = useState(false);
   const [counts, setCounts] = useState(null);
+  const [count, setCount] = React.useState(0);
   const { userInfo } = useSelector((state) => state.user);
+  let index = 0;
 
   const fetchData = async () => {
     setLoading(true);
     const { daily1 } = await apiDaily1.singleDaily1BasedUser(userInfo._id);
     const data = await apiDaily1.tongquan(daily1._id);
+    const { donhang } = await apiDaily1.dsDonhang(daily1._id);
     setCounts(data);
+    donhang.map((item) => {
+      if (item.trangthai === true) index++;
+    });
+    setCount(index);
     setLoading(false);
   };
 
-  useEffect(() => {
+  useEffect(async () => {
     fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (loading) {
@@ -126,7 +132,8 @@ const TongQuan = (props) => {
             <Card onClick={() => props.history.push("/daily1/donhang")}>
               <CardContent>
                 <TextInfo>
-                  <div>{counts?.dsdonhang}</div>
+                  {/* <div>{counts?.dsdonhang}</div> */}
+                  <div>{count}</div>
                   <span>Đơn hàng</span>
                 </TextInfo>
                 <Icon>

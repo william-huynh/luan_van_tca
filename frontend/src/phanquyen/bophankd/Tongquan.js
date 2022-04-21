@@ -14,13 +14,19 @@ import { links } from "./arrayOfLinks";
 const TongQuan = (props) => {
   const [loading, setLoading] = useState(false);
   const [counts, setCounts] = useState(null);
+  const [count, setCount] = useState(0);
   const { userInfo } = useSelector((state) => state.user);
-
+  let index = 0;
   const fetchData = async () => {
     setLoading(true);
     const { bophankd } = await apiBophankd.bophankdBasedUserId(userInfo._id);
     const { dshodan } = await apiBophankd.dsHodan(bophankd._id);
     const data = await apiBophankd.tongquan(bophankd._id);
+    const { donhang } = await apiBophankd.dsDonhang(bophankd._id);
+    donhang.map((item) => {
+      if (item.trangthai === true) index++;
+    });
+    setCount(index);
     setCounts({ ...data, dshodan: dshodan.length });
     setLoading(false);
   };
@@ -143,7 +149,8 @@ const TongQuan = (props) => {
             <Card onClick={() => props.history.push("/bophankd/donhang")}>
               <CardContent>
                 <TextInfo>
-                  <div>{counts?.donhang}</div>
+                  {/* <div>{counts?.donhang}</div> */}
+                  <div>{count}</div>
                   <span>Đơn hàng</span>
                 </TextInfo>
                 <Icon>

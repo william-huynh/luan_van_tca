@@ -14,13 +14,19 @@ import { links } from "./arrayOfLinks";
 const TongQuan = (props) => {
   const [loading, setLoading] = useState(false);
   const [counts, setCounts] = useState(null);
+  const [count, setCount] = useState(0);
   const { userInfo } = useSelector((state) => state.user);
-
+  let index = 0;
   const fetchData = async () => {
     setLoading(true);
     const { gsv } = await apiGSV.singleGsvBasedUserId(userInfo._id);
     const { dshodan } = await apiGSV.dsHodan(gsv._id);
     const data = await apiGSV.tongquan(gsv._id);
+    const { donhang } = await apiGSV.dsDonhang(gsv._id);
+    donhang.map((item) => {
+      if (item.trangthai === true) index++;
+    });
+    setCount(index);
     setCounts({ ...data, dshodan: dshodan.length });
     setLoading(false);
   };
@@ -36,7 +42,7 @@ const TongQuan = (props) => {
 
   return (
     <Wrapper>
-      <Header title="Tổng quan" arrOfLinks={links}  vaitro="giamsatvung" />
+      <Header title="Tổng quan" arrOfLinks={links} vaitro="giamsatvung" />
       <Content>
         <div className="row  mb-4">
           <div className="col-lg-3">
@@ -85,8 +91,8 @@ const TongQuan = (props) => {
             <Card onClick={() => props.history.push("/giamsatvung/donhang")}>
               <CardContent>
                 <TextInfo>
-                  <div>{counts?.dsdonhang}</div>
-                  <span>Đơn hàng</span>
+                  {/* <div>{counts?.dsdonhang}</div> */}
+                  <div>{count}</div>
                 </TextInfo>
                 <Icon>
                   <i class="far fa-newspaper"></i>
