@@ -93,6 +93,7 @@ const TableSanpham = ({ dsSanpham = [], setRowsRemoved }) => {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [open, setOpen] = React.useState(false);
   const history = useHistory();
+  console.log({dsSanpham});
  
 
   const handleOpen = () => setOpen(true);
@@ -189,6 +190,7 @@ const TableSanpham = ({ dsSanpham = [], setRowsRemoved }) => {
     getQrcode()
   },[])
   return (
+    dsSanpham.length > 0 && 
     <>
       <Box sx={{ width: "100%" }}>
         <Paper sx={{ width: "100%", mb: 2 }}>
@@ -224,7 +226,7 @@ const TableSanpham = ({ dsSanpham = [], setRowsRemoved }) => {
                   .map((row, index) => {
                     const isItemSelected = isSelected(row._id);
                     const labelId = `enhanced-table-checkbox-${index}`;
-                    
+
                     return (
                       <TableRow
                         hover
@@ -268,7 +270,7 @@ const TableSanpham = ({ dsSanpham = [], setRowsRemoved }) => {
                         </TableCell>
                         <TableCell align="right">{row.ten}</TableCell>
                         <TableCell align="right">
-                          {row.loaisanpham.ten}
+                          {row?.loaisanpham?.ten}
                         </TableCell>
                         <TableCell align="right">
                           {formatMoney(row.gia)}
@@ -295,6 +297,7 @@ const TableSanpham = ({ dsSanpham = [], setRowsRemoved }) => {
               </TableBody>
             </Table>
           </TableContainer>
+          
           <TablePagination
             rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
             colSpan={3}

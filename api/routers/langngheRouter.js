@@ -1,114 +1,25 @@
 const express = require("express");
-const Hodan = require("../models/hodanModel");
-const Langnghe = require("../models/langngheModel");
 const langngheRouter = express.Router();
-
+const langngheController = require("../controller/LangngheController");
 // them lang nghe
-langngheRouter.post("/them", async (req, res) => {
-  const { gsvId, ten, tinh, huyen, loaisanpham } = req.body;
-  try {
-    const newLN = new Langnghe({
-      ten,
-      tinh,
-      huyen,
-      loaisanpham,
-      giamsatvung: gsvId,
-    });
-    const savedLangnghe = await newLN.save();
-    res.send({ savedLangnghe, success: true });
-  } catch (error) {
-    res.send({ message: error.message, success: false });
-  }
-});
+langngheRouter.post("/them", langngheController.themlangnghe);
 
 // lay ds langnghe
-langngheRouter.get("/danhsach", async (req, res) => {
-  try {
-    const langnghe = await Langnghe.find({})
-      .populate("loaisanpham")
-      .sort({ createdAt: "desc" });
-    if (!langnghe.length) {
-      return res.send({
-        message: "Không tìm thấy làng nghề nào",
-        success: false,
-      });
-    }
-    res.send({ langnghe, success: true });
-  } catch (error) {
-    res.send({ message: error.message, success: false });
-  }
-});
+langngheRouter.get("/danhsach", langngheController.laydslangnghe);
 
 // lay thong tin 1 langnghe
-langngheRouter.get("/single/:id", async (req, res) => {
-  try {
-    const langnghe = await Langnghe.findById(req.params.id).populate(
-      "loaisanpham"
-    );
-    if (!langnghe) {
-      return res.send({
-        message: "Không tìm thấy làng nghề nào",
-        success: false,
-      });
-    }
-    res.send({ langnghe, success: true });
-  } catch (error) {
-    res.send({ message: error.message, success: false });
-  }
-});
+langngheRouter.get("/single/:id", langngheController.laythongtin1langnghe);
 
 // chinh sua lang nghe
-langngheRouter.put("/chinhsua/:id", async (req, res) => {
-  const { ten, tinh, huyen, loaisanpham } = req.body;
-  try {
-    const langnghe = await Langnghe.findById(req.params.id);
-    langnghe.ten = ten;
-    langnghe.tinh = tinh;
-    langnghe.huyen = huyen;
-    langnghe.loaisanpham = loaisanpham;
-
-    const updatedLangnghe = await langnghe.save();
-    res.send({ updatedLangnghe, success: true });
-  } catch (error) {
-    res.send({ message: error.message, success: false });
-  }
-});
+langngheRouter.put("/chinhsua/:id", langngheController.chinhsualangnghe);
 
 // xoa nhieu` langnghe
-langngheRouter.put("/multiple", async (req, res) => {
-  const { arrayOfId } = req.body;
-  try {
-    for (const item of arrayOfId) {
-      await Langnghe.findByIdAndDelete(item);
-    }
-    res.send({ success: true });
-  } catch (error) {
-    res.send({ message: error.message, success: false });
-  }
-});
+langngheRouter.put("/multiple", langngheController.xoanhieulangnghe);
 
 // lay ds hodan
-langngheRouter.get("/danhsachhodan/:langngheId", async (req, res) => {
-  try {
-    const hodan = await Hodan.find({
-      langnghe: req.params.langngheId,
-    }).populate("langnghe loaisanpham");
+langngheRouter.get("/danhsachhodan/:langngheId", langngheController.laydshodan);
 
-    res.send({ hodan, success: true });
-  } catch (error) {
-    res.send({ message: error.message, success: false });
-  }
-});
-
-langngheRouter.get('/collection', async (req, res) => {
-  const collection = await Langnghe.find({});
-
-  return res.status(200).send(collection);
-})
-langngheRouter.delete('/collection', async (req, res) => {
-  await Langnghe.deleteMany({});
-
-  return res.status(204).send("Ok");
-})
+langngheRouter.get("/collection", langngheController.getCollection);
+langngheRouter.delete("/collection", langngheController.dropCollection);
 
 module.exports = langngheRouter;

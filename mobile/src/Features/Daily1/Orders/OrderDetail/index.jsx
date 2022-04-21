@@ -7,19 +7,58 @@ import daily1Api from "../../../../api/daily1Api";
 import OrderDetailProductsList from "./ProductsList";
 import OrderDetailToolsList from "./ToolsList";
 import OrderDetailMaterialsList from "./MaterialsList";
-
-
+import * as Progress from 'react-native-progress';
 
 function OrderDetailDaily1 (props) {
     const data = props.route.params.data;
-    // console.log(props.route.params.data._id);
     const daily1Id =props.route.params.extra;
     const orderId = props.route.params.data._id;
-    // console.log(props.route.params.data.order);
     const { navigation } = props;
+    const [tiLePhanphat, setTiLePhanphat] = useState(null);
+    const [tiendoHT, setTiendoHT] = useState(null);  
+    const [tiendoDonhang, setTiendoDonhang] = useState(null);
+
     const handleRedirectOrderList = () => { navigation.navigate("OrderDaily1", { navigation: navigation }) }
     const getImg = (imgName)=>{ return `${axiosClient.defaults.baseURL}uploads/${imgName}` }
-    
+    // const getChartData = (dssubdh) => {
+    //     let fullPercent = 0;
+    //     dssubdh.forEach((dh) => {
+    //       let sum = dh.dssanpham.reduce((acc, sp) => acc + sp.soluong, 0);
+    //       fullPercent = fullPercent + sum;
+    //     });
+    //     // ti le phan phat
+    //     const tilephanphat = dssubdh.map((dh) => ({
+    //       label: dh.to.daily2.ten,
+    //       percent:
+    //         (dh.dssanpham.reduce((acc, sp) => acc + sp.soluong, 0) * 100) /
+    //         fullPercent,
+    //     }));
+    //     // tien do hoan thanh
+    //     const tiendoHT = dssubdh.map((dh) => ({
+    //       label: dh.to.daily2.ten,
+    //       percent:
+    //         (dh.dssanpham.reduce(
+    //           (acc, sp) => acc + (sp.danhan ? sp.danhan : 0),
+    //           0
+    //         ) *
+    //           100) /
+    //         dh.dssanpham.reduce((acc, sp) => acc + sp.soluong, 0),
+    //     }));
+    //     setTiLePhanphat(tilephanphat);
+    //     setTiendoHT(tiendoHT);
+    // };
+
+    // const fetchData = async () => {
+    //     const data = await daily1Api.tiendoDonhang(daily1Id, orderId);
+    //     const { subdonhang } = await daily1Api.dssubdonhangOfSingleDH(
+    //         daily1Id,
+    //         orderId
+    //     );
+    //     setTiendoDonhang(data);
+    //     getChartData(subdonhang);
+    //     console.log(tiendoDonhang);
+    // }
+    // fetchData();
 
     return( 
         <SafeAreaView style = {styles.container}>
@@ -39,22 +78,85 @@ function OrderDetailDaily1 (props) {
             
             {/* Order Detail */}
             
-            <View style = {styles.productDetailBackground}>
-                <ScrollView style = {styles.productDetailContainer}>
+            <View style = {styles.orderDetailBackground}>
+                <ScrollView style = {styles.orderDetailContainer}>
                 { (data) ? (
                 <View>
                      {/* Order Base Detail */}
 
-                    <View style = {styles.productDetailContainerUpper}>
-                        {data.xacnhan?<Text style = {styles.productApprove} >ĐÃ DUYỆT ✓</Text>:<Text style = {styles.productNotApprove} >ĐANG CHỜ DUYỆT ✗</Text>}
-                        <Text style = {styles.productPrice}>{data.tongdongia} VND</Text>
+                    <View style = {styles.orderDetailContainerUpper}>
+                        {data.xacnhan?<Text style = {styles.orderApprove} >ĐÃ DUYỆT ✓</Text>:<Text style = {styles.orderNotApprove} >ĐANG CHỜ DUYỆT ✗</Text>}
+                        <Text style = {styles.orderPrice}>{data.tongdongia} VND</Text>
                         <Text style = {styles.orderCode}>{data.ma}</Text>
+                    </View>
+
+                    {/* Daily1 Progress */}
+
+                    <View style = {styles.orderDetailContainerLower}>
+                        <Text style = {styles.orderDetailTitle}>Đại lý cấp 1</Text>
+                    </View>
+                    <View>
+                        <View style={styles.orderDetailProgressTextContainer}>
+                            <Text style={styles.orderDetailProgressTextLeft}>Hoàn thành</Text>
+                            <Text style={styles.orderDetailProgressTextRight}>50%</Text>
+                        </View>
+                        <Progress.Bar
+                            progress={0.5} 
+                            height={20} 
+                            width={null} 
+                            color={"#FFB74B"}
+                            borderRadius={10} 
+                            borderWidth={0} 
+                            style={styles.orderDetailProgressBar} 
+                        />
+                    </View>
+
+                    {/* Daily2 Progress */}
+
+                    <View style = {styles.orderDetailContainerLower}>
+                        <Text style = {styles.orderDetailTitle}>Đại lý cấp 2</Text>
+                    </View>
+                    <View>
+                        <View style={styles.orderDetailProgressTextContainer}>
+                            <Text style={styles.orderDetailProgressTextLeft}>Hoàn thành</Text>
+                            <Text style={styles.orderDetailProgressTextRight}>0%</Text>
+                        </View>
+                        <Progress.Bar
+                            progress={0} 
+                            height={20} 
+                            width={null} 
+                            color={"#FFB74B"}
+                            borderRadius={10} 
+                            borderWidth={0} 
+                            style={styles.orderDetailProgressBar} 
+                        />
+                    </View>
+
+                    {/* Farmer Progress */}
+
+                    <View style = {styles.orderDetailContainerLower}>
+                        <Text style = {styles.orderDetailTitle}>Hộ dân</Text>
+                    </View>
+                    <View>
+                        <View style={styles.orderDetailProgressTextContainer}>
+                            <Text style={styles.orderDetailProgressTextLeft}>Hoàn thành</Text>
+                            <Text style={styles.orderDetailProgressTextRight}>25%</Text>
+                        </View>
+                        <Progress.Bar
+                            progress={0.25} 
+                            height={20} 
+                            width={null} 
+                            color={"#FB4747"}
+                            borderRadius={10} 
+                            borderWidth={0} 
+                            style={styles.orderDetailProgressBar} 
+                        />
                     </View>
 
                     {/* Order Products */}
 
-                    <View style = {styles.productDetailContainerLower}>
-                        <Text style = {styles.productDetailTitle}>Sản phẩm</Text>
+                    <View style = {styles.orderDetailContainerLower}>
+                        <Text style = {styles.orderDetailTitle}>Sản phẩm</Text>
                     </View>
                     <View style = {styles.orderProductListContainer}>
                         <FlatList
@@ -67,12 +169,12 @@ function OrderDetailDaily1 (props) {
                         />
                     </View>
 
-                    {/* Product Tools */}
+                    {/* Order Tools */}
 
-                    <View style = {styles.productDetailContainerLower}>
-                        <Text style = {styles.productDetailTitle}>Công cụ</Text>
+                    <View style = {styles.orderDetailContainerLower}>
+                        <Text style = {styles.orderDetailTitle}>Công cụ</Text>
                     </View>
-                    <View style = {styles.orderProductListContainer}>
+                    <View style = {styles.orderOrderListContainer}>
                         <FlatList
                             keyExtractor={(item)=>item._id}
                             data={data.dscongcu}
@@ -82,12 +184,12 @@ function OrderDetailDaily1 (props) {
                         />
                     </View>
 
-                    {/* Product Tools */}
+                    {/* Order Tools */}
 
-                    <View style = {styles.productDetailContainerLower}>
-                        <Text style = {styles.productDetailTitle}>Nguyên liệu</Text>
+                    <View style = {styles.orderDetailContainerLower}>
+                        <Text style = {styles.orderDetailTitle}>Nguyên liệu</Text>
                     </View>
-                    <View style = {styles.orderProductListContainer}>
+                    <View style = {styles.orderOrderListContainer}>
                         <FlatList
                             keyExtractor={(item)=>item._id}
                             data={data.dsnguyenlieu}

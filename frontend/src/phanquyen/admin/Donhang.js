@@ -16,18 +16,21 @@ import {
 import TableDonhang from "./tables/TableDonhang";
 import apiDonhang from "../../axios/apiDonhang";
 import { links } from "./arrayOfLinks";
+import { StateContext } from "../../Context/StateContext";
+import { useContext } from "react";
 
 const Donhang = (props) => {
   const [query, setQuery] = React.useState("");
   const [searchColumns] = React.useState(["ma"]);
   const [loading, setLoading] = React.useState(false);
-  const [dsDonhang, setDsDonhang] = React.useState([]);
+  // const [dsDonhang, setDsDonhang] = React.useState([]);
   const [rowsRemoved, setRowsRemoved] = React.useState(false);
+  const context = useContext(StateContext);
 
   const fetchDsSanpham = async () => {
     setLoading(true);
     const { donhang } = await apiDonhang.allDsDonhang();
-    setDsDonhang(donhang);
+    context.setDsDonhang(donhang);
     setLoading(false);
   };
 
@@ -83,7 +86,7 @@ const Donhang = (props) => {
 
             <TableSection>
               <TableDonhang
-                dsDonhang={search(dsDonhang)}
+                dsDonhang={search(context.dsDonhang)}
                 setRowsRemoved={setRowsRemoved}
               />
             </TableSection>

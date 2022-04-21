@@ -21,6 +21,9 @@ import TableButton from "../../../components/TableButton";
 import { toast } from "react-toastify";
 import apiDonhang from "../../../axios/apiDonhang";
 import { Link } from "react-router-dom";
+import { StateContext } from "../../../Context/StateContext";
+import { useContext } from "react";
+import { useConfirm } from "material-ui-confirm";
 
 const EnhancedTableToolbar = ({
   numSelected,
@@ -29,6 +32,18 @@ const EnhancedTableToolbar = ({
   onClickCapnhat,
   onClickXoa,
 }) => {
+  const context = useContext(StateContext);
+  const confirm = useConfirm();
+  const handleDelete = (code) => {
+    confirm({
+      title: "Hủy đơn hàng?",
+      description: `Bạn có chắc muốn hủy đơn hàng ${code} không?`,
+      cancellationText: "Không",
+      confirmationText: "Có",
+    }).then(() => {
+      context.handleCancleOrder(context.code, false);
+    });
+  };
   return numSelected > 0 ? (
     <>
       <Toolbar
@@ -56,9 +71,25 @@ const EnhancedTableToolbar = ({
                 <>
                   <TableButton onClick={onClickChitiet}>Chi tiết</TableButton>
                   <TableButton onClick={onClickXoa}>Xóa</TableButton>
+                  <TableButton
+                    onClick={() => {
+                      handleDelete(context.code);
+                    }}
+                  >
+                    Hủy đơn hàng
+                  </TableButton>
                 </>
               ) : (
-                <TableButton onClick={onClickXoa}>Xóa</TableButton>
+                <>
+                  <TableButton onClick={onClickXoa}>Xóa</TableButton>
+                  <TableButton
+                    onClick={() => {
+                      handleDelete(context.code);
+                    }}
+                  >
+                    Hủy đơn hàng
+                  </TableButton>
+                </>
               )}
             </div>
           </Typography>
@@ -156,7 +187,7 @@ const TableDonhang = ({ dsDonhang = [], setRowsRemoved }) => {
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - dsDonhang.length) : 0;
-
+  const context = useContext(StateContext);
   return (
     <>
       <Box sx={{ width: "100%" }}>
@@ -192,43 +223,47 @@ const TableDonhang = ({ dsDonhang = [], setRowsRemoved }) => {
                   .map((row, index) => {
                     const isItemSelected = isSelected(row._id);
                     const labelId = `enhanced-table-checkbox-${index}`;
-
-                    return (
-                      <TableRow
-                        hover
-                        onClick={(event) => handleClick(event, row._id)}
-                        role="checkbox"
-                        aria-checked={isItemSelected}
-                        tabIndex={-1}
-                        key={row._id}
-                        selected={isItemSelected}
-                      >
-                        <TableCell padding="checkbox">
-                          <Checkbox
-                            color="primary"
-                            checked={isItemSelected}
-                            inputProps={{
-                              "aria-labelledby": labelId,
-                            }}
-                          />
-                        </TableCell>
-                        <TableCell align="right">
-                          <Link to={`/admin/donhang/chitiet/${row._id}`}>
-                            {row.ma}
-                          </Link>
-                        </TableCell>
-                        <TableCell align="right">{row.tongsanpham}</TableCell>
-                        <TableCell align="right">{row.tongcongcu}</TableCell>
-                        <TableCell align="right">{row.tongvattu}</TableCell>
-                        <TableCell align="right">
-                          {row.tongnguyenlieu} kg
-                        </TableCell>
-                        <TableCell align="right">
-                          {formatMoney(row.tongdongia)} vnđ
-                        </TableCell>
-                        <TableCell align="right">{row.ngaytao}</TableCell>
-                      </TableRow>
-                    );
+                    if (row.trangthai === true) {
+                      return (
+                        <TableRow
+                          hover
+                          onClick={(event) => {
+                            handleClick(event, row._id);
+                            context.setCode(row.ma);
+                          }}
+                          role="checkbox"
+                          aria-checked={isItemSelected}
+                          tabIndex={-1}
+                          key={row._id}
+                          selected={isItemSelected}
+                        >
+                          <TableCell padding="checkbox">
+                            <Checkbox
+                              color="primary"
+                              checked={isItemSelected}
+                              inputProps={{
+                                "aria-labelledby": labelId,
+                              }}
+                            />
+                          </TableCell>
+                          <TableCell align="right">
+                            <Link to={`/admin/donhang/chitiet/${row._id}`}>
+                              {row.ma}
+                            </Link>
+                          </TableCell>
+                          <TableCell align="right">{row.tongsanpham}</TableCell>
+                          <TableCell align="right">{row.tongcongcu}</TableCell>
+                          <TableCell align="right">{row.tongvattu}</TableCell>
+                          <TableCell align="right">
+                            {row.tongnguyenlieu} kg
+                          </TableCell>
+                          <TableCell align="right">
+                            {formatMoney(row.tongdongia)} vnđ
+                          </TableCell>
+                          <TableCell align="right">{row.ngaytao}</TableCell>
+                        </TableRow>
+                      );
+                    }
                   })}
                 {emptyRows > 0 && (
                   <TableRow

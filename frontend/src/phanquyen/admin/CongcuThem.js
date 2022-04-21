@@ -55,7 +55,7 @@ const CongcuThem = (props) => {
     }
   };
 
-  const submitForm = async () => {
+  const handleSubmit = async () => {
     if (!emptyField()) {
       const formData = new FormData();
       formData.append("ten", ten);
@@ -110,7 +110,7 @@ const CongcuThem = (props) => {
           titleBack
           onClick={() => props.history.push("/admin/congcu")}
           headerRight={
-            <button className="btn btn-primary px-4" onClick={submitForm}>
+            <button className="btn btn-primary px-4" onClick={handleSubmit}>
               <span>Lưu</span>
               <i class="fas fa-save"></i>
             </button>
@@ -233,6 +233,12 @@ const CongcuThem = (props) => {
                   );
                 })}
               </FormGroup>
+
+              <button className="btn btn-primary px-3" onClick={handleSubmit}>
+                Lưu
+                <i class="ml-2 fas fa-save"></i>
+              </button>
+
             </FormContent>
           </Form>
         </Content>

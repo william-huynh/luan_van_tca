@@ -23,6 +23,13 @@ const daily1Api = {
   },
   dsNguyenlieu(daily1Id) {
     const url = `/api/daily1/dsnguyenlieu/${daily1Id}`;
+  },
+  dssubdonhangOfSingleDH(daily1Id, maDH) {
+    const url = `/api/daily1/dssubdhofsingledh/${daily1Id}/${maDH}`;
+    return axiosClient.get(url);
+  },
+  tiendoDonhang(daily1Id, maDH) {
+    const url = `/api/daily1/tiendodonhang/${daily1Id}/${maDH}`;
     return axiosClient.get(url);
   },
 }

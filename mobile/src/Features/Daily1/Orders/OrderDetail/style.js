@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Text } from "react-native";
 
 
 const styles = StyleSheet.create({
@@ -31,8 +31,8 @@ const styles = StyleSheet.create({
         paddingLeft: 8,
     },
 
-    // Product Detail
-    productDetailBackground: {
+    // Order Detail
+    orderDetailBackground: {
         backgroundColor: "#F3F0FF",
         flex: 1,
         borderTopLeftRadius: 15,
@@ -41,28 +41,28 @@ const styles = StyleSheet.create({
         paddingRight: 25,
         paddingLeft: 25,
     },
-    productDetailContainer: {
+    orderDetailContainer: {
         backgroundColor: "#FFFFFF",
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
     },
-    productDetailContainerUpper: {
+    orderDetailContainerUpper: {
         marginTop: 30,
         alignItems: "center",
         justifyContent: "space-between",
         height: 100,
     },
-    productApprove: {
+    orderApprove: {
         fontSize: 20,
         fontWeight: "bold",
         color:'#32AC31',
     },
-    productNotApprove: {
+    orderNotApprove: {
         fontSize: 20,
         fontWeight: "bold",
         color:'#FB4747',
     },
-    productPrice: {
+    orderPrice: {
         fontSize: 20,
         fontWeight: "bold",
     },
@@ -71,16 +71,36 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         color:'#929292',
     },
-    productDetailContainerLower: {
-        marginTop: 30,
+    orderDetailContainerLower: {
+        marginTop: 20,
         paddingLeft: 25,
         paddingRight: 25,
     },
-    productDetailTitle: {
+    orderDetailTitle: {
         fontSize: 17,
         fontWeight: "bold",
         paddingBottom: 10,
     },
+    orderDetailProgressTextContainer: {
+        display: "flex", 
+        flexDirection: "row",
+        marginLeft: 25, 
+        marginRight: 25,
+    },
+    orderDetailProgressTextLeft: { 
+        flex: 1,
+        color: "#929292", 
+    },
+    orderDetailProgressTextRight: {
+        color: "#929292",
+    },
+    orderDetailProgressBar: {
+        backgroundColor: "#C4C4C4",
+        marginTop: 5,
+        marginLeft: 25, 
+        marginRight: 25,
+        marginBottom: 10,
+    }
 });
 
 export default styles;
