@@ -1,25 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, SafeAreaView, StyleSheet, Text, View,TouchableOpacity } from "react-native";
+import { FlatList, SafeAreaView, Text, View, TouchableOpacity } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import styles from "./style";
-import OrderListDaily1 from "./OrderListComponent";
+import ToolListDaily1 from "./ToolsListComponent";
 import daily1Api from "../../../api/daily1Api";
 
-function OrderDaily1(props) {
+function ToolDaily1(props) {
   const { navigation } = props;
   // Get daily1 id
   const daily1Id = props.route.params.idDaily1;
-  const [orderList, setOrderList] = useState();
+  const [toolList, setToolList] = useState();
 
   // Get list
   useEffect(() => {
     const fetchData = async () => {
-      const getListOrder = await daily1Api.dsDonhang(daily1Id);
-      setOrderList(getListOrder.donhang);
+      const getListOrder = await daily1Api.dsCongcu(daily1Id);
+      setToolList(getListOrder.dscongcu);
+      // console.log(getListOrder.dscongcu)
     };
     fetchData();
   }, []);
+
+
 
   const handleRedirectHome = () => { navigation.navigate("HomeDaily1", { navigation: navigation }) }
 
@@ -28,34 +31,36 @@ function OrderDaily1(props) {
       <SafeAreaView style = {styles.container}>
           
           {/* Top Bar: Return & Search */}
-          <View style = {styles.topBarContainer} >
+          <View style = {styles.topBarContainer}>
               <TouchableOpacity onPress = {handleRedirectHome} style = {styles.topBarReturn}>
+                  <Ionicons 
+                      name = "arrow-back"
+                      size = {25}
+                      style = {{ color: "white" }}
+                  />
+                  <Text style = {styles.topBarText}>Công cụ</Text>
+              </TouchableOpacity>
+              <TouchableOpacity>
                 <Ionicons 
-                    name = "arrow-back"
+                    name = "search"
                     size = {25}
-                    style = {styles.topBarIconArrow}
+                    style = {{ color: "white" }}
                 />
-                <Text style = {styles.topBarText}>Đơn hàng</Text>
-              </TouchableOpacity> 
-              <Ionicons 
-                  name = "search"
-                  size = {25}
-                  style = {styles.topBarIconSearch}
-              />
+              </TouchableOpacity>
           </View>
 
-          {/* Order List */}
-          <View style = {styles.orderListContainer}>
+          {/* Product List */}
+          <View style = {styles.toolListContainer}>
             <FlatList
-              data={orderList}
-              renderItem={(item, index) => (
-                <OrderListDaily1
-                  order={item}
+              data={toolList}
+              renderItem={(item) => (
+                <ToolListDaily1
+                  congcu={item}
                   navigation={navigation}
                   daily1Id={daily1Id}
                 />
               )}
-              keyExtractor={(item) => item._id}
+              keyExtractor={item => item.id}
             />
           </View>
 
@@ -76,4 +81,4 @@ function OrderDaily1(props) {
     );
 }
 
-export default OrderDaily1;
+export default ToolDaily1;

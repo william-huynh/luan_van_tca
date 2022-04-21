@@ -3,10 +3,10 @@ import { FlatList, SafeAreaView, StyleSheet, Text, View,TouchableOpacity } from 
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import styles from "./style";
-import OrderListDaily1 from "./OrderListComponent";
+import OrderInListDaily1 from "./OrderInListComponent";
 import daily1Api from "../../../api/daily1Api";
 
-function OrderDaily1(props) {
+function OrderInDaily1(props) {
   const { navigation } = props;
   // Get daily1 id
   const daily1Id = props.route.params.idDaily1;
@@ -18,7 +18,17 @@ function OrderDaily1(props) {
       const getListOrder = await daily1Api.dsDonhang(daily1Id);
       setOrderList(getListOrder.donhang);
     };
-    fetchData();
+    fetchData().then(res =>{
+      // console.log(orderList)
+      let orderIn =[];
+      for(let i =0;i<orderList.length;i++){
+        if(orderList[i].to.daily1==daily1Id){
+          // console.log(i);
+          orderIn.push(orderList[i])
+        }
+      }
+      setOrderList(orderIn);
+    })
   }, []);
 
   const handleRedirectHome = () => { navigation.navigate("HomeDaily1", { navigation: navigation }) }
@@ -28,15 +38,15 @@ function OrderDaily1(props) {
       <SafeAreaView style = {styles.container}>
           
           {/* Top Bar: Return & Search */}
-          <View style = {styles.topBarContainer} >
-              <TouchableOpacity onPress = {handleRedirectHome} style = {styles.topBarReturn}>
-                <Ionicons 
-                    name = "arrow-back"
-                    size = {25}
-                    style = {styles.topBarIconArrow}
-                />
-                <Text style = {styles.topBarText}>Đơn hàng</Text>
-              </TouchableOpacity> 
+          <View style = {styles.topBarContainer}>
+            <TouchableOpacity onPress = {handleRedirectHome} style = {styles.topBarReturn}>
+              <Ionicons 
+                  name = "arrow-back"
+                  size = {25}
+                  style = {styles.topBarIconArrow}
+              />
+              <Text style = {styles.topBarText}>Hàng giao đến</Text>
+            </TouchableOpacity> 
               <Ionicons 
                   name = "search"
                   size = {25}
@@ -49,7 +59,7 @@ function OrderDaily1(props) {
             <FlatList
               data={orderList}
               renderItem={(item, index) => (
-                <OrderListDaily1
+                <OrderInListDaily1
                   order={item}
                   navigation={navigation}
                   daily1Id={daily1Id}
@@ -76,4 +86,4 @@ function OrderDaily1(props) {
     );
 }
 
-export default OrderDaily1;
+export default OrderInDaily1;
