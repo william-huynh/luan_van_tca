@@ -3,10 +3,10 @@ import { FlatList, SafeAreaView, StyleSheet, Text, View,TouchableOpacity } from 
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import styles from "./style";
-import OrderListDaily1 from "./OrderListComponent";
+// import OrderListDaily1 from "./OrderListComponent";
 import daily1Api from "../../../api/daily1Api";
 
-function OrderDaily1(props) {
+function OrderOutDaily1(props) {
   const { navigation } = props;
   // Get daily1 id
   const daily1Id = props.route.params.idDaily1;
@@ -28,25 +28,25 @@ function OrderDaily1(props) {
       <SafeAreaView style = {styles.container}>
           
           {/* Top Bar: Return & Search */}
-          <View style = {styles.topBarContainer} >
-              <TouchableOpacity onPress = {handleRedirectHome} style = {styles.topBarReturn}>
-                <Ionicons 
-                    name = "arrow-back"
-                    size = {25}
-                    style = {styles.topBarIconArrow}
-                />
-                <Text style = {styles.topBarText}>Đơn hàng</Text>
-              </TouchableOpacity> 
+          <View style = {styles.topBarContainer}>
+            <TouchableOpacity onPress = {handleRedirectHome} style = {styles.topBarReturn}>
               <Ionicons 
-                  name = "search"
+                  name = "arrow-back"
                   size = {25}
-                  style = {styles.topBarIconSearch}
+                  style = {styles.topBarIconArrow}
               />
+              <Text style = {styles.topBarText}>Đơn hàng</Text>
+            </TouchableOpacity> 
+            <Ionicons 
+                name = "search"
+                size = {25}
+                style = {styles.topBarIconSearch}
+            />
           </View>
 
           {/* Order List */}
           <View style = {styles.orderListContainer}>
-            <FlatList
+            {/* <FlatList
               data={orderList}
               renderItem={(item, index) => (
                 <OrderListDaily1
@@ -56,10 +56,24 @@ function OrderDaily1(props) {
                 />
               )}
               keyExtractor={(item) => item._id}
-            />
+            /> */}
           </View>
+
+        {/* {orderList && (
+          <FlatList
+            data={orderList}
+            renderItem={(item, index) => (
+              <ListDonHang
+                dataList={item}
+                navigation={navigation}
+                hodanId={hodanId}
+              />
+            )}
+            keyExtractor={(item) => item._id}
+          />
+        )} */}
       </SafeAreaView>
     );
 }
 
-export default OrderDaily1;
+export default OrderOutDaily1;

@@ -37,7 +37,12 @@ function HomeDaily1(props) {
     // Redirect functions
     const handleRedirectOrder = () => { navigation.navigate("OrderDaily1", { idDaily1: `${user._id}`, navigation: navigation }) };
     const handleRedirectProduct = () => { navigation.navigate("ProductDaily1", { idDaily1: `${user._id}`, navigation: navigation }) }
-    
+    const handleRedirectTool = () => { navigation.navigate("ToolDaily1", { idDaily1: `${user._id}`, navigation: navigation }) }
+    const handleRedirectSupply = () => { navigation.navigate("SupplyDaily1", { idDaily1: `${user._id}`, navigation: navigation }) }
+    const handleRedirectMaterial = () => { navigation.navigate("MaterialDaily1", { idDaily1: `${user._id}`, navigation: navigation }) }
+    const handleRedirectOrderIn = () => { navigation.navigate("OrderInDaily1", { idDaily1: `${user._id}`, navigation: navigation }) }
+    const handleRedirectOrderOut = () => { navigation.navigate("OrderOutDaily1", { idDaily1: `${user._id}`, navigation: navigation }) }
+
     return (
         // Main container
         <SafeAreaView style = {styles.container}>
@@ -71,7 +76,7 @@ function HomeDaily1(props) {
                                     </TouchableOpacity>
                                 </View>
                                 <View style = {styles.dashboardBoxContainer}>
-                                    <TouchableOpacity style = {styles.dashboardBox}>
+                                    <TouchableOpacity style = {styles.dashboardBox} onPress = {handleRedirectTool}>
                                         <View style = {styles.dashboardBoxIconBox}>
                                             <Ionicons
                                                 name = "construct"
@@ -86,7 +91,7 @@ function HomeDaily1(props) {
                             </View>
                             <View style = {styles.dashboardRow}>
                                 <View style = {styles.dashboardBoxContainer}>
-                                    <TouchableOpacity style = {styles.dashboardBox}>
+                                    <TouchableOpacity style = {styles.dashboardBox} onPress = {handleRedirectSupply}>
                                         <View style = {styles.dashboardBoxIconBox}>
                                             <Ionicons
                                                 name = "analytics"
@@ -99,7 +104,7 @@ function HomeDaily1(props) {
                                     </TouchableOpacity>
                                 </View>
                                 <View style = {styles.dashboardBoxContainer}>
-                                    <TouchableOpacity style = {styles.dashboardBox}>
+                                    <TouchableOpacity style = {styles.dashboardBox} onPress = {handleRedirectMaterial}>
                                         <View style = {styles.dashboardBoxIconBox}>
                                             <Ionicons
                                                 name = "leaf"
@@ -142,7 +147,7 @@ function HomeDaily1(props) {
                             </View>
                             <View style = {styles.dashboardRow}>
                                 <View style = {styles.dashboardBoxContainer}>
-                                    <TouchableOpacity style = {styles.dashboardBox}>
+                                    <TouchableOpacity style = {styles.dashboardBox} onPress = {handleRedirectOrderIn}>
                                         <View style = {styles.dashboardBoxIconBox}>
                                             <Ionicons
                                                 name = "log-in"
@@ -155,7 +160,7 @@ function HomeDaily1(props) {
                                     </TouchableOpacity>
                                 </View>
                                 <View style = {styles.dashboardBoxContainer}>
-                                    <TouchableOpacity style = {styles.dashboardBox}>
+                                    <TouchableOpacity style = {styles.dashboardBox} onPress = {handleRedirectOrderOut}>
                                         <View style = {styles.dashboardBoxIconBox}>
                                             <Ionicons
                                                 name = "log-out"
