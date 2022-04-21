@@ -72,6 +72,9 @@ const styles = StyleSheet.create({
         color:'#929292',
     },
     orderDetailContainerLower: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
         marginTop: 20,
         paddingLeft: 25,
         paddingRight: 25,
@@ -81,25 +84,13 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         paddingBottom: 10,
     },
-    orderDetailProgressTextContainer: {
-        display: "flex", 
-        flexDirection: "row",
-        marginLeft: 25, 
-        marginRight: 25,
-    },
-    orderDetailProgressTextLeft: { 
+    orderDetailProgressTitle: {
         flex: 1,
-        color: "#929292", 
+        textAlign: 'center',
     },
-    orderDetailProgressTextRight: {
-        color: "#929292",
-    },
-    orderDetailProgressBar: {
-        backgroundColor: "#C4C4C4",
-        marginTop: 5,
-        marginLeft: 25, 
-        marginRight: 25,
-        marginBottom: 10,
+    orderDetailProgressCircle: {
+        flex: 1,
+        alignItems: 'center',
     }
 });
 
