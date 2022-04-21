@@ -20,7 +20,13 @@ function OrderInListDaily1 (props) {
             <View style = {styles.orderDetailContainer}>
                 <Text style = {styles.orderDetailName}>{data.ma}</Text>
                 <Text style = {styles.orderDetailDescription}>Từ: Dummy</Text>
-                <Text style = {styles.orderDetailDescription}>Tổng sản phẩm : {data.tongsanpham }</Text>
+                <Text style = {styles.orderDetailDescription}>Tình trạng :
+                {data.xacnhan==true ?
+                    <Text style = {[styles.orderDetailButtonText,styles.green]}> Đã duyệt</Text>
+                    :
+                    <Text style = {[styles.orderDetailButtonText,styles.red]}> Chờ duyệt</Text>
+                }   
+                </Text>
             </View>
 
             {/* Info Icon */}
@@ -34,17 +40,6 @@ function OrderInListDaily1 (props) {
                     />
                 </Text>
                 <View style = {styles.orderDetailButtons}>
-                    {data.xacnhan==true ?
-                    <TouchableOpacity disabled={true}>
-                        <View style = {[styles.orderDetailButton,styles.bggreen]}>
-                            <Text style = {[styles.orderDetailButtonText,styles.white]}>Đã duyệt</Text>
-                        </View>
-                    </TouchableOpacity>  :
-                    <TouchableOpacity>
-                        <View style = {[styles.orderDetailButton,styles.bgred]}>
-                            <Text style = {[styles.orderDetailButtonText,styles.white]}>Chờ duyệt</Text>
-                        </View>
-                    </TouchableOpacity>}
                     {data.xacnhan==true ? 
                     <TouchableOpacity disabled={true}>
                         <View style = {[styles.orderDetailButton,styles.bggrey]}>
@@ -137,11 +132,11 @@ const styles = StyleSheet.create({
     bggrey:{
         backgroundColor:"#CDCDCD",
     },
-    bggreen:{
-        backgroundColor: '#57DE8D',
+    green:{
+        color: '#57DE8D',
     },
-    bgred:{
-        backgroundColor: '#FB4747',
+    red:{
+        color: '#FB4747',
     },
     bgblue:{
         backgroundColor: '#31D2F2',

@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import { FlatList, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-function OrderListDaily1 (props) {
+function OrderOutListDaily1 (props) {
     // console.log(daily1Id);
     // console.log(props.daily1Id);
     const data = props.order.item;
     const extra = props.daily1Id;
     // console.log(extra)
     const { navigation } = props;
-    const handleRedirectOrderDetail = () => { navigation.navigate("OrderDetailDaily1", { data,extra}) }
+    // const handleRedirectOrderDetail = () => { navigation.navigate("OrderDetailDaily1", { data,extra}) }
 
     return (
         // Main container
@@ -18,12 +18,19 @@ function OrderListDaily1 (props) {
             {/* Detail: Name & Price & Deadline */}
             <View style = {styles.orderDetailContainer}>
                 <Text style = {styles.orderDetailName}>{data.ma}</Text>
-                <Text style = {styles.orderDetailDescription}>Tổng đơn giá : {data.tongdongia} VND</Text>
-                <Text style = {styles.orderDetailDescription}>Tình trạng đơn hàng : {data.xacnhan == true ? "Đã xác nhận" : "Chưa xác nhận"}</Text>
+                <Text style = {styles.orderDetailDescription}>Tới: Dummy</Text>
+                <Text style = {styles.orderDetailDescription}>Tình trạng :
+                {data.xacnhan==true ?
+                    <Text style = {[styles.orderDetailButtonText,styles.green]}> Đã duyệt</Text>
+                    :
+                    <Text style = {[styles.orderDetailButtonText,styles.red]}> Chờ duyệt</Text>
+                }   
+                </Text>
             </View>
 
             {/* Info Icon */}
-            <Text onPress={handleRedirectOrderDetail}>
+            {/* <Text onPress={handleRedirectOrderDetail}> */}
+            <Text>
                 <Ionicons
                     name = "information-circle-outline"
                     size = {25}
@@ -64,7 +71,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontWeight: "bold",
         paddingBottom: 10,
-        color: "#00E0B8",
+        color: "#16B08B",
     },
     orderDetailDescription: {
         fontSize: 13,
@@ -73,8 +80,24 @@ const styles = StyleSheet.create({
 
     // Order Info
     orderInfo: {
-        color: "#00E0B8",
+        color: "#16B08B",
     },
+
+    orderDetailButtonText:{
+        fontSize: 13,
+        lineHeight: 21,
+        fontWeight: 'bold',
+        letterSpacing: 0.25,
+    },
+
+    //Others
+    green:{
+        color: '#57DE8D',
+    },
+    red:{
+        color: '#FB4747',
+    },
+
   });
 
-export default OrderListDaily1;
+export default OrderOutListDaily1;

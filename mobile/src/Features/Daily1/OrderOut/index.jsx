@@ -3,7 +3,7 @@ import { FlatList, SafeAreaView, StyleSheet, Text, View,TouchableOpacity } from 
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import styles from "./style";
-// import OrderListDaily1 from "./OrderListComponent";
+import OrderOutListDaily1 from "./OrderOutListComponent";
 import daily1Api from "../../../api/daily1Api";
 
 function OrderOutDaily1(props) {
@@ -18,7 +18,17 @@ function OrderOutDaily1(props) {
       const getListOrder = await daily1Api.dsDonhang(daily1Id);
       setOrderList(getListOrder.donhang);
     };
-    fetchData();
+    fetchData().then(res =>{
+      // console.log(orderList)
+      let orderIn =[];
+      for(let i =0;i<orderList.length;i++){
+        if(orderList[i].to.daily1==daily1Id){
+          // console.log(i);
+          orderIn.push(orderList[i])
+        }
+      }
+      setOrderList(orderIn);
+    })
   }, []);
 
   const handleRedirectHome = () => { navigation.navigate("HomeDaily1", { navigation: navigation }) }
@@ -35,7 +45,7 @@ function OrderOutDaily1(props) {
                   size = {25}
                   style = {styles.topBarIconArrow}
               />
-              <Text style = {styles.topBarText}>Đơn hàng</Text>
+              <Text style = {styles.topBarText}>Hàng giao đi</Text>
             </TouchableOpacity> 
             <Ionicons 
                 name = "search"
@@ -46,17 +56,17 @@ function OrderOutDaily1(props) {
 
           {/* Order List */}
           <View style = {styles.orderListContainer}>
-            {/* <FlatList
+            <FlatList
               data={orderList}
               renderItem={(item, index) => (
-                <OrderListDaily1
+                <OrderOutListDaily1
                   order={item}
                   navigation={navigation}
                   daily1Id={daily1Id}
                 />
               )}
               keyExtractor={(item) => item._id}
-            /> */}
+            />
           </View>
 
         {/* {orderList && (
