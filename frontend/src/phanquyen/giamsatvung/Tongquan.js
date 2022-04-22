@@ -93,6 +93,7 @@ const TongQuan = (props) => {
                 <TextInfo>
                   {/* <div>{counts?.dsdonhang}</div> */}
                   <div>{count}</div>
+                  <span>Đơn hàng</span>
                 </TextInfo>
                 <Icon>
                   <i class="far fa-newspaper"></i>
