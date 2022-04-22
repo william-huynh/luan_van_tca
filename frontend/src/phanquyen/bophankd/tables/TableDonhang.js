@@ -190,45 +190,48 @@ const TableDonhang = ({ dsDonhang = [], setRowsRemoved }) => {
                   .map((row, index) => {
                     const isItemSelected = isSelected(row._id);
                     const labelId = `enhanced-table-checkbox-${index}`;
-
-                    return (
-                      <TableRow
-                        hover
-                        onClick={(event) => handleClick(event, row._id)}
-                        role="checkbox"
-                        aria-checked={isItemSelected}
-                        tabIndex={-1}
-                        key={row._id}
-                        selected={isItemSelected}
-                      >
-                        <TableCell padding="checkbox">
-                          <Checkbox
-                            color="primary"
-                            checked={isItemSelected}
-                            inputProps={{
-                              "aria-labelledby": labelId,
-                            }}
-                          />
-                        </TableCell>
-                        <TableCell align="right">
-                          <Link to={`/bophankd/donhang/chitiet/${row._id}`}>
-                            {row?.ma}
-                          </Link>
-                        </TableCell>
-                        <TableCell align="right">{row?.tongsanpham}</TableCell>
-                        <TableCell align="right">{row?.tongcongcu}</TableCell>
-                        <TableCell align="right">{row?.tongvattu}</TableCell>
-                        <TableCell align="right">
-                          {row?.tongnguyenlieu} kg
-                        </TableCell>
-                        <TableCell align="right" style={{ fontWeight: 500 }}>
-                          {formatMoney(row?.tongdongia)} vnđ
-                        </TableCell>
-                        <TableCell align="right">
-                          <Badge className="success">{row.ngaydathang}</Badge>
-                        </TableCell>
-                      </TableRow>
-                    );
+                    if (row.trangthai === true) {
+                      return (
+                        <TableRow
+                          hover
+                          onClick={(event) => handleClick(event, row._id)}
+                          role="checkbox"
+                          aria-checked={isItemSelected}
+                          tabIndex={-1}
+                          key={row._id}
+                          selected={isItemSelected}
+                        >
+                          <TableCell padding="checkbox">
+                            <Checkbox
+                              color="primary"
+                              checked={isItemSelected}
+                              inputProps={{
+                                "aria-labelledby": labelId,
+                              }}
+                            />
+                          </TableCell>
+                          <TableCell align="right">
+                            <Link to={`/bophankd/donhang/chitiet/${row._id}`}>
+                              {row?.ma}
+                            </Link>
+                          </TableCell>
+                          <TableCell align="right">
+                            {row?.tongsanpham}
+                          </TableCell>
+                          <TableCell align="right">{row?.tongcongcu}</TableCell>
+                          <TableCell align="right">{row?.tongvattu}</TableCell>
+                          <TableCell align="right">
+                            {row?.tongnguyenlieu} kg
+                          </TableCell>
+                          <TableCell align="right" style={{ fontWeight: 500 }}>
+                            {formatMoney(row?.tongdongia)} vnđ
+                          </TableCell>
+                          <TableCell align="right">
+                            <Badge className="success">{row.ngaydathang}</Badge>
+                          </TableCell>
+                        </TableRow>
+                      );
+                    }
                   })}
                 {emptyRows > 0 && (
                   <TableRow

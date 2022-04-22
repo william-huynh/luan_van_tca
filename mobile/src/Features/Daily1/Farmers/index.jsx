@@ -3,33 +3,25 @@ import { FlatList, SafeAreaView, StyleSheet, Text, View,TouchableOpacity } from 
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import styles from "./style";
-import OrderOutListDaily1 from "./OrderOutListComponent";
+import FarmerListDaily1 from "./FarmerListComponent";
 import daily1Api from "../../../api/daily1Api";
 
-function OrderOutDaily1(props) {
+function FarmerDaily1(props) {
   const { navigation } = props;
   // Get daily1 id
   const daily1Id = props.route.params.idDaily1;
-  const [orderList, setOrderList] = useState();
+  const [farmerList, setFarmerList] = useState();
 
   // Get list
   useEffect(() => {
     const fetchData = async () => {
-      const getListOrder = await daily1Api.dsDonhang(daily1Id);
-      setOrderList(getListOrder.donhang);
+      const getFarmerList = await daily1Api.dsHodan(daily1Id);
+      setFarmerList(getFarmerList.hodan);
+      // console.log(getFarmerList)
     };
-    fetchData().then(res =>{
-      // console.log(orderList)
-      let orderIn =[];
-      for(let i =0;i<orderList.length;i++){
-        if(orderList[i].to.daily1==daily1Id){
-          // console.log(i);
-          orderIn.push(orderList[i])
-        }
-      }
-      setOrderList(orderIn);
-    })
+    fetchData()
   }, []);
+  // console.log(farmerList)
 
   const handleRedirectHome = () => { navigation.navigate("HomeDaily1", { navigation: navigation }) }
 
@@ -45,21 +37,21 @@ function OrderOutDaily1(props) {
                   size = {25}
                   style = {styles.topBarIconArrow}
               />
-              <Text style = {styles.topBarText}>Hàng giao đi</Text>
+              <Text style = {styles.topBarText}>Hộ dân</Text>
             </TouchableOpacity> 
-            <Ionicons 
-                name = "search"
-                size = {25}
-                style = {styles.topBarIconSearch}
-            />
+              <Ionicons 
+                  name = "search"
+                  size = {25}
+                  style = {styles.topBarIconSearch}
+              />
           </View>
 
           {/* Order List */}
           <View style = {styles.orderListContainer}>
             <FlatList
-              data={orderList}
+              data={farmerList}
               renderItem={(item, index) => (
-                <OrderOutListDaily1
+                <FarmerListDaily1
                   order={item}
                   navigation={navigation}
                   daily1Id={daily1Id}
@@ -86,4 +78,4 @@ function OrderOutDaily1(props) {
     );
 }
 
-export default OrderOutDaily1;
+export default FarmerDaily1;

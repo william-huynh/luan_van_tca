@@ -13,6 +13,7 @@ import SupplyDaily1 from "../../../Daily1/Supplies";
 import MaterialDaily1 from "../../../Daily1/Materials";
 import OrderInDaily1 from "../../../Daily1/OrderIn";
 import OrderOutDaily1 from "../../../Daily1/OrderOut";
+import FarmerDaily1 from "../../../Daily1/Farmers";
 
 // Import Ho dan screens
 import ListCongCu from "../../../Home/ScreenKho/ListCongCu";
@@ -54,6 +55,7 @@ function Login(props) {
         <Stack.Screen name="MaterialDaily1" component={MaterialDaily1} />
         <Stack.Screen name="OrderInDaily1" component={OrderInDaily1} />
         <Stack.Screen name="OrderOutDaily1" component={OrderOutDaily1} />
+        <Stack.Screen name="FarmerDaily1" component={FarmerDaily1} />
 
         {/* Ho dan screens */}
         <Stack.Screen name="TabNav" component={TabNav} />

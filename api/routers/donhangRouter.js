@@ -4,7 +4,8 @@ const upload = require("../middleware/imageUpload");
 const donhangController = require("../controller/DonhangController");
 // them don hang
 donhangRouter.post("/them", donhangController.themdonhang);
-
+// huy don hang
+donhangRouter.put("/huy", donhangController.huydonhang);
 // Lấy ALL ds đơn hàng là đơn hàng gốc
 donhangRouter.get("/alldanhsach", donhangController.layALLdsdonhanggoc);
 

@@ -5,6 +5,7 @@ const Bophankd = require("../models/bophankdModel");
 
 // them moi sp
 module.exports.themsp = async (req, res) => {
+  console.log("1");
   const {
     ma,
     ten,

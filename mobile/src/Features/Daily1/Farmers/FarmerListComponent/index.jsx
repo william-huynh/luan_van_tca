@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FlatList, SafeAreaView, StyleSheet, Text, View,TouchableOpacity,Button,Pressable } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-function OrderInListDaily1 (props) {
+function FarmerListDaily1 (props) {
     // console.log(daily1Id);
     // console.log(props.daily1Id);
     const data = props.order.item;
@@ -18,10 +18,10 @@ function OrderInListDaily1 (props) {
 
             {/* Detail: Name & Price & Deadline */}
             <View style = {styles.orderDetailContainer}>
-                <Text style = {styles.orderDetailName}>{data.ma}</Text>
-                <Text style = {styles.orderDetailDescription}>Từ: Dummy</Text>
+                <Text style = {styles.orderDetailName}>{data.daidien}</Text>
+                <Text style = {styles.orderDetailDescription}>Loại sản phẩm: {data.loaisanpham.ten}</Text>
                 <Text style = {styles.orderDetailDescription}>Tình trạng :
-                {data.xacnhan==true ?
+                {data.active==true ?
                     <Text style = {[styles.orderDetailButtonText,styles.green]}> Đã duyệt</Text>
                     :
                     <Text style = {[styles.orderDetailButtonText,styles.red]}> Chờ duyệt</Text>
@@ -40,7 +40,7 @@ function OrderInListDaily1 (props) {
                     />
                 </Text>
                 <View style = {styles.orderDetailButtons}>
-                    {data.xacnhan==true ? 
+                    {data.active==true ? 
                     <TouchableOpacity disabled={true}>
                         <View style = {[styles.orderDetailButton,styles.bggrey]}>
                             <Text style = {[styles.orderDetailButtonText,styles.black]}>Duyệt</Text>
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontWeight: "bold",
         paddingBottom: 10,
-        color: "#00E0B8",
+        color: "#7C3EFF",
     },
     orderDetailDescription: {
         fontSize: 13,
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     orderInfo: {
         flex:1,
         textAlign:"right",  
-        color: "#00E0B8",
+        color: "#7C3EFF",
     },
 
     //Buttons
@@ -150,4 +150,4 @@ const styles = StyleSheet.create({
 
   });
 
-export default OrderInListDaily1;
+export default FarmerListDaily1;

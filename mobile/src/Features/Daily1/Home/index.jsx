@@ -42,6 +42,7 @@ function HomeDaily1(props) {
     const handleRedirectMaterial = () => { navigation.navigate("MaterialDaily1", { idDaily1: `${user._id}`, navigation: navigation }) }
     const handleRedirectOrderIn = () => { navigation.navigate("OrderInDaily1", { idDaily1: `${user._id}`, navigation: navigation }) }
     const handleRedirectOrderOut = () => { navigation.navigate("OrderOutDaily1", { idDaily1: `${user._id}`, navigation: navigation }) }
+    const handleRedirectFarmer = () => { navigation.navigate("FarmerDaily1", { idDaily1: `${user._id}`, navigation: navigation }) }
 
     return (
         // Main container
@@ -132,7 +133,7 @@ function HomeDaily1(props) {
                                     </TouchableOpacity>
                                 </View>
                                 <View style = {styles.dashboardBoxContainer}>
-                                    <TouchableOpacity style = {styles.dashboardBox}>
+                                    <TouchableOpacity style = {styles.dashboardBox} onPress = {handleRedirectFarmer}>
                                         <View style = {styles.dashboardBoxIconBox}>
                                             <Ionicons
                                                 name = "man"
@@ -140,7 +141,7 @@ function HomeDaily1(props) {
                                                 style = {{ color: "#7C3EFF" }}
                                             />
                                         </View>
-                                        <Text style = {styles.dashboardBoxTitle}>Hộ Dân</Text>
+                                        <Text style = {styles.dashboardBoxTitle} >Hộ Dân</Text>
                                         <Text style = {styles.dashboardBoxDescription}>3 hộ dân</Text>
                                     </TouchableOpacity>
                                 </View>

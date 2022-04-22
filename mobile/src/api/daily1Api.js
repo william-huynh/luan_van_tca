@@ -23,6 +23,21 @@ const daily1Api = {
   },
   dsNguyenlieu(daily1Id) {
     const url = `/api/daily1/dsnguyenlieu/${daily1Id}`;
+<<<<<<< HEAD
+=======
+    return axiosClient.get(url);
+  },
+  dsHodan(daily1Id) {
+    const url = `/api/daily1/dshodan/${daily1Id}`;
+    return axiosClient.get(url);
+  },
+  dssubdonhangOfSingleDH(daily1Id, maDH) {
+    const url = `/api/daily1/dssubdhofsingledh/${daily1Id}/${maDH}`;
+    return axiosClient.get(url);
+  },
+  tiendoDonhang(daily1Id, maDH) {
+    const url = `/api/daily1/tiendodonhang/${daily1Id}/${maDH}`;
+>>>>>>> f370ea94bbf5e2ff023f52ff62523bd0c99ef510
     return axiosClient.get(url);
   },
 }

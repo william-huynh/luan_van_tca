@@ -1,5 +1,7 @@
 import React from "react";
 import { Bar, Pie } from "react-chartjs-2";
+import { Chart, registerables } from "chart.js";
+Chart.register(...registerables);
 
 const data = {
   labels: ["Quý 1", "Quý 2", "Quý 3", "Quý 4"],

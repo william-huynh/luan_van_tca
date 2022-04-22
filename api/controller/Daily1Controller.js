@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const Daily2 = require("../models/daily2Model");
 const Bophankd = require("../models/bophankdModel");
 const Giamsatvung = require("../models/giamsatvungModel");
+const Donhang = require("../models/donhangModel");
 const Hodan = require("../models/hodanModel");
 const upload = require("../middleware/imageUpload");
 const {
@@ -660,8 +661,13 @@ module.exports.danhsachcongcuthuocdaily1 = async (req, res) => {
 module.exports.laysolieutongquan = async (req, res) => {
   try {
     let daily1 = await Daily1.findById(req.params.daily1Id).populate(
-      "dssanpham dscongcu dsvattu dsnguyenlieu daily2 hodan donhang"
+      "dssanpham dscongcu dsvattu dsnguyenlieu daily2 hodan"
     );
+    const slDonhang = await Donhang.find({
+      daily1: req.params.daily1Id,
+      donhanggoc: true,
+      trangthai: true,
+    });
 
     res.send({
       dssanpham: daily1.dssanpham.length,
@@ -670,7 +676,7 @@ module.exports.laysolieutongquan = async (req, res) => {
       dsnguyenlieu: daily1.dsnguyenlieu.length,
       dsdaily2: daily1.daily2.length,
       dshodan: daily1.hodan.length,
-      dsdonhang: daily1.donhang.length,
+      dsdonhang: slDonhang.length,
       success: true,
     });
   } catch (error) {

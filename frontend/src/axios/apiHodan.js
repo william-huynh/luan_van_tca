@@ -83,13 +83,13 @@ const apiHodan = {
 
   // lay danh sach CONG CU thuoc ho dan
   dsCongcu(hodanId) {
-    const url = `/hodan/danhsachcongcu/${hodanId}`;
+    const url = `/hodan/dscongcu/${hodanId}`;
     return axiosClient.get(url);
   },
 
   // lay danh sach VAT TU thuoc ho dan
   dsVattu(hodanId) {
-    const url = `/hodan/danhsachvattu/${hodanId}`;
+    const url = `/hodan/dsvattu/${hodanId}`;
     return axiosClient.get(url);
   },
 
