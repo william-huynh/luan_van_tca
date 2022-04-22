@@ -23,8 +23,6 @@ const daily1Api = {
   },
   dsNguyenlieu(daily1Id) {
     const url = `/api/daily1/dsnguyenlieu/${daily1Id}`;
-<<<<<<< HEAD
-=======
     return axiosClient.get(url);
   },
   dsHodan(daily1Id) {
@@ -37,7 +35,6 @@ const daily1Api = {
   },
   tiendoDonhang(daily1Id, maDH) {
     const url = `/api/daily1/tiendodonhang/${daily1Id}/${maDH}`;
->>>>>>> f370ea94bbf5e2ff023f52ff62523bd0c99ef510
     return axiosClient.get(url);
   },
 }
