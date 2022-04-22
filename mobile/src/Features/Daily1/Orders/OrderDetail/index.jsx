@@ -7,7 +7,7 @@ import daily1Api from "../../../../api/daily1Api";
 import OrderDetailProductsList from "./ProductsList";
 import OrderDetailToolsList from "./ToolsList";
 import OrderDetailMaterialsList from "./MaterialsList";
-import * as Progress from 'react-native-progress';
+import CircularProgress from 'react-native-circular-progress-indicator';
 
 function OrderDetailDaily1 (props) {
     const data = props.route.params.data;
@@ -93,64 +93,64 @@ function OrderDetailDaily1 (props) {
                     {/* Daily1 Progress */}
 
                     <View style = {styles.orderDetailContainerLower}>
-                        <Text style = {styles.orderDetailTitle}>Đại lý cấp 1</Text>
-                    </View>
-                    <View>
-                        <View style={styles.orderDetailProgressTextContainer}>
-                            <Text style={styles.orderDetailProgressTextLeft}>Hoàn thành</Text>
-                            <Text style={styles.orderDetailProgressTextRight}>50%</Text>
+                        <View style = {styles.orderDetailProgressCircle}>
+                            <CircularProgress
+                                value = {50}
+                                duration = {1000}
+                                activeStrokeColor = {'#57DE8D'}
+                                progressValueColor = {'#929292'}
+                                maxValue = {100}
+                                valueSuffix = {'%'}
+                                progressValueFontSize = {18}
+                                title = {'Hoàn thành'}
+                                titleColor = {'#929292'}
+                                titleStyle = {{fontWeight: 'bold'}}
+                                titleFontSize = {14}
+                            />
                         </View>
-                        <Progress.Bar
-                            progress={0.5} 
-                            height={20} 
-                            width={null} 
-                            color={"#FFB74B"}
-                            borderRadius={10} 
-                            borderWidth={0} 
-                            style={styles.orderDetailProgressBar} 
-                        />
+                        <Text style = {[styles.orderDetailTitle, styles.orderDetailProgressTitle]}>Đại lý cấp 1</Text>
                     </View>
 
                     {/* Daily2 Progress */}
 
                     <View style = {styles.orderDetailContainerLower}>
-                        <Text style = {styles.orderDetailTitle}>Đại lý cấp 2</Text>
-                    </View>
-                    <View>
-                        <View style={styles.orderDetailProgressTextContainer}>
-                            <Text style={styles.orderDetailProgressTextLeft}>Hoàn thành</Text>
-                            <Text style={styles.orderDetailProgressTextRight}>0%</Text>
+                        <View style = {styles.orderDetailProgressCircle}>
+                            <CircularProgress
+                                value = {20}
+                                duration = {1000}
+                                activeStrokeColor = {'#FFB74B'}
+                                progressValueColor = {'#929292'}
+                                maxValue = {100}
+                                valueSuffix = {'%'}
+                                progressValueFontSize = {18}
+                                title = {'Hoàn thành'}
+                                titleColor = {'#929292'}
+                                titleStyle = {{fontWeight: 'bold'}}
+                                titleFontSize = {14}
+                            />
                         </View>
-                        <Progress.Bar
-                            progress={0} 
-                            height={20} 
-                            width={null} 
-                            color={"#FFB74B"}
-                            borderRadius={10} 
-                            borderWidth={0} 
-                            style={styles.orderDetailProgressBar} 
-                        />
+                        <Text style = {[styles.orderDetailTitle, styles.orderDetailProgressTitle]}>Đại lý cấp 2</Text>
                     </View>
 
                     {/* Farmer Progress */}
 
                     <View style = {styles.orderDetailContainerLower}>
-                        <Text style = {styles.orderDetailTitle}>Hộ dân</Text>
-                    </View>
-                    <View>
-                        <View style={styles.orderDetailProgressTextContainer}>
-                            <Text style={styles.orderDetailProgressTextLeft}>Hoàn thành</Text>
-                            <Text style={styles.orderDetailProgressTextRight}>25%</Text>
+                        <View style = {styles.orderDetailProgressCircle}>
+                            <CircularProgress
+                                value = {80}
+                                duration = {1000}
+                                activeStrokeColor = {'#FB4747'}
+                                progressValueColor = {'#929292'}
+                                maxValue = {100}
+                                valueSuffix = {'%'}
+                                progressValueFontSize = {18}
+                                title = {'Hoàn thành'}
+                                titleColor = {'#929292'}
+                                titleStyle = {{fontWeight: 'bold'}}
+                                titleFontSize = {14}
+                            />
                         </View>
-                        <Progress.Bar
-                            progress={0.25} 
-                            height={20} 
-                            width={null} 
-                            color={"#FB4747"}
-                            borderRadius={10} 
-                            borderWidth={0} 
-                            style={styles.orderDetailProgressBar} 
-                        />
+                        <Text style = {[styles.orderDetailTitle, styles.orderDetailProgressTitle]}>Hộ dân</Text>
                     </View>
 
                     {/* Order Products */}
@@ -161,10 +161,10 @@ function OrderDetailDaily1 (props) {
                     <View style = {styles.orderProductListContainer}>
                         <FlatList
                             
-                            keyExtractor={(item)=>item._id}
-                            data={data.dssanpham}
-                            const renderItem={({item})=>(  
-                                <OrderDetailProductsList sanpham ={item} daily1Id={daily1Id} orderId={orderId}/>
+                            keyExtractor = {(item)=>item._id}
+                            data = {data.dssanpham}
+                            const renderItem = {({item})=>(  
+                                <OrderDetailProductsList sanpham  = {item} daily1Id = {daily1Id} orderId = {orderId}/>
                             )}                  
                         />
                     </View>
@@ -176,10 +176,10 @@ function OrderDetailDaily1 (props) {
                     </View>
                     <View style = {styles.orderOrderListContainer}>
                         <FlatList
-                            keyExtractor={(item)=>item._id}
-                            data={data.dscongcu}
-                            const renderItem={({item})=>(  
-                                <OrderDetailToolsList sanpham ={item}/>
+                            keyExtractor = {(item)=>item._id}
+                            data = {data.dscongcu}
+                            const renderItem = {({item})=>(  
+                                <OrderDetailToolsList sanpham  = {item}/>
                             )}                  
                         />
                     </View>
@@ -191,10 +191,10 @@ function OrderDetailDaily1 (props) {
                     </View>
                     <View style = {styles.orderOrderListContainer}>
                         <FlatList
-                            keyExtractor={(item)=>item._id}
-                            data={data.dsnguyenlieu}
-                            const renderItem={({item})=>(  
-                                <OrderDetailMaterialsList sanpham ={item}/>
+                            keyExtractor = {(item)=>item._id}
+                            data = {data.dsnguyenlieu}
+                            const renderItem = {({item})=>(  
+                                <OrderDetailMaterialsList sanpham  = {item}/>
                             )}                  
                         />
                     </View>

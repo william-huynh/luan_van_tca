@@ -58,20 +58,6 @@ function OrderDaily1(props) {
               keyExtractor={(item) => item._id}
             />
           </View>
-
-        {/* {orderList && (
-          <FlatList
-            data={orderList}
-            renderItem={(item, index) => (
-              <ListDonHang
-                dataList={item}
-                navigation={navigation}
-                hodanId={hodanId}
-              />
-            )}
-            keyExtractor={(item) => item._id}
-          />
-        )} */}
       </SafeAreaView>
     );
 }
