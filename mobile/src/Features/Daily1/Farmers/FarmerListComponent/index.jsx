@@ -8,7 +8,7 @@ function FarmerListDaily1 (props) {
     const data = props.order.item;
     const extra = props.daily1Id;
     // console.log(extra)
-    console.log(data)
+    // console.log(data)
     const { navigation } = props;
     const handleRedirectOrderDetail = () => { navigation.navigate("OrderDetailDaily1", { data,extra}) }
 
